@@ -1,31 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 18:55:00 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/12 14:11:45 by vache            ###   ########.fr       */
+/*   Created: 2023/01/21 11:27:11 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/10/12 12:09:58 by vache            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+char	*ft_strnstr(char *s1, char *s2, size_t n)
 {
-	char	*res;
-	char	**arr;
+	size_t	i;
+	size_t	k;
+	size_t	len;
 
-	res = NULL;
-	arr = NULL;
-	if (argc != 2)
+	if (!s1 && !s2)
+		return (0);
+	i = 0;
+	len = ft_strlen(s2);
+	k = 0;
+	if (s2[k] == '\0')
+		return ((char *)s1 + i);
+	if (n == 0)
+		return (0);
+	while (s1[i] != '\0' && i < n)
 	{
-		write(2, "Error : Arguments\n", 19);
-		return (1);
+		while (s1[i + k] == s2[k] && i < n)
+		{
+			if (k == len - 1 && i + k < n)
+				return ((char *)s1 + i);
+			k++;
+		}
+		i++;
+		k = 0;
 	}
-	check_fname(argv[1]);
-	res = read_file(argv[1]);
-	arr = ft_split(res, '\n');
 	return (0);
 }

@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 18:55:00 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/12 14:11:45 by vache            ###   ########.fr       */
+/*   Created: 2023/01/17 12:54:48 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/10/12 12:10:02 by vache            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+char	*ft_strrchr( char *str, int c)
 {
-	char	*res;
-	char	**arr;
+	int		i;
+	char	*s;
 
-	res = NULL;
-	arr = NULL;
-	if (argc != 2)
+	if (!str)
+		return (NULL);
+	s = (char *)str;
+	i = ft_strlen(str);
+	while (*s)
+		s++;
+	while (i >= 0)
 	{
-		write(2, "Error : Arguments\n", 19);
-		return (1);
+		if (*s == c % 256)
+			return (s);
+		s--;
+		i--;
 	}
-	check_fname(argv[1]);
-	res = read_file(argv[1]);
-	arr = ft_split(res, '\n');
-	return (0);
+	return (NULL);
 }

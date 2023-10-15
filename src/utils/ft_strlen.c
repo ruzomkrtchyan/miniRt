@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 18:55:00 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/12 14:11:45 by vache            ###   ########.fr       */
+/*   Created: 2023/01/17 12:54:43 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/10/12 12:13:20 by vache            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+int	ft_strlen(char *str)
 {
-	char	*res;
-	char	**arr;
+	int	i;
 
-	res = NULL;
-	arr = NULL;
-	if (argc != 2)
-	{
-		write(2, "Error : Arguments\n", 19);
-		return (1);
-	}
-	check_fname(argv[1]);
-	res = read_file(argv[1]);
-	arr = ft_split(res, '\n');
-	return (0);
+	i = 0;
+	while (str && str[i] != '\0')
+		i++;
+	return (i);
 }

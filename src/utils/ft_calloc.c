@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 18:55:00 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/12 14:11:45 by vache            ###   ########.fr       */
+/*   Created: 2023/01/19 12:53:13 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/10/12 12:18:31 by vache            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+void	*ft_calloc(size_t nitems, size_t size)
 {
-	char	*res;
-	char	**arr;
+	char	*ptr;
 
-	res = NULL;
-	arr = NULL;
-	if (argc != 2)
-	{
-		write(2, "Error : Arguments\n", 19);
-		return (1);
-	}
-	check_fname(argv[1]);
-	res = read_file(argv[1]);
-	arr = ft_split(res, '\n');
-	return (0);
+	if (nitems == SIZE_MAX || size == SIZE_MAX)
+		return (NULL);
+	ptr = malloc(nitems * size);
+	if (ptr == NULL)
+		return (NULL);
+	ft_bzero(ptr, (nitems * size));
+	return (ptr);
 }

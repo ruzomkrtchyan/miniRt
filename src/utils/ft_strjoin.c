@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 18:55:00 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/12 14:11:45 by vache            ###   ########.fr       */
+/*   Created: 2023/01/23 13:20:50 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/10/12 12:10:43 by vache            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+char	*ft_strjoin(char *s1, char *s2, int flag)
 {
-	char	*res;
-	char	**arr;
+	int		i;
+	int		j;
+	char	*str;
 
-	res = NULL;
-	arr = NULL;
-	if (argc != 2)
+	if (!s2)
+		return (NULL);
+	i = 0;
+	j = 0;
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (0);
+	while (s1 && s1[j] != '\0')
+		str[i++] = s1[j++];
+	j = 0;
+	while (s2 && s2[j] != '\0')
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	if (flag == 1)
 	{
-		write(2, "Error : Arguments\n", 19);
-		return (1);
+		free(s1);
+		s1 = 0;
 	}
-	check_fname(argv[1]);
-	res = read_file(argv[1]);
-	arr = ft_split(res, '\n');
-	return (0);
+	return (str);
 }

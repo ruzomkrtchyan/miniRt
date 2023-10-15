@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 18:55:00 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/12 14:11:45 by vache            ###   ########.fr       */
+/*   Created: 2022/11/20 17:13:35 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/10/12 12:10:21 by vache            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+int	ft_strcmp(char *s1, char *s2)
 {
-	char	*res;
-	char	**arr;
+	int	i;
 
-	res = NULL;
-	arr = NULL;
-	if (argc != 2)
+	i = 0;
+	if (!s1 || !s2)
+		return (0);
+	while (s1[i] == s2[i])
 	{
-		write(2, "Error : Arguments\n", 19);
-		return (1);
+		if ((s1[i] == '\0') && (s2[i] == '\0'))
+			return (0);
+		i++;
 	}
-	check_fname(argv[1]);
-	res = read_file(argv[1]);
-	arr = ft_split(res, '\n');
-	return (0);
+	return (s1[i] - s2[i]);
 }

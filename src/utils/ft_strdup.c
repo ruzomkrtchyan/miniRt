@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 18:55:00 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/12 14:11:45 by vache            ###   ########.fr       */
+/*   Created: 2023/01/17 20:13:36 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/10/12 12:10:06 by vache            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+char	*ft_strdup(char *str)
 {
-	char	*res;
-	char	**arr;
+	int		len;
+	char	*s;
 
-	res = NULL;
-	arr = NULL;
-	if (argc != 2)
+	if (!str)
+		return (0);
+	len = 0;
+	while (str && str[len])
+		len++;
+	s = (char *)ft_calloc(len + 1, sizeof(char));
+	if (s == NULL)
+		return (NULL);
+	while (len >= 0)
 	{
-		write(2, "Error : Arguments\n", 19);
-		return (1);
+		s[len] = str[len];
+		len--;
 	}
-	check_fname(argv[1]);
-	res = read_file(argv[1]);
-	arr = ft_split(res, '\n');
-	return (0);
+	return (s);
 }
