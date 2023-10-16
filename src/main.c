@@ -27,5 +27,6 @@ int	main(int argc, char **argv)
 	check_fname(argv[1]);
 	res = read_file(argv[1]);
 	arr = ft_split(res, '\n');
+	pars(arr);
 	return (0);
 }

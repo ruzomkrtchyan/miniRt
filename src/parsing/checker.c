@@ -16,3 +16,21 @@ void	check_fname(char *str)
 		exit(1);
 	}
 }
+
+void	check_A(char *str)
+{
+	int	i;
+
+	i = 1;
+	if (str[i] != " ")
+	{
+		write (2, "Error: Wrong Identifier\n", 24);
+		exit (1);
+	}
+	else
+	{
+		while ( str[i] && str[i] == " ")
+			i++;
+		
+	}
+}

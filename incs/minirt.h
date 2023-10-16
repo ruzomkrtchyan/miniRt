@@ -31,23 +31,23 @@ typedef	struct s_rgb
 
 typedef	struct s_coord
 {
-	double	x;
-	double	y;
-	double	z;
+	float	x;
+	float	y;
+	float	z;
 }				t_coord;
 
 typedef	struct s_light
 {
 	t_coord	*cord;
 	t_rgb	*color;
-	double	bright;
+	float	bright;
 }				t_light;
 
 typedef	struct s_sph
 {
 	t_coord	*cord;
 	t_rgb	*color;
-	double	diam;
+	float	diam;
 }				t_sph;
 
 typedef	struct s_pl
@@ -62,13 +62,13 @@ typedef	struct s_cyl
 	t_coord	*cord;
 	t_coord	*n_cord;
 	t_rgb	*color;
-	double	diam;
-	double	height;
+	float	diam;
+	float	height;
 }				t_cyl;
 
 typedef	struct s_amb
 {
-	double	ratio;
+	float	ratio;
 	t_rgb	*color;
 }				t_amb;
 
@@ -76,7 +76,7 @@ typedef struct s_cam
 {
 	t_coord	*dir;
 	t_coord	*pos;
-	double	degree;
+	float	degree;
 }				t_cam;
 
 typedef	struct s_scene
