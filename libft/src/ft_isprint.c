@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 17:13:35 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/12 12:10:21 by vache            ###   ########.fr       */
+/*   Created: 2023/01/17 20:12:33 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/07/27 16:18:30 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	ft_strcmp(char *s1, char *s2)
+int	ft_isprint(int c)
 {
-	int	i;
-
-	i = 0;
-	if (!s1 || !s2)
-		return (0);
-	while (s1[i] == s2[i])
-	{
-		if ((s1[i] == '\0') && (s2[i] == '\0'))
-			return (0);
-		i++;
-	}
-	return (s1[i] - s2[i]);
+	return (c >= 32 && c <= 126);
 }

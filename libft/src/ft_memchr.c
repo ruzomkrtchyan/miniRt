@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 20:13:36 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/12 12:10:06 by vache            ###   ########.fr       */
+/*   Created: 2023/01/17 15:19:16 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/07/26 10:09:09 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-char	*ft_strdup(char *str)
+void	*ft_memchr( void *str, int c, size_t n)
 {
-	int		len;
-	char	*s;
+	size_t	i;
 
+	i = 0;
+	c %= 256;
 	if (!str)
-		return (0);
-	len = 0;
-	while (str && str[len])
-		len++;
-	s = (char *)ft_calloc(len + 1, sizeof(char));
-	if (s == NULL)
-		return (NULL);
-	while (len >= 0)
+		return ((void *)0);
+	while (i < n)
 	{
-		s[len] = str[len];
-		len--;
+		if (((char *)str)[i] == c)
+			return ((unsigned char *)str + i);
+		i++;
 	}
-	return (s);
+	return ((void *)0);
 }

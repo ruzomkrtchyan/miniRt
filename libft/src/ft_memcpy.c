@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 12:54:25 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/12 12:18:55 by vache            ###   ########.fr       */
+/*   Created: 2023/01/17 13:48:19 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/08/08 13:01:05 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+void	*ft_memcpy(void *dest, void *src, size_t n)
 {
-	if (!s)
-		return ;
-	while (n--)
+	size_t	i;
+
+	i = 0;
+	if (!dest && !src)
+		return (0);
+	while (i < n)
 	{
-		*(unsigned char *)s = 0;
-		s++;
+		(((unsigned char *)dest)[i] = ((unsigned char *)src)[i]);
+		i++;
 	}
+	return (dest);
 }

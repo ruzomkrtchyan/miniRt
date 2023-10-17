@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:58:07 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/12 12:17:57 by vache            ###   ########.fr       */
+/*   Updated: 2023/08/25 19:49:08 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
 static void	ft_free(char **s, size_t i)
 {
-	while ((int)i-- >= 0)
+	while (i-- >= 0)
 		free (s[i]);
 	free(s);
 }

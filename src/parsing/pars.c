@@ -7,11 +7,12 @@ void pars(char **arr)
 
 	i = 0;
 	j = 0;
-	while (arr[i])
-	{
-		j = 0
-		if (arr[i][j] == "A")
-			check_A(arr[i]);
-		
-	}
+	(void)arr;
+	// while (arr[i])
+	// {
+	// 	j = 0;
+	// 	if (arr[i][j] == 'A')
+	// 		// check_A(arr[i]);
+
+	// }
 }

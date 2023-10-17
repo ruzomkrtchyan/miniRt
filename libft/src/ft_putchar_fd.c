@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 12:54:43 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/12 12:13:20 by vache            ###   ########.fr       */
+/*   Created: 2023/01/19 13:18:43 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/02/03 17:20:12 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	ft_strlen(char *str)
+void	ft_putchar_fd(char c, int fd)
 {
-	int	i;
-
-	i = 0;
-	while (str && str[i] != '\0')
-		i++;
-	return (i);
+	if (fd < 0)
+		return ;
+	write(fd, &c, 1);
 }

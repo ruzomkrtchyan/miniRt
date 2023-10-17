@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 18:55:00 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/12 14:11:45 by vache            ###   ########.fr       */
+/*   Created: 2023/01/17 12:54:36 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/08/28 20:31:59 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_isdigit(int c)
 {
-	char	*res;
-	char	**arr;
-
-	res = NULL;
-	arr = NULL;
-	if (argc != 2)
-	{
-		write(2, "Error : Arguments\n", 19);
+	if (c >= '0' && c <= '9')
 		return (1);
-	}
-	check_fname(argv[1]);
-	res = read_file(argv[1]);
-	arr = ft_split(res, '\n');
-	// pars(arr);
 	return (0);
 }

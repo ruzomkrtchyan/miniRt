@@ -11,16 +11,21 @@ OBJ 		= $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 CC		= cc
 HEADER	= $(wildcard ./incs/*.h)
-INCLUDE	= -Iincs
+INCLUDE	= -Iincs -Iincludes -I$(LIBFT_DIR)/$(INCLUDES)
+LINKERS	= -L$(LIBFT_DIR) -lft
 CFLAGS	= -Wall -Wextra -Werror #-g3 #-fsanitize=address
 MK		= mkdir -p
+
+LIBS		= libft
+LIBFT_DIR	= ./libft
+INCLUDES	= includes
 
 TEXT		= "\033[6;1m"
 GREEN		= "\033[38;2;49;247;196m"
 PURPLE		= "\033[38;2;0;138;240m"
 RESET		= "\033[0m"
 
-all: $(OBJ_DIR) $(NAME)
+all: $(LIBS) $(OBJ_DIR) $(NAME)
 
 $(OBJ_DIR):
 	$(MK) $(OBJ_DIR)
@@ -36,7 +41,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/*/%.c $(HEADER) Makefile
 
 $(NAME): $(OBJ) $(HEADER)
 	@echo $(GREEN) "$(CC) $(CFLAGS) -o $(NAME) $(OBJ)" $(RESET)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	@$(CC) $(CFLAGS) $(LINKERS) -o $(NAME) $(OBJ)
+
+libft :
+	make -C $(LIBFT_DIR)
 
 clean:
 	@rm -f $(OBJ)
@@ -44,7 +52,8 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@rm -rf $(OBJ_DIR)
+	@make fclean -C $(LIBFT_DIR)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean $(LIBS) re

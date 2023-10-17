@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 12:54:48 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/12 12:10:02 by vache            ###   ########.fr       */
+/*   Created: 2023/01/23 15:35:57 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/07/26 10:08:30 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-char	*ft_strrchr( char *str, int c)
+char	*ft_strmapi(char *s, char (*f)(unsigned int, char))
 {
 	int		i;
-	char	*s;
+	char	*str;
+	int		k;
 
+	if (!s || !f)
+		return (0);
+	k = ft_strlen(s);
+	str = (char *)malloc(k + 1);
 	if (!str)
-		return (NULL);
-	s = (char *)str;
-	i = ft_strlen(str);
-	while (*s)
-		s++;
-	while (i >= 0)
+		return (0);
+	i = 0;
+	while (s[i])
 	{
-		if (*s == c % 256)
-			return (s);
-		s--;
-		i--;
+		str[i] = f(i, s[i]);
+		i++;
 	}
-	return (NULL);
+	str[i] = '\0';
+	return (str);
 }

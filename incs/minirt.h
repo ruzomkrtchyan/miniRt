@@ -20,6 +20,7 @@
 # include <math.h>
 # include <stdint.h>
 # include <fcntl.h>
+# include "libft.h"
 # include "get_next_line_bonus.h"
 
 typedef	struct s_rgb
@@ -29,38 +30,38 @@ typedef	struct s_rgb
 	int	b;
 }				t_rgb;
 
-typedef	struct s_coord
+typedef	struct s_vect
 {
 	float	x;
 	float	y;
 	float	z;
-}				t_coord;
+}				t_vect;
 
 typedef	struct s_light
 {
-	t_coord	*cord;
+	t_vect	*cord;
 	t_rgb	*color;
 	float	bright;
 }				t_light;
 
 typedef	struct s_sph
 {
-	t_coord	*cord;
+	t_vect	*cord;
 	t_rgb	*color;
 	float	diam;
 }				t_sph;
 
 typedef	struct s_pl
 {
-	t_coord	*cord;
-	t_coord	*n_cord;
+	t_vect	*cord;
+	t_vect	*n_cord;
 	t_rgb	*color;
 }				t_pl;
 
 typedef	struct s_cyl
 {
-	t_coord	*cord;
-	t_coord	*n_cord;
+	t_vect	*cord;
+	t_vect	*n_cord;
 	t_rgb	*color;
 	float	diam;
 	float	height;
@@ -74,8 +75,8 @@ typedef	struct s_amb
 
 typedef struct s_cam
 {
-	t_coord	*dir;
-	t_coord	*pos;
+	t_vect	*dir;
+	t_vect	*pos;
 	float	degree;
 }				t_cam;
 
@@ -91,7 +92,8 @@ typedef	struct s_scene
 
 typedef	struct s_pars
 {
-	char	*str;
+	char	c;
+	t_vect	*coord;
 	t_rgb	*color;
 }				t_pars;
 
@@ -99,18 +101,7 @@ typedef	struct s_pars
 /**************UTILS******************/
 /*************************************/
 
-char	*ft_strjoin(char *s1, char *s2, int flag);
-char	*ft_strnstr(char *s1, char *s2, size_t n);
-void	*ft_calloc(size_t nitems, size_t size);
-char	*ft_strrchr( char *str, int c);
-char	*ft_strrchr( char *str, int c);
-char	*ft_strchr( char *str, int c);
-char	**ft_split_2(char *s, char c);
-int		ft_strcmp(char *s1, char *s2);
-char	**ft_split(char *s, char c);
-void	ft_bzero(void *s, size_t n);
-char	*ft_strdup(char *str);
-int		ft_strlen(char *str);
+float	ft_atof(char *str);
 
 void	check_fname(char *str);
 char	*read_file(char *str);

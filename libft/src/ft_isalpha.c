@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 18:55:00 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/12 14:11:45 by vache            ###   ########.fr       */
+/*   Created: 2023/01/17 20:02:01 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/07/26 20:01:56 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_isalpha(int c)
 {
-	char	*res;
-	char	**arr;
-
-	res = NULL;
-	arr = NULL;
-	if (argc != 2)
-	{
-		write(2, "Error : Arguments\n", 19);
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
-	}
-	check_fname(argv[1]);
-	res = read_file(argv[1]);
-	arr = ft_split(res, '\n');
-	// pars(arr);
 	return (0);
 }
