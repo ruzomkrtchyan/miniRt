@@ -1,4 +1,6 @@
-./minirt
-./.vscode
-./.DS_Store
-./obj
+minirt
+.vscode
+.DS_Store
+obj
+libft/*.a
+libft/obj
