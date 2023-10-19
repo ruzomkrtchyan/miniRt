@@ -92,8 +92,14 @@ typedef	struct s_scene
 
 typedef	struct s_pars
 {
-	char	c;
+	char	*str;
+	float	amb;
+	float	l_brith;
+	float	s_diam;
+	float	c_diam;
+	float	c_height;
 	t_vect	*coord;
+	t_vect	*n_vect;
 	t_rgb	*color;
 }				t_pars;
 
@@ -102,8 +108,17 @@ typedef	struct s_pars
 /*************************************/
 
 float	ft_atof(char *str);
+int		strlen_2d(char **str);
+int		free_2d(char **s);
 
 void	check_fname(char *str);
 char	*read_file(char *str);
+void 	pars(char **arr);
+int		check_identifier_name(char *str);
+int		check_identifier(char **arr);
+int		check_identifier2(char **arr);
+int		check_identifier3(char **arr);
+int		check_ident_args(char **arr);
+
 
 #endif

@@ -28,7 +28,7 @@ RESET		= "\033[0m"
 all: $(LIBS) $(OBJ_DIR) $(NAME)
 
 $(OBJ_DIR):
-	$(MK) $(OBJ_DIR)
+	@$(MK) $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER) Makefile
 	@echo $(GREEN) "$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@" $(RESET)
@@ -44,7 +44,7 @@ $(NAME): $(OBJ) $(HEADER)
 	@$(CC) $(CFLAGS) $(LINKERS) -o $(NAME) $(OBJ)
 
 libft :
-	make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR)
 
 clean:
 	@rm -f $(OBJ)
