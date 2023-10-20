@@ -54,7 +54,7 @@ void	valid_float(char *str)
 		if (str[i] == '.')
 			break;
 	}
-	if (ft_strchr(str + i + 1, '.') || !ft_strchr(str, '.'))
+	if (ft_strchr(str + i + 1, '.') || !ft_strchr(str, '.') || (str[i] == '.' && i == 0))
 	{
 		write(2, "Error: incorrect dots\n", 23);
 		exit(1);

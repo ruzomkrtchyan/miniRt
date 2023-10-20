@@ -107,18 +107,21 @@ typedef	struct s_pars
 /**************UTILS******************/
 /*************************************/
 
+int		free_of_n(char *str, char **arr1, char **arr2, int i);
 float	ft_atof(char *str);
 int		strlen_2d(char **str);
 int		free_2d(char **s);
+int		err(char *str);
 
 void	check_fname(char *str);
+void	check_ident_name(char **arr);
 char	*read_file(char *str);
 void 	pars(char **arr);
-int		check_identifier_name(char *str);
 int		check_identifier(char **arr);
-int		check_identifier2(char **arr);
-int		check_identifier3(char **arr);
 int		check_ident_args(char **arr);
-
+int		check_args_amb(char **line);
+int		check_args_cam(char **line);
+int		check_args_light(char **line);
+int		check_args_plane(char **line);
 
 #endif

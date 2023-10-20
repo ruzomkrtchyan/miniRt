@@ -1,19 +1,9 @@
 #include "minirt.h"
 
-int	check_identifier_name(char *str);
 int	check_identifier(char **arr);
 int	check_identifier2(char **arr);
 int	check_identifier3(char **arr);
 
-int	check_identifier_name(char *str)
-{
-	if (!ft_strcmp(str, "A") || !ft_strcmp(str, "C") || \
-		!ft_strcmp(str, "L") || !ft_strcmp(str, "pl") || \
-		!ft_strcmp(str, "sp") || !ft_strcmp(str, "cy"))
-		return (0);
-	write(2, "Error : All identifiers are not present\n", 41);
-	return (1);
-}
 
 int	check_identifier(char **arr)
 {
@@ -25,8 +15,13 @@ int	check_identifier(char **arr)
 			return (1);
 		}
 	}
-	else if (check_identifier2(arr) || check_identifier3(arr))
+	else if (check_identifier2(arr) == 1 || check_identifier3(arr) == 1)
 		return (1);
+	else if (check_identifier2(arr) == 2 && check_identifier3(arr) == 2)
+	{
+		write(2, "Error : Wrong identifier\n", 26);
+		return (1);
+	}
 	return (0);
 }
 
@@ -48,14 +43,8 @@ int	check_identifier2(char **arr)
 			return (1);
 		}
 	}
-	else if (!ft_strcmp(arr[0], "L"))
-	{
-		if (strlen_2d(arr) != 4)
-		{
-			write(2, "Error : Wrong 'L' identifier arguments\n", 40);
-			return (1);
-		}
-	}
+	else
+		return (2);
 	return (0);
 }
 
@@ -85,5 +74,7 @@ int	check_identifier3(char **arr)
 			return (1);
 		}
 	}
+	else
+		return (2);
 	return (0);
 }

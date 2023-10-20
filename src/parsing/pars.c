@@ -13,7 +13,7 @@ void pars(char **arr)
 	{
 		j = 0;
 		line = ft_split(arr[i], ' ');
-		if (check_identifier_name(line[0]) || check_identifier(line) || check_ident_args(line))
+		if (check_identifier(line) || check_ident_args(line))
 		{
 			free_2d(arr);
 			exit(1);
@@ -21,10 +21,11 @@ void pars(char **arr)
 		free_2d(line);
 		i++;
 	}
+
 }
 
 
-int	check_ident_arg(char **line)
+int	check_ident_args(char **line)
 {
 	int	i;
 
@@ -34,12 +35,12 @@ int	check_ident_arg(char **line)
 	else if (!ft_strcmp(line[0], "C"))
 		i = check_args_cam(line);
 	else if (!ft_strcmp(line[0], "L"))
-		i = check_arg_light(line);
+		i = check_args_light(line);
 	else if (!ft_strcmp(line[0], "pl"))
 		i = check_args_plane(line);
-	else if (!ft_strcmp(line[0], "sp"))
-		i = check_args_sphere(line);
-	else if (!ft_strcmp(line[0], "cy"))
-		i = check_args_cylinder(line);
+	// else if (!ft_strcmp(line[0], "sp"))
+	// 	i = check_args_sphere(line);
+	// else if (!ft_strcmp(line[0], "cy"))
+	// 	i = check_args_cylinder(line);
 	return (i);
 }
