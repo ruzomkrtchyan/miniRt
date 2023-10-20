@@ -33,34 +33,6 @@ float	before_dot(char *str)
 	
 }
 
-void	valid_float(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] && ((str[i] >= '0' && str[i] <= '9') || str[i] == '.'))
-			i++;
-		else
-		{
-			write(2, "Error : incorrect float number\n", 32);
-			exit(1);
-		}
-	}
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '.')
-			break;
-	}
-	if (ft_strchr(str + i + 1, '.') || !ft_strchr(str, '.') || (str[i] == '.' && i == 0))
-	{
-		write(2, "Error: incorrect dots\n", 23);
-		exit(1);
-	}
-}
-
 float	ft_atof(char *str)
 {
 	float	res;
@@ -76,7 +48,6 @@ float	ft_atof(char *str)
 			sign = -1.0;
 		++str;
 	}
-	valid_float(str);
 	res = before_dot(str);
 	while (str[i] && str[i] != '.')
 		i++;

@@ -112,6 +112,9 @@ float	ft_atof(char *str);
 int		strlen_2d(char **str);
 int		free_2d(char **s);
 int		err(char *str);
+int		valid_coord(char **arr);
+int		valid_float(char **str);
+int		valid_colors(char **colors);
 
 void	check_fname(char *str);
 void	check_ident_name(char **arr);
@@ -123,5 +126,6 @@ int		check_args_amb(char **line);
 int		check_args_cam(char **line);
 int		check_args_light(char **line);
 int		check_args_plane(char **line);
+int		check_args_sphere(char **line);
 
 #endif

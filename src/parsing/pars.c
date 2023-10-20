@@ -38,8 +38,8 @@ int	check_ident_args(char **line)
 		i = check_args_light(line);
 	else if (!ft_strcmp(line[0], "pl"))
 		i = check_args_plane(line);
-	// else if (!ft_strcmp(line[0], "sp"))
-	// 	i = check_args_sphere(line);
+	else if (!ft_strcmp(line[0], "sp"))
+		i = check_args_sphere(line);
 	// else if (!ft_strcmp(line[0], "cy"))
 	// 	i = check_args_cylinder(line);
 	return (i);

@@ -1,6 +1,6 @@
-minirt
-.vscode
-.DS_Store
-obj
-libft/*.a
 libft/obj
+libft/libft.a
+obj
+minirt
+.DS_Store
+.vscode

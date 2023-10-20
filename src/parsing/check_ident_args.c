@@ -2,29 +2,29 @@
 
 int	check_args_amb(char **line)
 {
-	float	amb;
 	char	**colors;
-	int		i;
+	char	*amb;
 
-	i = 1;
-	amb = ft_atof(line[1]);
+	amb = ft_strdup(line[1]);
 	colors = NULL;
-	if (amb < 0.0 || amb > 1.0)
-		return (err("Error : Ambient light factor is not in range\n"));
-	colors = ft_split(line[2], ',');
-	i = 0;
-	if (strlen_2d(colors) != 3)
-		return(err("Error : Color arguments do not match quantity\n"));
-	i = -1;
-	while (colors[++i])
+	if (valid_float(&amb) || ft_atof(line[1]) < 0.0 || ft_atof(line[1]) > 1.0)
 	{
-		if (ft_atoi(colors[i]) < 0 || ft_atoi(colors[i]) > 255)
-		{
-			free_2d(colors);	
-			return (err("Error : Color number out of range\n"));
-		}
+		free(amb);
+		return (err("Error : Ambient light factor is not in range\n"));
 	}
-	free_2d(colors);	
+	free(amb);
+	colors = ft_split(line[2], ',');
+	if (strlen_2d(colors) != 3)
+	{
+		free_2d(colors);
+		return(err("Error : Color arguments do not match quantity\n"));
+	}
+	if (valid_colors(colors))
+	{
+		free_2d(colors);	
+		return (err("Error : Color number out of range\n"));
+	}
+	free_2d(colors);
 	return (0);
 }
 
@@ -63,10 +63,7 @@ int	check_args_light(char **line)
 		free_of_n(NULL, vect, colors, 2);
 		return (err("Error : Wrong coordinates for light\n"));
 	}
-	if (strlen_2d(colors) != 3 || \
-		(ft_atoi(colors[0]) < 0 || ft_atoi(colors[0]) > 255) || \
-		(ft_atoi(colors[1]) < 0 || ft_atoi(colors[1]) > 255) || \
-		(ft_atoi(colors[2]) < 0 || ft_atoi(colors[2]) > 255))
+	if (strlen_2d(colors) != 3 || valid_colors(colors))
 	{
 		free_of_n(NULL, vect, colors, 2);
 		return (err("Error : Wrong colors for light\n"));
