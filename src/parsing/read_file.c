@@ -19,15 +19,10 @@ char	*read_file(char *str)
 			res = ft_strjoin(res, tmp, 1);
 		free(tmp);
 	}
-	if (ft_strchr(res, '\t') != NULL)
+	if (!res || ft_strchr(res, '\t') != NULL || only_new_line(res))
 	{
-		write(2, "Error : Dont use tab\n", 22);
+		write(2, "Error : Incorrect file\n", 22);
 		free(res);
-		exit(1);
-	}
-	if (!res)
-	{
-		write(2, "Erorr : File Empty\n", 20);
 		exit(1);
 	}
 	return (res);

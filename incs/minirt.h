@@ -90,19 +90,6 @@ typedef	struct s_scene
 	t_cam	*cam;
 }				t_scene;
 
-typedef	struct s_pars
-{
-	char	*str;
-	float	amb;
-	float	l_brith;
-	float	s_diam;
-	float	c_diam;
-	float	c_height;
-	t_vect	*coord;
-	t_vect	*n_vect;
-	t_rgb	*color;
-}				t_pars;
-
 void	print_vect(char **arr);
 
 /*************************************/
@@ -114,6 +101,9 @@ float	ft_atof(char *str);
 int		strlen_2d(char **str);
 int		free_2d(char **s);
 int		err(char *str);
+int		only_new_line(char *str);
+int		count_comma(char *str);
+int		check_number(char *str, char **arr, int mode);
 int		valid_coord(char **arr);
 int		valid_float(char **str, int len);
 int		valid_colors(char **colors);

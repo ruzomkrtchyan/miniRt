@@ -13,7 +13,7 @@ CC		= cc
 HEADER	= $(wildcard ./incs/*.h)
 INCLUDE	= -Iincs -Iincludes -I$(LIBFT_DIR)/$(INCLUDES)
 LINKERS	= -L$(LIBFT_DIR) -lft
-CFLAGS	= -Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
 MK		= mkdir -p
 
 LIBS		= libft

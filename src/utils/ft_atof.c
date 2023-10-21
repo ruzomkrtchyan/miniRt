@@ -2,7 +2,7 @@
 
 float	after_dot(char *str)
 {
-	int	i;
+	int		i;
 	float	res;
 
 	i = 0;
@@ -42,6 +42,8 @@ float	ft_atof(char *str)
 	res = 0;
 	i = 0;
 	sign = 1.0;
+	if (!ft_strchr(str, '.'))
+		str = ft_strjoin(str, ".0", -1);
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')

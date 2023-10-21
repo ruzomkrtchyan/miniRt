@@ -36,7 +36,7 @@ int	valid_float(char **str, int len)
 			if (str[j][i] == '.')
 				break;
 		if (ft_strchr(str[j] + i + 1, '.') || !ft_strchr(str[j], '.') || \
-											str[j][0] == '.')
+				str[j][0] == '.' || (str[j][i] == '.' && str[j][i + 1] == '\0'))
 				return (1);
 	}
 	return (0);
@@ -47,7 +47,7 @@ int	valid_coord(char **arr)
 	int	i;
 
 	i = 0;
-	while (arr[i])
+	while (i < 3)
 	{
 		if (ft_atof(arr[i]) < 0.0 || ft_atof(arr[i]) > 1.0)
 			return (1);

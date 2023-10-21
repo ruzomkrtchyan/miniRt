@@ -50,6 +50,37 @@ int	free_of_n(char *str, char **arr1, char **arr2, int i)
 	return (0);
 }
 
+int	only_new_line(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (str[i] == '\n')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+int	count_comma(char *str)
+{
+	int	i;
+	int	comma;
+
+	i = 0;
+	comma = 0;
+	while (str && str[i])
+	{
+		if (str[i] == ',')
+			comma++;
+		i++;
+	}
+	return (comma);
+}
+
 void	print_vect(char **arr)
 {
 	for (int i = 0; arr[i]; ++i)

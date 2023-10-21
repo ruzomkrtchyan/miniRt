@@ -1,29 +1,35 @@
 #include "minirt.h"
 
+void	pars(char **arr);
+int		check_ident_args(char **line);
+void	fill_structs(char **line, t_scene *scene);
 
 void pars(char **arr)
 {
 	int		i;
-	int		j;
+	t_scene	*scene;
 	char	**line;
 
-	i = 0;
 	line = NULL;
-	while (arr[i])
+	i = -1;
+	while (arr[++i])
 	{
-		j = 0;
 		line = ft_split(arr[i], ' ');
 		if (check_identifier(line) || check_ident_args(line))
-		{
-			free_of_n(NULL, line, arr, 2);
-			exit(1);
-		}
+			exit(1 + free_of_n(NULL, line, arr, 2));
 		free_2d(line);
-		i++;
 	}
-
+	scene = (t_scene *)malloc(sizeof(scene));
+	if (!scene)
+		exit(1);
+	// i = -1;
+	// while (arr[++i])
+	// {
+	// 	line = ft_split(arr[i], ' ');
+	// 	fill_structs(line, scene);
+	// 	free_2d(line);
+	// }
 }
-
 
 int	check_ident_args(char **line)
 {
@@ -44,3 +50,19 @@ int	check_ident_args(char **line)
 		i = check_args_cylinder(line);
 	return (i);
 }
+
+// void	fill_structs(char **line, t_scene *scene)
+// {
+// 	if (!ft_strcmp(line[0], "A"))
+// 		fill_amb(line, scene->amb);
+// 	else if (!ft_strcmp(line[0], "C"))
+// 		fill_cam(line, scene->cam);
+// 	else if (!ft_strcmp(line[0], "L"))
+// 		fill_light(line, scene->light);
+// 	else if (!ft_strcmp(line[0], "pl"))
+// 		fill_plane(line, scene->pl);
+// 	else if (!ft_strcmp(line[0], "sp"))
+// 		fill_sphere(line,scene->sph);
+// 	else if (!ft_strcmp(line[0], "cy"))
+// 		fill_cylinder(line, scene->cyl);
+// }
