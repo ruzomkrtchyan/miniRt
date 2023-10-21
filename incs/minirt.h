@@ -103,6 +103,8 @@ typedef	struct s_pars
 	t_rgb	*color;
 }				t_pars;
 
+void	print_vect(char **arr);
+
 /*************************************/
 /**************UTILS******************/
 /*************************************/
@@ -113,7 +115,7 @@ int		strlen_2d(char **str);
 int		free_2d(char **s);
 int		err(char *str);
 int		valid_coord(char **arr);
-int		valid_float(char **str);
+int		valid_float(char **str, int len);
 int		valid_colors(char **colors);
 
 void	check_fname(char *str);

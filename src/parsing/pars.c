@@ -15,7 +15,8 @@ void pars(char **arr)
 		line = ft_split(arr[i], ' ');
 		if (check_identifier(line) || check_ident_args(line))
 		{
-			free_2d(arr);
+			free_of_n(NULL, line, arr, 2);
+			// printf("!!!!!!!!\n");
 			exit(1);
 		}
 		free_2d(line);
@@ -30,6 +31,7 @@ int	check_ident_args(char **line)
 	int	i;
 
 	i = 0;
+	// printf("%s\n", line[0]);
 	if (!ft_strcmp(line[0], "A"))
 		i = check_args_amb(line);
 	else if (!ft_strcmp(line[0], "C"))

@@ -22,13 +22,15 @@ char	*ft_strdup(char *str)
 	len = 0;
 	while (str && str[len])
 		len++;
-	s = (char *)ft_calloc(len + 1, sizeof(char));
+	s = (char *)malloc(sizeof(char) * (len + 1));
 	if (s == NULL)
 		return (NULL);
-	while (len >= 0)
+	len = 0;
+	while (str[len])
 	{
 		s[len] = str[len];
-		len--;
+		len++;
 	}
+	s[len] = '\0';
 	return (s);
 }

@@ -20,7 +20,7 @@ int	strlen_2d(char **str)
 	int	i;
 
 	i = 0;
-	if (!str)
+	if (!str || !(*str))
 		return (0);
 	while (str && str[i] != NULL)
 		i++;
@@ -50,3 +50,8 @@ int	free_of_n(char *str, char **arr1, char **arr2, int i)
 	return (0);
 }
 
+void	print_vect(char **arr)
+{
+	for (int i = 0; arr[i]; ++i)
+		printf("%s\n", arr[i]);
+}

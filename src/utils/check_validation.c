@@ -14,13 +14,13 @@ int	valid_colors(char **colors)
 	return (0);
 }
 
-int	valid_float(char **str)
+int	valid_float(char **str, int len)
 {
 	int	i;
 	int	j;
 
 	j = -1;
-	while (str[++j])
+	while (++j < len)
 	{
 		i = 0;
 		while (str[j][i])
