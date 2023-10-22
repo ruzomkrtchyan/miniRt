@@ -39,32 +39,38 @@ typedef	struct s_vect
 
 typedef	struct s_light
 {
-	t_vect	*cord;
+	t_vect	*coord;
 	t_rgb	*color;
 	float	bright;
 }				t_light;
 
 typedef	struct s_sph
 {
-	t_vect	*cord;
-	t_rgb	*color;
-	float	diam;
+	float			diam;
+	t_vect			*coord;
+	t_rgb			*color;
+	struct s_sph	*next;
+	struct s_sph	*prev;
 }				t_sph;
 
 typedef	struct s_pl
 {
-	t_vect	*cord;
-	t_vect	*n_cord;
-	t_rgb	*color;
+	t_vect		*coord;
+	t_vect		*n_coord;
+	t_rgb		*color;
+	struct s_pl	*next;
+	struct s_pl	*prev;
 }				t_pl;
 
 typedef	struct s_cyl
 {
-	t_vect	*cord;
-	t_vect	*n_cord;
-	t_rgb	*color;
-	float	diam;
-	float	height;
+	t_vect			*cord;
+	t_vect			*n_cord;
+	t_rgb			*color;
+	float			diam;
+	float			height;
+	struct s_cyl	*next;
+	struct s_cyl	*prev;
 }				t_cyl;
 
 typedef	struct s_amb
@@ -96,7 +102,7 @@ void	print_vect(char **arr);
 /**************UTILS******************/
 /*************************************/
 
-int		free_of_n(char *str, char **arr1, char **arr2, int i);
+int	free_of_n(char **arr1, char **arr2, char **arr3, int i);
 float	ft_atof(char *str);
 int		strlen_2d(char **str);
 int		free_2d(char **s);
@@ -107,11 +113,11 @@ int		check_number(char *str, char **arr, int mode);
 int		valid_coord(char **arr);
 int		valid_float(char **str, int len);
 int		valid_colors(char **colors);
+char	*read_file(char *str);
 
+void 	pars(char **arr);
 void	check_fname(char *str);
 void	check_ident_name(char **arr);
-char	*read_file(char *str);
-void 	pars(char **arr);
 int		check_identifier(char **arr);
 int		check_ident_args(char **arr);
 int		check_args_amb(char **line);
@@ -120,5 +126,25 @@ int		check_args_light(char **line);
 int		check_args_plane(char **line);
 int		check_args_sphere(char **line);
 int		check_args_cylinder(char **line);
+
+/***********************************************/
+/**************LST_UTILS_SPHERE*****************/
+/***********************************************/
+
+void	lstback_sp(t_sph **pars, t_sph *new);
+void	lstclear_sp(t_sph **lst);
+int		lstsize_sp(t_sph *lst);
+t_sph	*lstadd_sp(char **line);
+t_sph	*lstlast_sp(t_sph *lst);
+
+t_amb	*fill_amb(char **line);
+t_cam	*fill_cam(char **line);
+t_light	*fill_light(char **line);
+
+void	lstback_pl(t_pl **pars, t_pl *new);
+void	lstclear_pl(t_pl **lst);
+int		lstsize_pl(t_pl *lst);
+t_pl	*lstadd_pl(char **line);
+t_pl	*lstlast_pl(t_pl *lst);
 
 #endif

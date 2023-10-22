@@ -23,6 +23,8 @@ int	valid_float(char **str, int len)
 	while (++j < len)
 	{
 		i = 0;
+		if (str[j][i] == '-' || str[j][i] == '+')
+			i++;
 		while (str[j][i])
 		{
 			if (str[j][i] && ((str[j][i] >= '0' && str[j][i] <= '9') || \

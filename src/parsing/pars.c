@@ -51,18 +51,18 @@ int	check_ident_args(char **line)
 	return (i);
 }
 
-// void	fill_structs(char **line, t_scene *scene)
-// {
-// 	if (!ft_strcmp(line[0], "A"))
-// 		fill_amb(line, scene->amb);
-// 	else if (!ft_strcmp(line[0], "C"))
-// 		fill_cam(line, scene->cam);
-// 	else if (!ft_strcmp(line[0], "L"))
-// 		fill_light(line, scene->light);
-// 	else if (!ft_strcmp(line[0], "pl"))
-// 		fill_plane(line, scene->pl);
-// 	else if (!ft_strcmp(line[0], "sp"))
-// 		fill_sphere(line,scene->sph);
-// 	else if (!ft_strcmp(line[0], "cy"))
-// 		fill_cylinder(line, scene->cyl);
-// }
+void	fill_structs(char **line, t_scene *scene)
+{
+	if (!ft_strcmp(line[0], "A"))
+		scene->amb = fill_amb(line);
+	else if (!ft_strcmp(line[0], "C"))
+		scene->cam = fill_cam(line);
+	else if (!ft_strcmp(line[0], "L"))
+		scene->cam = fill_light(line);
+	else if (!ft_strcmp(line[0], "pl"))
+		fill_plane(line, scene->pl);
+	else if (!ft_strcmp(line[0], "sp"))
+		lstback_sp(&scene->sph, lstadd_sp(line));
+	else if (!ft_strcmp(line[0], "cy"))
+		fill_cylinder(line, scene->cyl);
+}

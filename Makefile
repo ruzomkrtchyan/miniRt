@@ -1,7 +1,7 @@
 NAME	= minirt
 
 SRC_DIR 	= src
-SUBDIRS 	= utils parsing
+SUBDIRS 	= utils parsing fill_structs
 SRCDIRS 	:= $(addprefix $(SRC_DIR)/, $(SUBDIRS))
 SRCS		:= $(notdir $(foreach dir, $(SRCDIRS), $(wildcard $(dir)/*.c))) $(notdir $(SRC_DIR)/main.c)
 
