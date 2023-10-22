@@ -1,7 +1,5 @@
 #include "minirt.h"
 
-int	free_of_n(char *str, char **arr1, char **arr2, int i);
-
 int	free_2d(char **s)
 {
 	int	i;
@@ -27,7 +25,7 @@ int	strlen_2d(char **str)
 	return (i);
 }
 
-int	free_of_n(char **arr1, char **arr2, char **arr3, int i)
+int	free_of_n(char *str, char **arr1, char **arr2, int i)
 {
 	if (i == 2)
 	{
@@ -38,13 +36,15 @@ int	free_of_n(char **arr1, char **arr2, char **arr3, int i)
 	}
 	else if (i == 3)
 	{
+		if (str != NULL)
+			free(str);
 		if (arr1 != NULL)
 			free_2d(arr1);
 		if (arr2 != NULL)
 			free_2d(arr2);
-		if (arr3 != NULL)
-			free_2d(arr3);
 	}
+	else
+		free(str);
 	return (0);
 }
 

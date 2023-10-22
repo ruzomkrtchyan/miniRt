@@ -44,3 +44,14 @@ int	check_matrix_num(char **arr)
 	}
 	return (0);
 }
+
+t_scene	*scene_init(t_scene *scene)
+{
+	scene->amb = (t_amb *)malloc(sizeof(t_amb));
+	scene->cam = (t_cam *)malloc(sizeof(t_cam));
+	scene->light = (t_light *)malloc(sizeof(t_light));
+	scene->cyl = NULL;
+	scene->pl = NULL;
+	scene->sph = NULL;
+	return (scene);
+}

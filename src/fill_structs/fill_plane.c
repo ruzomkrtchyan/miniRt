@@ -31,8 +31,8 @@ t_pl	*lstadd_pl(char **line)
 	tmp->n_coord->x = ft_atof(n_vect[0]);
 	tmp->n_coord->y = ft_atof(n_vect[1]);
 	tmp->n_coord->z = ft_atof(n_vect[2]);
-	free_of_n(vect, n_vect, colors, 3);
-	return (tmp);
+	free_of_n(NULL, n_vect, colors, 3);
+	return (free_2d(vect), tmp);
 }
 
 void	lstback_pl(t_pl **pars, t_pl *new)

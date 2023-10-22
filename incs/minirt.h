@@ -64,8 +64,8 @@ typedef	struct s_pl
 
 typedef	struct s_cyl
 {
-	t_vect			*cord;
-	t_vect			*n_cord;
+	t_vect			*coord;
+	t_vect			*n_coord;
 	t_rgb			*color;
 	float			diam;
 	float			height;
@@ -102,7 +102,7 @@ void	print_vect(char **arr);
 /**************UTILS******************/
 /*************************************/
 
-int	free_of_n(char **arr1, char **arr2, char **arr3, int i);
+int		free_of_n(char *str, char **arr1, char **arr2, int i);
 float	ft_atof(char *str);
 int		strlen_2d(char **str);
 int		free_2d(char **s);
@@ -114,6 +114,7 @@ int		valid_coord(char **arr);
 int		valid_float(char **str, int len);
 int		valid_colors(char **colors);
 char	*read_file(char *str);
+t_scene	*scene_init(t_scene *scene);
 
 void 	pars(char **arr);
 void	check_fname(char *str);
@@ -146,5 +147,16 @@ void	lstclear_pl(t_pl **lst);
 int		lstsize_pl(t_pl *lst);
 t_pl	*lstadd_pl(char **line);
 t_pl	*lstlast_pl(t_pl *lst);
+
+void	lstback_cyl(t_cyl **pars, t_cyl *new);
+void	lstclear_cyl(t_cyl **lst);
+int		lstsize_cyl(t_cyl *lst);
+t_cyl	*lstadd_cyl(char **line);
+
+void	lstback_sp(t_sph **pars, t_sph *new);
+void	lstclear_sp(t_sph **lst);
+int		lstsize_sp(t_sph *lst);
+t_sph	*lstadd_sp(char **line);
+t_sph	*lstlast_sp(t_sph *lst);
 
 #endif

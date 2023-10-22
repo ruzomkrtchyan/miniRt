@@ -9,10 +9,10 @@ t_cam	*fill_cam(char **line)
 	char	**pos;
 
 	tmp = (t_cam *)malloc(sizeof(t_cam));
-	if (!tmp)
-		return (NULL);
 	tmp->dir = (t_vect *)malloc(sizeof(t_vect));
 	tmp->pos = (t_vect *)malloc(sizeof(t_vect));
+	if (!tmp || !tmp->pos || !tmp->dir)
+		return (NULL);
 	dir = ft_split(line[1], ',');
 	pos = ft_split(line[2], ',');
 	tmp->dir->x = ft_atof(dir[1]);

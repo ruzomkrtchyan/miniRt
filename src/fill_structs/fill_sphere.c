@@ -17,7 +17,8 @@ t_sph	*lstadd_sp(char **line)
 		return (NULL);
 	tmp->coord = (t_vect *)malloc(sizeof(t_vect));
 	tmp->color = (t_rgb *)malloc(sizeof(t_rgb));
-	vect = ft_split(line[2], ',');
+	vect = ft_split(line[1], ',');
+	tmp->diam = ft_atof(line[2]);
 	colors = ft_split(line[3], ',');
 	tmp->color->r = ft_atoi(colors[0]);
 	tmp->color->g = ft_atoi(colors[1]);
@@ -25,7 +26,6 @@ t_sph	*lstadd_sp(char **line)
 	tmp->coord->x = ft_atof(vect[0]);
 	tmp->coord->y = ft_atof(vect[1]);
 	tmp->coord->z = ft_atof(vect[2]);
-	tmp->diam = ft_atof(line[2]);
 	free_of_n(NULL, colors, vect, 2);
 	return (tmp);
 }
