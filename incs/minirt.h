@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/12 13:52:36 by vache            ###   ########.fr       */
+/*   Updated: 2023/10/23 16:16:02 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int		valid_colors(char **colors);
 char	*read_file(char *str);
 t_scene	*scene_init(t_scene *scene);
 
-void 	pars(char **arr);
+void	pars(char **arr, t_scene *scene);;
 void	check_fname(char *str);
 void	check_ident_name(char **arr);
 int		check_identifier(char **arr);

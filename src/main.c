@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vache <vache@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:55:00 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/12 14:11:45 by vache            ###   ########.fr       */
+/*   Updated: 2023/10/23 16:18:46 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ int	main(int argc, char **argv)
 {
 	char	*res;
 	char	**arr;
+	t_scene	*scene;
 
 	res = NULL;
 	arr = NULL;
+	scene = NULL;
 	if (argc != 2)
 	{
 		write(2, "Error : Arguments\n", 19);
@@ -29,7 +31,7 @@ int	main(int argc, char **argv)
 	arr = ft_split(res, '\n');
 	free(res);
 	check_ident_name(arr);
-	pars(arr);
+	pars(arr, scene);
 	free_2d(arr);
 	return (0);
 }

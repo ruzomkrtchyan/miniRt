@@ -1,13 +1,12 @@
 #include "minirt.h"
 
-void	pars(char **arr);
+void	pars(char **arr, t_scene *scene);
 int		check_ident_args(char **line);
 void	fill_structs(char **line, t_scene *scene);
 
-void pars(char **arr)
+void	pars(char **arr, t_scene *scene)
 {
 	int		i;
-	t_scene	*scene;
 	char	**line;
 
 	line = NULL;
@@ -21,9 +20,6 @@ void pars(char **arr)
 		free_2d(line);
 	}
 	scene = (t_scene *)malloc(sizeof(t_scene));
-	// scene = scene_init(scene);
-	if (!scene)
-		exit(1);
 	i = -1;
 	while (arr[++i])
 	{
