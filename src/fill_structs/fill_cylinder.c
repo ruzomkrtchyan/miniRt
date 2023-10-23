@@ -23,7 +23,7 @@ t_cyl	*lstadd_cyl(char **line)
 	vect = ft_split(line[1], ',');
 	n_vect = ft_split(line[2], ',');
 	tmp->diam = ft_atof(line[3]);
-	tmp->diam = ft_atof(line[4]);
+	tmp->height = ft_atof(line[4]);
 	colors = ft_split(line[5], ',');
 	tmp = lstadd_cyl_2(tmp, vect, n_vect, colors);
 	free_of_n(NULL, n_vect, colors, 3);

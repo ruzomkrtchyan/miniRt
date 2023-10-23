@@ -1,10 +1,10 @@
 #include "minirt.h"
 
-void	pars(char **arr, t_scene *scene);
+t_scene	*pars(char **arr, t_scene *scene);
 int		check_ident_args(char **line);
 void	fill_structs(char **line, t_scene *scene);
 
-void	pars(char **arr, t_scene *scene)
+t_scene	*pars(char **arr, t_scene *scene)
 {
 	int		i;
 	char	**line;
@@ -27,6 +27,7 @@ void	pars(char **arr, t_scene *scene)
 		fill_structs(line, scene);
 		free_2d(line);
 	}
+	return (scene);
 }
 
 int	check_ident_args(char **line)
