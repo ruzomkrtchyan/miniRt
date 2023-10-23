@@ -20,14 +20,15 @@ int	check_args_plane(char **line)
 		free_of_n(NULL, vect, n_vect, 2);
 		return (err("Error : Wrong coordinates for plane\n"));
 	}
+	free_of_n(NULL, vect, n_vect, 2);
 	colors = ft_split(line[3],',');
 	if (count_comma(line[3]) != 2 || valid_colors(colors) || \
 		strlen_2d(colors) != 3 || check_number(NULL, colors, 0))
 	{
-		free_of_n(NULL, vect, colors, 2);
-		return (err("Error : Wrong colors for light\n"));
+		free_2d(colors);
+		return (err("Error : Wrong colors for plane\n"));
 	}
-	free_of_n(NULL, vect, colors, 2);
+	free_2d(colors);
 	return (0);
 }
 
@@ -35,29 +36,28 @@ int	check_args_sphere(char **line)
 {
 	char	**colors;
 	char	**vect;
-	char	*diam;
 
-	diam = ft_strdup(line[2]);
 	vect = ft_split(line[1], ',');
 	colors = ft_split(line[3], ',');
 	if (count_comma(line[1]) != 2 || valid_float(vect, 3) || \
 											strlen_2d(vect) != 3)
 	{
-		free_of_n(diam, vect, colors, 3);
+		free_of_n(NULL, vect, colors, 2);
 		return (err("Error : Wrong coordinates for sphere\n"));
 	}
-	if (valid_float(&diam, 1) || count_comma(line[2]) != 0)
+	if (valid_float(&line[2], 1) || count_comma(line[2]) != 0)
 	{
-		free_of_n(diam, vect, colors, 3);
+		free_of_n(NULL, vect, colors, 2);
 		return (err("Error : Wrong diameter for sphere\n"));
 	}
 	if (count_comma(line[3]) != 2 || valid_colors(colors) || \
 			strlen_2d(colors) != 3 || check_number(NULL, colors, 0))
 	{
-		free_of_n(diam, vect, colors, 3);
+		free_of_n(NULL, vect, colors, 2);
 		return (err("Error : Wrong colors for sphere\n"));
 	}
-	return (0 + free_of_n(diam, vect, colors, 3));
+	free_of_n(NULL, vect, colors, 2);
+	return (0);
 }
 
 int	check_args_cylinder(char **line)
