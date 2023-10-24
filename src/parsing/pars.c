@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:53 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/24 13:07:54 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:29:13 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ t_scene	*pars(char **arr, t_scene *scene)
 	char	**line;
 
 	line = NULL;
-	scene = NULL;
 	i = -1;
 	while (arr[++i])
 	{
 		line = ft_split(arr[i], ' ');
 		if (check_identifier(line) || check_ident_args(line))
+		{
+			system("leaks minirt");
 			exit(1 + free_of_n(NULL, line, arr, 2));
+		}
 		free_2d(line);
 	}
 	scene = (t_scene *)malloc(sizeof(t_scene));

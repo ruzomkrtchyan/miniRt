@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:55:00 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/24 13:08:30 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:09:46 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	main(int argc, char **argv)
 	check_ident_name(arr);
 	scene = pars(arr, scene);
 	destroy_scene(&scene);
-	system("leaks minirt");
 	free_2d(arr);
 	return (0);
 }

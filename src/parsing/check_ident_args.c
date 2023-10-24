@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:51 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/24 13:08:24 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:28:31 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	check_args_amb(char **line)
 												strlen_2d(colors) != 3)
 	{
 		free_2d(colors);
-		return(err("Error : Wrong RGB number\n"));
+		return (err("Error : Wrong RGB number\n"));
 	}
 	if (valid_colors(colors))
 	{
@@ -44,6 +44,7 @@ int	check_args_amb(char **line)
 	free_2d(colors);
 	return (0);
 }
+
 int	check_args_cam(char **line)
 {
 	int		fov;

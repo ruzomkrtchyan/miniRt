@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/24 13:08:19 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:36:05 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,28 @@
 # include "libft.h"
 # include "get_next_line_bonus.h"
 
-typedef	struct s_rgb
+typedef struct s_rgb
 {
 	int	r;
 	int	g;
 	int	b;
 }				t_rgb;
 
-typedef	struct s_vect
+typedef struct s_vect
 {
 	float	x;
 	float	y;
 	float	z;
 }				t_vect;
 
-typedef	struct s_light
+typedef struct s_light
 {
 	t_vect	*coord;
 	t_rgb	*color;
 	float	bright;
 }				t_light;
 
-typedef	struct s_sph
+typedef struct s_sph
 {
 	float			diam;
 	t_vect			*coord;
@@ -53,7 +53,7 @@ typedef	struct s_sph
 	struct s_sph	*prev;
 }				t_sph;
 
-typedef	struct s_pl
+typedef struct s_pl
 {
 	t_vect		*coord;
 	t_vect		*n_coord;
@@ -62,7 +62,7 @@ typedef	struct s_pl
 	struct s_pl	*prev;
 }				t_pl;
 
-typedef	struct s_cyl
+typedef struct s_cyl
 {
 	t_vect			*coord;
 	t_vect			*n_coord;
@@ -73,7 +73,7 @@ typedef	struct s_cyl
 	struct s_cyl	*prev;
 }				t_cyl;
 
-typedef	struct s_amb
+typedef struct s_amb
 {
 	float	ratio;
 	t_rgb	*color;
@@ -86,7 +86,7 @@ typedef struct s_cam
 	float	degree;
 }				t_cam;
 
-typedef	struct s_scene
+typedef struct s_scene
 {
 	t_amb	*amb;
 	t_light	*light;

@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:10 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/24 13:08:11 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:29:43 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,17 +100,4 @@ void	lstclear_cyl(t_cyl **lst)
 		(*lst) = ptr;
 	}
 	ptr = NULL;
-}
-
-int	lstsize_cyl(t_cyl *lst)
-{
-	int	i;
-
-	i = 0;
-	while (lst)
-	{
-		i++;
-		(lst) = (lst)->next;
-	}
-	return (i);
 }

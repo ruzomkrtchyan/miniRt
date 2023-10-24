@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_validation.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/24 13:29:55 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/10/24 13:34:04 by vhovhann         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 int	valid_colors(char **colors)
@@ -36,10 +48,10 @@ int	valid_float(char **str, int len)
 		i = -1;
 		while (str[j][++i])
 			if (str[j][i] == '.')
-				break;
+				break ;
 		if (ft_strchr(str[j] + i + 1, '.') || !ft_strchr(str[j], '.') || \
 				str[j][0] == '.' || (str[j][i] == '.' && str[j][i + 1] == '\0'))
-				return (1);
+			return (1);
 	}
 	return (0);
 }

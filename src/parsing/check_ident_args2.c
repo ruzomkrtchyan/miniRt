@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:49 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/24 13:08:26 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:28:56 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	check_args_plane(char **line)
 	char	**n_vect;
 	char	**colors;
 
-	vect = ft_split(line[1],',');
-	n_vect = ft_split(line[2],',');
+	vect = ft_split(line[1], ',');
+	n_vect = ft_split(line[2], ',');
 	if (count_comma(line[1]) != 2 || count_comma(line[2]) != 2 || \
 		strlen_2d(vect) != 3 || strlen_2d(n_vect) != 3 || \
 		valid_float(vect, 3) || valid_float(n_vect, 3) || valid_coord(n_vect))
@@ -33,7 +33,7 @@ int	check_args_plane(char **line)
 		return (err("Error : Wrong coordinates for plane\n"));
 	}
 	free_of_n(NULL, vect, n_vect, 2);
-	colors = ft_split(line[3],',');
+	colors = ft_split(line[3], ',');
 	if (count_comma(line[3]) != 2 || valid_colors(colors) || \
 		strlen_2d(colors) != 3 || check_number(NULL, colors, 0))
 	{

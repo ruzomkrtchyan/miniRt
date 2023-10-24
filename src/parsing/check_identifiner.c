@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:45 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/24 13:07:46 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:29:05 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	check_identifier(char **arr);
 int	check_identifier2(char **arr);
 int	check_identifier3(char **arr);
-
 
 int	check_identifier(char **arr)
 {
@@ -30,7 +29,6 @@ int	check_identifier(char **arr)
 		return (err("Error : Wrong identifier\n"));
 	return (0);
 }
-
 
 int	check_identifier2(char **arr)
 {
