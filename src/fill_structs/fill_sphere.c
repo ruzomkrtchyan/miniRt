@@ -54,6 +54,8 @@ void	lstclear_sp(t_sph **lst)
 	while ((*lst))
 	{
 		ptr = (*lst)->next;
+		free((*lst)->coord);
+		free((*lst)->color);
 		free (*lst);
 		(*lst) = ptr;
 	}

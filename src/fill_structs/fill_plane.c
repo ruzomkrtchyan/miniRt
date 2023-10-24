@@ -59,6 +59,9 @@ void	lstclear_pl(t_pl **lst)
 	while ((*lst))
 	{
 		ptr = (*lst)->next;
+		free((*lst)->coord);
+		free((*lst)->n_coord);
+		free((*lst)->color);
 		free (*lst);
 		(*lst) = ptr;
 	}

@@ -81,6 +81,9 @@ void	lstclear_cyl(t_cyl **lst)
 	while ((*lst))
 	{
 		ptr = (*lst)->next;
+		free((*lst)->coord);
+		free((*lst)->n_coord);
+		free((*lst)->color);
 		free (*lst);
 		(*lst) = ptr;
 	}
