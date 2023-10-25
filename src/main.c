@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:55:00 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/24 13:09:46 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:40:23 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	main(int argc, char **argv)
 	free(res);
 	check_ident_name(arr);
 	scene = pars(arr, scene);
-	destroy_scene(&scene);
 	free_2d(arr);
+	mlx_create(scene);
+	destroy_scene(&scene);
 	return (0);
 }

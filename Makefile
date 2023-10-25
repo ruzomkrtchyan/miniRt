@@ -1,7 +1,7 @@
 NAME	= minirt
 
 SRC_DIR 	= src
-SUBDIRS 	= utils parsing fill_structs
+SUBDIRS 	= utils parsing fill_structs mlx_start
 SRCDIRS 	:= $(addprefix $(SRC_DIR)/, $(SUBDIRS))
 SRCS		:= $(notdir $(foreach dir, $(SRCDIRS), $(wildcard $(dir)/*.c))) $(notdir $(SRC_DIR)/main.c)
 
@@ -12,7 +12,8 @@ OBJ 		= $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 CC		= cc
 HEADER	= $(wildcard ./incs/*.h)
 INCLUDE	= -Iincs -Iincludes -I$(LIBFT_DIR)/$(INCLUDES)
-LINKERS	= -L$(LIBFT_DIR) -lft
+MLX		= -lmlx -framework OpenGL -framework AppKit
+LINKERS	= -L$(LIBFT_DIR) -lft $(MLX)
 CFLAGS	= -Wall -Wextra -Werror #-g3 -fsanitize=address
 MK		= mkdir -p
 

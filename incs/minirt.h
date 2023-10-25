@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/24 13:45:33 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:40:02 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,85 +18,22 @@
 # include <string.h>
 # include <errno.h>
 # include <math.h>
+# include <mlx.h>
 # include <stdint.h>
 # include <fcntl.h>
+# include "structs.h"
 # include "libft.h"
 # include "get_next_line_bonus.h"
 
-typedef struct s_rgb
-{
-	int	r;
-	int	g;
-	int	b;
-}				t_rgb;
-
-typedef struct s_vect
-{
-	float	x;
-	float	y;
-	float	z;
-}				t_vect;
-
-typedef struct s_light
-{
-	t_vect	*coord;
-	t_rgb	*color;
-	float	bright;
-}				t_light;
-
-typedef struct s_sph
-{
-	float			diam;
-	t_vect			*coord;
-	t_rgb			*color;
-	struct s_sph	*next;
-	struct s_sph	*prev;
-}				t_sph;
-
-typedef struct s_pl
-{
-	t_vect		*coord;
-	t_vect		*n_coord;
-	t_rgb		*color;
-	struct s_pl	*next;
-	struct s_pl	*prev;
-}				t_pl;
-
-typedef struct s_cyl
-{
-	t_vect			*coord;
-	t_vect			*n_coord;
-	t_rgb			*color;
-	float			diam;
-	float			height;
-	struct s_cyl	*next;
-	struct s_cyl	*prev;
-}				t_cyl;
-
-typedef struct s_amb
-{
-	float	ratio;
-	t_rgb	*color;
-}				t_amb;
-
-typedef struct s_cam
-{
-	t_vect	*dir;
-	t_vect	*pos;
-	float	degree;
-}				t_cam;
-
-typedef struct s_scene
-{
-	t_amb	*amb;
-	t_light	*light;
-	t_sph	*sph;
-	t_pl	*pl;
-	t_cyl	*cyl;
-	t_cam	*cam;
-}				t_scene;
-
-void	print_vect(char **arr);
+# define W 		13
+# define A 		0
+# define S 		1
+# define D 		2
+# define UP		126
+# define DOWN	125
+# define LEFT	123
+# define RIGHT	124
+# define ESC	53
 
 /*************************************/
 /**************UTILS******************/
@@ -158,5 +95,7 @@ void	lstclear_sp(t_sph **lst);
 int		lstsize_sp(t_sph *lst);
 t_sph	*lstadd_sp(char **line);
 t_sph	*lstlast_sp(t_sph *lst);
+
+void	mlx_create(t_scene *scene);
 
 #endif

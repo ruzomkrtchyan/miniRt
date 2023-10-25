@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:29:55 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/24 13:48:04 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:01:38 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,10 @@ int	valid_float(char **str, int len)
 			i++;
 		while (str[j][i])
 		{
-			if (str[j][i] && ((str[j][i] >= '0' && str[j][i] <= '9') || \
-														str[j][i] == '.'))
-				i++;
-			else
+			if (str[j][i] && ((str[j][i] < '0' || str[j][i] > '9') && \
+														str[j][i] != '.'))
 				return (1);
+			i++;
 		}
 		i = -1;
 		while (str[j][++i])
