@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_sphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:00 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/24 13:08:01 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/26 19:24:49 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ t_sph	*lstadd_sp(char **line)
 	char	**vect;
 
 	tmp = (t_sph *)malloc(sizeof(t_sph));
-	if (!tmp)
-		return (NULL);
 	tmp->coord = (t_vect *)malloc(sizeof(t_vect));
 	tmp->color = (t_rgb *)malloc(sizeof(t_rgb));
+	if (!tmp || !tmp->coord || !tmp->color)
+		return (NULL);
 	vect = ft_split(line[1], ',');
-	tmp->diam = ft_atof(line[2]);
+	tmp->radius = ft_atof(line[2]) / 2;
 	colors = ft_split(line[3], ',');
 	tmp->color->r = ft_atoi(colors[0]);
 	tmp->color->g = ft_atoi(colors[1]);

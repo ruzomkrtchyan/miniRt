@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/25 18:36:17 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:54:53 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_light
 
 typedef struct s_sph
 {
-	float			diam;
+	float			radius;
 	t_vect			*coord;
 	t_rgb			*color;
 	struct s_sph	*next;
@@ -82,6 +82,14 @@ typedef struct s_cam
 	float	degree;
 }				t_cam;
 
+typedef struct s_vplane
+{
+	float	width;
+	float	height;
+	float	x_pixel;
+	float	y_pixel;
+}				t_vplane;
+
 typedef struct s_scene
 {
 	t_amb	*amb;
@@ -91,6 +99,8 @@ typedef struct s_scene
 	t_cyl	*cyl;
 	t_cam	*cam;
 	t_mlx	*mlx;
+	float	height;
+	float	width;
 }				t_scene;
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_camera.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:11 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/24 13:08:12 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:57:54 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_cam	*fill_cam(char **line)
 	tmp->pos = (t_vect *)malloc(sizeof(t_vect));
 	if (!tmp || !tmp->pos || !tmp->dir)
 		return (NULL);
-	dir = ft_split(line[1], ',');
-	pos = ft_split(line[2], ',');
+	pos = ft_split(line[1], ',');
+	dir = ft_split(line[2], ',');
 	tmp->dir->x = ft_atof(dir[0]);
 	tmp->dir->y = ft_atof(dir[1]);
 	tmp->dir->z = ft_atof(dir[2]);
