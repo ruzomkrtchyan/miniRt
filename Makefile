@@ -11,8 +11,8 @@ OBJ 		= $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 CC		= cc
 HEADER	= $(wildcard ./incs/*.h)
-INCLUDE	= -Iincs -Iincludes -I$(LIBFT_DIR)/$(INCLUDES)
-MLX		= -lmlx -framework OpenGL -framework AppKit
+INCLUDE	= -Iincs -Iincludes -I$(LIBFT_DIR)/$(INCLUDES) -Imlx
+MLX		= -Lmlx -lmlx -framework OpenGL -framework AppKit
 LINKERS	= -L$(LIBFT_DIR) -lft $(MLX)
 CFLAGS	= -Wall -Wextra -Werror #-g3 -fsanitize=address
 MK		= mkdir -p
