@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:03 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/24 13:08:04 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:33:40 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ t_pl	*lstadd_pl(char **line)
 	tmp->n_coord->x = ft_atof(n_vect[0]);
 	tmp->n_coord->y = ft_atof(n_vect[1]);
 	tmp->n_coord->z = ft_atof(n_vect[2]);
-	free_of_n(NULL, n_vect, colors, 3);
-	return (free_2d(vect), tmp);
+	tmp->next = NULL;
+	return (free_2d(vect), free_of_n(NULL, n_vect, colors, 3), tmp);
 }
 
 void	lstback_pl(t_pl **pars, t_pl *new)
@@ -55,10 +55,7 @@ void	lstback_pl(t_pl **pars, t_pl *new)
 	if (!tmp)
 		*pars = new;
 	else
-	{
 		tmp->next = new;
-		new->prev = tmp;
-	}
 }
 
 void	lstclear_pl(t_pl **lst)

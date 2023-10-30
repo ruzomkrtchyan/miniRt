@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/30 16:42:15 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:35:20 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef struct	s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
 typedef struct s_rgb
 {
@@ -24,11 +33,6 @@ typedef struct s_mlx
 {
 	void	*mlx;
 	void	*mlx_win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
 }				t_mlx;
 
 typedef struct s_vect
@@ -51,7 +55,6 @@ typedef struct s_sph
 	t_vect			*coord;
 	t_rgb			*color;
 	struct s_sph	*next;
-	struct s_sph	*prev;
 }				t_sph;
 
 typedef struct s_pl
@@ -60,7 +63,6 @@ typedef struct s_pl
 	t_vect		*n_coord;
 	t_rgb		*color;
 	struct s_pl	*next;
-	struct s_pl	*prev;
 }				t_pl;
 
 typedef struct s_cyl
@@ -71,7 +73,6 @@ typedef struct s_cyl
 	float			diam;
 	float			height;
 	struct s_cyl	*next;
-	struct s_cyl	*prev;
 }				t_cyl;
 
 typedef struct s_amb
@@ -103,6 +104,7 @@ typedef struct s_scene
 	t_pl	*pl;
 	t_cyl	*cyl;
 	t_cam	*cam;
+	t_data	*data;
 	t_mlx	*mlx;
 	float	height;
 	float	width;

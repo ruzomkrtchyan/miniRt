@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:53 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/26 19:52:16 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:34:57 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 t_scene	*pars(char **arr, t_scene *scene);
 int		check_ident_args(char **line);
 void	fill_structs(char **line, t_scene *scene);
+
+void	init_scene(t_scene **scene)
+{
+	(*scene)->amb = NULL;
+	(*scene)->light = NULL;
+	(*scene)->sph = NULL;
+	(*scene)->pl = NULL;
+	(*scene)->cyl = NULL;
+	(*scene)->cam = NULL;
+	(*scene)->data = NULL;
+	(*scene)->mlx = NULL;
+}
 
 t_scene	*pars(char **arr, t_scene *scene)
 {
@@ -31,6 +43,7 @@ t_scene	*pars(char **arr, t_scene *scene)
 		free_2d(line);
 	}
 	scene = (t_scene *)malloc(sizeof(t_scene));
+	init_scene(&scene);
 	i = -1;
 	while (arr[++i])
 	{
@@ -39,7 +52,7 @@ t_scene	*pars(char **arr, t_scene *scene)
 		free_2d(line);
 	}
 	scene->height = 1080;
-	scene->width = 800;
+	scene->width = 720;
 	return (scene);
 }
 

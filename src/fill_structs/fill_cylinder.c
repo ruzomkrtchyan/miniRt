@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:10 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/24 13:29:43 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:33:48 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_cyl	*lstadd_cyl(char **line)
 	tmp->height = ft_atof(line[4]);
 	colors = ft_split(line[5], ',');
 	tmp = lstadd_cyl_2(tmp, vect, n_vect, colors);
+	tmp->next = NULL;
 	free_of_n(NULL, n_vect, colors, 3);
 	free_2d(vect);
 	return (tmp);
@@ -65,10 +66,7 @@ void	lstback_cyl(t_cyl **pars, t_cyl *new)
 	if (!tmp)
 		*pars = new;
 	else
-	{
 		tmp->next = new;
-		new->prev = tmp;
-	}
 }
 
 t_cyl	*lstlast_cyl(t_cyl *lst)

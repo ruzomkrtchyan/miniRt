@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/30 20:07:02 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:47:09 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int	get_color(int red, int green, int blue, float bright)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = red * bright;
+	g = green * bright;
+	b = blue * bright;
+	if (r > 255)
+		r = 255;
+	if (g > 255)
+		g = 255;
+	if (b > 255)
+		b = 255;
+	return (r << 16 | g << 8 | b);
+}
 
 int	sphere_intersection(t_cam *cam, t_vect *ray, t_sph *sph)
 {
@@ -63,10 +81,10 @@ void	ray_tracing(t_scene *scene)
 			ray = new_vect(x_ray, y_ray, -1);
 			norm_vect(ray);
 			if (sphere_intersection(scene->cam, ray, scene->sph))
-				color = 16777215;
+				color = get_color(scene->sph->color->r, scene->sph->color->g, scene->sph->color->b, 1);
 			else
 				color = 0;
-			mlx_pixel_put(scene->mlx, scene->mlx->mlx_win, mlx_x, mlx_y, color);
+			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, color);
 			free(ray);
 			x_angle++;
 			mlx_x++;
