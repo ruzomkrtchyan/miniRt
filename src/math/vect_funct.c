@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:16:14 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/25 20:21:15 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:01:56 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ float	length_vect(t_vect *vec)
 {
 	float	length;
 
-	legth = sqrt((vec->x * vec->x) + (vec->y * vec->y) + (vec->z * vec->z));
+	length = sqrt((vec->x * vec->x) + (vec->y * vec->y) + (vec->z * vec->z));
 	return (length);
 }
 
@@ -53,8 +53,8 @@ void	norm_vect(t_vect *vector)
 {
 	float	length;
 
-	length = length_vect(vec);
-	vector->x /= length(vector);
-	vector->y /= length(vector);
-	vector->z /= length(vector);
+	length = length_vect(vector);
+	vector->x /= length;
+	vector->y /= length;
+	vector->z /= length;
 }

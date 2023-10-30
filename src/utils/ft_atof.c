@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:30:57 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/24 13:31:13 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:31:38 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ float	ft_atof(char *str)
 	res = before_dot(str);
 	while (str[i] && str[i] != '.')
 		i++;
-	res += after_dot(str + i + 1);
+	if (str[i])
+		res += after_dot(str + i + 1);
 	return (res * sign);
 }
