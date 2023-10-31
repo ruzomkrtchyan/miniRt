@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:16:14 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/30 19:01:56 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/10/31 19:26:49 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,22 @@ t_vect	*substraction_vect(t_vect *v1, t_vect *v2)
 
 	res = new_vect(v1->x - v2->x, v1->y - v2->y, v1->z - v2->z);
 	return (res);
+}
+
+t_vect	*sum_vect(t_vect *v1, t_vect *v2)
+{
+	t_vect	*new;
+	
+	new = new_vect(v1->x + v2->x, v1->y + v2->y, v1->z + v2->z);
+	return (new);
+}
+
+t_vect	*num_product_vect(t_vect *vec, float num)
+{
+	t_vect	*new;
+
+	new = new_vect(vec->x * num, vec->y * num, vec->z * num);
+	return (new);
 }
 
 float	length_vect(t_vect *vec)

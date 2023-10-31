@@ -6,11 +6,32 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/31 13:55:20 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/10/31 20:31:20 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+float	compute_light(float dot, t_scene *scene)
+{
+	t_vect	*d;
+	t_vect	*prod;
+	t_vect	*p;
+	t_vevt	*norm;
+	t_vect	*light;
+	float	i;
+
+	d = substraction_vect(cam->pos, sph->coord);
+	prod = num_product_vect(d, dot);
+	p = sum_vect(scene->cam->pos, prod);
+	norm = substraction_vect(p, scene->sph->coord);
+	norm = norm_vect(norm);
+	light = substraction_vect(scene->light->coord, p);
+	i = scene->amb->ratio;
+	
+	
+	return(i);
+}
 
 int	get_color(int red, int green, int blue, float bright)
 {
@@ -30,7 +51,7 @@ int	get_color(int red, int green, int blue, float bright)
 	return (r << 16 | g << 8 | b);
 }
 
-int	sphere_intersection(t_cam *cam, t_vect *ray, t_sph *sph)
+float	sphere_intersection(t_cam *cam, t_vect *ray, t_sph *sph)
 {
 	float	b;
 	float	c;
@@ -51,7 +72,7 @@ int	sphere_intersection(t_cam *cam, t_vect *ray, t_sph *sph)
 	x1 = ((b * (-1)) - sqrt(disc)) / 2;
 	x2 = ((b * (-1)) + sqrt(disc)) / 2;
 	if (x1 > 0)
-		return (1);
+		return (x1);
 	return (0);
 }
 
@@ -61,6 +82,7 @@ void	ray_tracing(t_scene *scene)
 	float		y_angle;
 	float		x_ray;
 	float		y_ray;
+	float		dot;
 	int			color;
 	int			mlx_x;
 	int			mlx_y;
@@ -80,10 +102,12 @@ void	ray_tracing(t_scene *scene)
 			x_ray = x_angle * v_plane->x_pixel;
 			ray = new_vect(x_ray, y_ray, -1);
 			norm_vect(ray);
-			if (sphere_intersection(scene->cam, ray, scene->sph))
-				color = get_color(scene->sph->color->r, scene->sph->color->g, scene->sph->color->b, 1);
+			dot = sphere_intersection(scene->cam, ray, scene->sph);
+			if (dot)
+				color = get_color(scene->sph->color->r, scene->sph->color->g, scene->sph->color->b, \
+									compute_light(dot, scene));
 			else
-				color = get_color(255, 255, 255, 1);
+				color = get_color(0, 0, 0, 1);
 			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, color);
 			free(ray);
 			x_angle++;
