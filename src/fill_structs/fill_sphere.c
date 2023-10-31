@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_sphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:00 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/30 21:33:32 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/31 13:43:23 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_sph	*lstadd_sp(char **line)
 	tmp->coord->y = ft_atof(vect[1]);
 	tmp->coord->z = ft_atof(vect[2]);
 	tmp->next = NULL;
+	tmp->prev = NULL;
 	free_of_n(NULL, colors, vect, 2);
 	return (tmp);
 }
@@ -51,7 +52,10 @@ void	lstback_sp(t_sph **pars, t_sph *new)
 	if (!tmp)
 		*pars = new;
 	else
+	{
 		tmp->next = new;
+		new->prev = tmp;
+	}
 }
 
 void	lstclear_sp(t_sph **lst)

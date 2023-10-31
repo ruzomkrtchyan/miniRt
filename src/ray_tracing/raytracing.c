@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/30 21:47:09 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/31 13:55:20 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	ray_tracing(t_scene *scene)
 	int			mlx_y;
 	t_vplane	*v_plane;
 	t_vect		*ray;
-
+	
 	y_angle = (scene->height / 2);
-	v_plane = get_vplane(scene->width, scene->height);
+	v_plane = get_vplane(scene->width, scene->height, scene->cam->fov);
 	mlx_y = 0;
 	while (y_angle >= scene->height / 2 * (-1))
 	{
@@ -83,7 +83,7 @@ void	ray_tracing(t_scene *scene)
 			if (sphere_intersection(scene->cam, ray, scene->sph))
 				color = get_color(scene->sph->color->r, scene->sph->color->g, scene->sph->color->b, 1);
 			else
-				color = 0;
+				color = get_color(255, 255, 255, 1);
 			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, color);
 			free(ray);
 			x_angle++;
@@ -94,13 +94,13 @@ void	ray_tracing(t_scene *scene)
 	}
 }
 
-t_vplane	*get_vplane(float height, float width)
+t_vplane	*get_vplane(float height, float width, float fov)
 {
 	t_vplane	*v_plane;
 
 	v_plane = malloc(sizeof(t_vplane));
-	v_plane->width = 1;
-	v_plane->height = 1 / (width / height);
+	v_plane->width = 2 * tan((fov / 2) * (M_PI / 180));
+	v_plane->height = v_plane->width / (width / height);
 	v_plane->x_pixel = v_plane->width / width;
 	v_plane->y_pixel = v_plane->height / height;
 	return (v_plane);

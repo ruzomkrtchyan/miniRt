@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/30 21:35:36 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/31 13:17:21 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	mlx_create(t_scene *scene);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 void		ray_tracing(t_scene *scene);
-t_vplane	*get_vplane(float height, float width);
+t_vplane	*get_vplane(float height, float width, float fov);
 int			sphere_intersection(t_cam *cam, t_vect *ray, t_sph *sph);
 
 t_vect	*new_vect(float x, float y, float z);

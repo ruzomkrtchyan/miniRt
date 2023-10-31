@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:11 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/26 18:57:54 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/10/31 13:14:17 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_cam	*fill_cam(char **line)
 	tmp->pos->x = ft_atof(pos[0]);
 	tmp->pos->y = ft_atof(pos[1]);
 	tmp->pos->z = ft_atof(pos[2]);
-	tmp->degree = ft_atof(line[3]);
+	tmp->fov = ft_atof(line[3]);
 	free_of_n(NULL, dir, pos, 2);
 	return (tmp);
 }

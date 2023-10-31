@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:53 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/30 21:34:57 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/31 12:48:41 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,9 @@ void	fill_structs(char **line, t_scene *scene)
 	else if (!ft_strcmp(line[0], "L"))
 		scene->light = fill_light(line);
 	else if (!ft_strcmp(line[0], "pl"))
-	{
-		scene->pl = NULL;
 		lstback_pl(&scene->pl, lstadd_pl(line));
-	}
 	else if (!ft_strcmp(line[0], "sp"))
-	{
-		scene->sph = NULL;
 		lstback_sp(&scene->sph, lstadd_sp(line));
-	}
 	else if (!ft_strcmp(line[0], "cy"))
-	{
-		scene->cyl = NULL;
 		lstback_cyl(&scene->cyl, lstadd_cyl(line));
-	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/30 21:35:20 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/31 13:43:34 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_sph
 	t_vect			*coord;
 	t_rgb			*color;
 	struct s_sph	*next;
+	struct s_sph	*prev;
 }				t_sph;
 
 typedef struct s_pl
@@ -85,7 +86,7 @@ typedef struct s_cam
 {
 	t_vect	*dir;
 	t_vect	*pos;
-	float	degree;
+	float	fov;
 }				t_cam;
 
 typedef struct s_vplane
