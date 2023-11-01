@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/31 13:43:34 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:08:06 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ typedef struct s_light
 typedef struct s_sph
 {
 	float			radius;
+	float			spec;
 	t_vect			*coord;
 	t_rgb			*color;
 	struct s_sph	*next;
-	struct s_sph	*prev;
 }				t_sph;
 
 typedef struct s_pl

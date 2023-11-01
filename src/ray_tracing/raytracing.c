@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/01 13:49:12 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:31:08 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ float	compute_light(float dot, t_scene *scene, t_vect *ray)
 	t_vect	*p;
 	t_vect	*norm;
 	t_vect	*light;
+	t_vect	*v;
+	t_vect	*r;
 	float	n_dot_l;
+	float	r_dot_v;
 	float	i;
 
 	prod = num_product_vect(ray, dot);
@@ -30,6 +33,15 @@ float	compute_light(float dot, t_scene *scene, t_vect *ray)
 	n_dot_l = dot_product_vect(norm, light);
 	if (n_dot_l > 0)
 		i += scene->light->bright * n_dot_l / (length_vect(norm) * length_vect(light));
+	if (scene->sph->spec > 0)
+	{
+		v = num_product_vect(ray, -1);
+		r = num_product_vect(num_product_vect(norm, 2), n_dot_l);
+		r = substraction_vect(r, light);
+		r_dot_v = dot_product_vect(r, v);
+		if (r_dot_v > 0)
+			i += scene->light->bright * pow(r_dot_v/(length_vect(r)*length_vect(v)), scene->sph->spec);
+	}
 	return(i);
 }
 
@@ -57,11 +69,9 @@ float	sphere_intersection(t_cam *cam, t_vect *ray, t_sph *sph)
 	float	c;
 	float	disc;
 	float	x1;
-	float	x2;
 	t_vect	*cam_to_sphere;
 
 	x1 = 0;
-	x2 = 0;
 	cam_to_sphere = substraction_vect(cam->pos, sph->coord);
 	b = 2 * (dot_product_vect(cam_to_sphere, ray));
 	c = dot_product_vect(cam_to_sphere,cam_to_sphere) - (sph->radius * sph->radius);
@@ -70,7 +80,6 @@ float	sphere_intersection(t_cam *cam, t_vect *ray, t_sph *sph)
 	if (disc < 0)
 		return (0);
 	x1 = ((b * (-1)) - sqrt(disc)) / 2;
-	x2 = ((b * (-1)) + sqrt(disc)) / 2;
 	if (x1 > 0)
 		return (x1);
 	return (0);
