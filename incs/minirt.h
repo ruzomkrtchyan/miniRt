@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/31 13:17:21 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/01 13:10:24 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,14 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 void		ray_tracing(t_scene *scene);
 t_vplane	*get_vplane(float height, float width, float fov);
-int			sphere_intersection(t_cam *cam, t_vect *ray, t_sph *sph);
+float		sphere_intersection(t_cam *cam, t_vect *ray, t_sph *sph);
 
 t_vect	*new_vect(float x, float y, float z);
 t_vect	*substraction_vect(t_vect *v1, t_vect *v2);
 float	length_vect(t_vect *vec);
 float	dot_product_vect(t_vect *v1, t_vect *v2);
 void	norm_vect(t_vect *vector);
+t_vect	*num_product_vect(t_vect *vec, float num);
+t_vect	*sum_vect(t_vect *v1, t_vect *v2);
 
 #endif

@@ -6,30 +6,30 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/10/31 20:31:20 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/01 13:49:12 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-float	compute_light(float dot, t_scene *scene)
+float	compute_light(float dot, t_scene *scene, t_vect *ray)
 {
-	t_vect	*d;
 	t_vect	*prod;
 	t_vect	*p;
-	t_vevt	*norm;
+	t_vect	*norm;
 	t_vect	*light;
+	float	n_dot_l;
 	float	i;
 
-	d = substraction_vect(cam->pos, sph->coord);
-	prod = num_product_vect(d, dot);
+	prod = num_product_vect(ray, dot);
 	p = sum_vect(scene->cam->pos, prod);
 	norm = substraction_vect(p, scene->sph->coord);
-	norm = norm_vect(norm);
+	norm_vect(norm);
 	light = substraction_vect(scene->light->coord, p);
 	i = scene->amb->ratio;
-	
-	
+	n_dot_l = dot_product_vect(norm, light);
+	if (n_dot_l > 0)
+		i += scene->light->bright * n_dot_l / (length_vect(norm) * length_vect(light));
 	return(i);
 }
 
@@ -105,7 +105,7 @@ void	ray_tracing(t_scene *scene)
 			dot = sphere_intersection(scene->cam, ray, scene->sph);
 			if (dot)
 				color = get_color(scene->sph->color->r, scene->sph->color->g, scene->sph->color->b, \
-									compute_light(dot, scene));
+									compute_light(dot, scene, ray));
 			else
 				color = get_color(0, 0, 0, 1);
 			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, color);
