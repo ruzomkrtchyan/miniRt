@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/01 15:31:08 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/01 20:40:22 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,12 @@ void	ray_tracing(t_scene *scene)
 	int			mlx_y;
 	t_vplane	*v_plane;
 	t_vect		*ray;
-	
-	y_angle = (scene->height / 2);
+	t_sph		*tmp;
+
 	v_plane = get_vplane(scene->width, scene->height, scene->cam->fov);
+	y_angle = (scene->height / 2);
 	mlx_y = 0;
+	tmp = scene->sph;
 	while (y_angle >= scene->height / 2 * (-1))
 	{
 		mlx_x = 0;
@@ -112,22 +114,31 @@ void	ray_tracing(t_scene *scene)
 			ray = new_vect(x_ray, y_ray, -1);
 			norm_vect(ray);
 			dot = sphere_intersection(scene->cam, ray, scene->sph);
+			if (!dot)
+			{
+				while (scene->sph->next && !dot)
+				{
+					dot = sphere_intersection(scene->cam, ray, scene->sph->next);
+					scene->sph = scene->sph->next;
+				}
+			}
 			if (dot)
-				color = get_color(scene->sph->color->r, scene->sph->color->g, scene->sph->color->b, \
-									compute_light(dot, scene, ray));
+				color = get_color(scene->sph->color->r, scene->sph->color->g, \
+						scene->sph->color->b, compute_light(dot, scene, ray));
 			else
 				color = get_color(0, 0, 0, 1);
 			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, color);
 			free(ray);
 			x_angle++;
 			mlx_x++;
+			scene->sph = tmp;
 		}
 		mlx_y++;
 		y_angle--;
 	}
 }
 
-t_vplane	*get_vplane(float height, float width, float fov)
+t_vplane	*get_vplane(float width, float height, float fov)
 {
 	t_vplane	*v_plane;
 
