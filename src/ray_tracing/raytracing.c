@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/01 20:40:22 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/05 12:54:49 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,19 @@ float	sphere_intersection(t_cam *cam, t_vect *ray, t_sph *sph)
 	float	c;
 	float	disc;
 	float	x1;
+	float	a;
 	t_vect	*cam_to_sphere;
 
 	x1 = 0;
 	cam_to_sphere = substraction_vect(cam->pos, sph->coord);
 	b = 2 * (dot_product_vect(cam_to_sphere, ray));
 	c = dot_product_vect(cam_to_sphere,cam_to_sphere) - (sph->radius * sph->radius);
-	disc = (b * b) - (4 * c);
+	a = dot_product_vect(ray, ray);
+	disc = (b * b) - (4 * c * a);
 	free(cam_to_sphere);
 	if (disc < 0)
 		return (0);
-	x1 = ((b * (-1)) - sqrt(disc)) / 2;
+	x1 = ((-b) - sqrt(disc)) / (2 * a);
 	if (x1 > 0)
 		return (x1);
 	return (0);
