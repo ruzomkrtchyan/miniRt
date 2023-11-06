@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:00 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/01 20:43:24 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:02:55 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_sph	*lstadd_sp(char **line)
 	tmp->coord->x = ft_atof(vect[0]);
 	tmp->coord->y = ft_atof(vect[1]);
 	tmp->coord->z = ft_atof(vect[2]);
-	tmp->spec = 50;
+	tmp->spec = 40;
 	tmp->next = NULL;
 	free_of_n(NULL, colors, vect, 2);
 	return (tmp);

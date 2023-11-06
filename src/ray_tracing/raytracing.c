@@ -6,13 +6,13 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/05 12:54:49 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/06 18:05:25 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-float	compute_light(float dot, t_scene *scene, t_vect *ray)
+float	compute_light(float dot, t_scene *scene, t_vect *ray, t_sph *tmp)
 {
 	t_vect	*prod;
 	t_vect	*p;
@@ -26,21 +26,21 @@ float	compute_light(float dot, t_scene *scene, t_vect *ray)
 
 	prod = num_product_vect(ray, dot);
 	p = sum_vect(scene->cam->pos, prod);
-	norm = substraction_vect(p, scene->sph->coord);
+	norm = substraction_vect(p, tmp->coord);
 	norm_vect(norm);
 	light = substraction_vect(scene->light->coord, p);
 	i = scene->amb->ratio;
 	n_dot_l = dot_product_vect(norm, light);
 	if (n_dot_l > 0)
 		i += scene->light->bright * n_dot_l / (length_vect(norm) * length_vect(light));
-	if (scene->sph->spec > 0)
+	if (tmp->spec > 0)
 	{
 		v = num_product_vect(ray, -1);
 		r = num_product_vect(num_product_vect(norm, 2), n_dot_l);
 		r = substraction_vect(r, light);
 		r_dot_v = dot_product_vect(r, v);
 		if (r_dot_v > 0)
-			i += scene->light->bright * pow(r_dot_v/(length_vect(r)*length_vect(v)), scene->sph->spec);
+			i += scene->light->bright * pow(r_dot_v/(length_vect(r)*length_vect(v)), tmp->spec);
 	}
 	return(i);
 }
@@ -77,7 +77,7 @@ float	sphere_intersection(t_cam *cam, t_vect *ray, t_sph *sph)
 	b = 2 * (dot_product_vect(cam_to_sphere, ray));
 	c = dot_product_vect(cam_to_sphere,cam_to_sphere) - (sph->radius * sph->radius);
 	a = dot_product_vect(ray, ray);
-	disc = (b * b) - (4 * c * a);
+	disc = (b * b) - (4 * a * c);
 	free(cam_to_sphere);
 	if (disc < 0)
 		return (0);
@@ -115,29 +115,30 @@ void	ray_tracing(t_scene *scene)
 			x_ray = x_angle * v_plane->x_pixel;
 			ray = new_vect(x_ray, y_ray, -1);
 			norm_vect(ray);
-			dot = sphere_intersection(scene->cam, ray, scene->sph);
+			dot = sphere_intersection(scene->cam, ray, tmp);
 			if (!dot)
 			{
-				while (scene->sph->next && !dot)
+				while (tmp->next && !dot)
 				{
-					dot = sphere_intersection(scene->cam, ray, scene->sph->next);
-					scene->sph = scene->sph->next;
+					dot = sphere_intersection(scene->cam, ray, tmp->next);
+					tmp = tmp->next;
 				}
 			}
 			if (dot)
-				color = get_color(scene->sph->color->r, scene->sph->color->g, \
-						scene->sph->color->b, compute_light(dot, scene, ray));
+				color = get_color(tmp->color->r, tmp->color->g, \
+						tmp->color->b, compute_light(dot, scene, ray, tmp));
 			else
 				color = get_color(0, 0, 0, 1);
 			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, color);
 			free(ray);
 			x_angle++;
 			mlx_x++;
-			scene->sph = tmp;
+			tmp = scene->sph;
 		}
 		mlx_y++;
 		y_angle--;
 	}
+	free(v_plane);
 }
 
 t_vplane	*get_vplane(float width, float height, float fov)

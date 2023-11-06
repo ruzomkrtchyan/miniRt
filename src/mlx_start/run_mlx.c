@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:26:38 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/05 12:05:35 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:47:06 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	char	*dst;
 	if (x >= 0 && x < data->width && y >= 0 && y < data->height)
 	{
-		dst = data->addr + (x * data->line_length + y * (data->bits_per_pixel / 8));
+		dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
 	}
 }
@@ -67,7 +67,7 @@ void	mlx_create(t_scene *scene)
 	scene->data->height = scene->height;
 	scene->mlx->mlx = mlx_init();
 	scene->mlx->mlx_win = mlx_new_window(scene->mlx->mlx, 1080, 720, "MiniRt");
-	scene->data->img = mlx_new_image(scene->mlx->mlx, 1920, 1080);
+	scene->data->img = mlx_new_image(scene->mlx->mlx, 1080, 720);
 	scene->data->addr = mlx_get_data_addr(scene->data->img, \
 								&scene->data->bits_per_pixel, \
 								&scene->data->line_length, &scene->data->endian);
