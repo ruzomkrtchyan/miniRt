@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/06 18:05:25 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:51:24 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,14 @@ void	ray_tracing(t_scene *scene)
 	float		x_ray;
 	float		y_ray;
 	float		dot;
+	float		min_t;
 	int			color;
 	int			mlx_x;
 	int			mlx_y;
 	t_vplane	*v_plane;
 	t_vect		*ray;
 	t_sph		*tmp;
+	t_sph		*tmp1;
 
 	v_plane = get_vplane(scene->width, scene->height, scene->cam->fov);
 	y_angle = (scene->height / 2);
@@ -112,21 +114,24 @@ void	ray_tracing(t_scene *scene)
 		x_angle = ((scene->width / 2) * (-1));
 		while (x_angle <= scene->width / 2)
 		{
+			min_t = INFINITY;
+			dot = INFINITY;
 			x_ray = x_angle * v_plane->x_pixel;
 			ray = new_vect(x_ray, y_ray, -1);
 			norm_vect(ray);
-			dot = sphere_intersection(scene->cam, ray, tmp);
-			if (!dot)
+			while (tmp)
 			{
-				while (tmp->next && !dot)
+				dot = sphere_intersection(scene->cam, ray, tmp);
+				if (dot && dot < min_t)
 				{
-					dot = sphere_intersection(scene->cam, ray, tmp->next);
-					tmp = tmp->next;
+					min_t = dot;
+					tmp1 = tmp;
 				}
+				tmp = tmp->next;
 			}
-			if (dot)
-				color = get_color(tmp->color->r, tmp->color->g, \
-						tmp->color->b, compute_light(dot, scene, ray, tmp));
+			if (min_t != INFINITY)
+				color = get_color(tmp1->color->r, tmp1->color->g, \
+						tmp1->color->b, compute_light(min_t, scene, ray, tmp1));
 			else
 				color = get_color(0, 0, 0, 1);
 			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, color);
