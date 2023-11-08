@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_mlx.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:26:38 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/08 12:37:32 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/08 13:04:38 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	mlx_keypress(int keypress, t_scene *scene)
 	if (keypress == ESC)
 	{
 		destroy_scene(&scene);
-		system("leaks minirt");
 		exit (1);
 	}
 	return (0);
@@ -72,7 +71,7 @@ void	mlx_create(t_scene *scene)
 	scene->data->addr = mlx_get_data_addr(scene->data->img, \
 								&scene->data->bits_per_pixel, \
 								&scene->data->line_length, &scene->data->endian);
-	// ray_tracing(scene);
+	ray_tracing(scene);
 	mlx_put_image_to_window(scene->mlx->mlx, scene->mlx->mlx_win, \
 								scene->data->img, 0, 0);
 	mlx_hook(scene->mlx->mlx_win, 2, 0, &mlx_keypress, scene);
