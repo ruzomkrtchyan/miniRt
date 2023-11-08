@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:55:28 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/04 18:30:35 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:33:53 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,12 @@ void	destroy_scene(t_scene **scene)
 	}
 	if ((*scene)->light)
 	{
-		if ((*scene)->light->coord)
-			free((*scene)->light->coord);
 		if ((*scene)->light->color)
 			free((*scene)->light->color);
 		free((*scene)->light);
 	}
 	if ((*scene)->cam)
-	{
-		if ((*scene)->cam->dir)
-			free((*scene)->cam->dir);
-		if ((*scene)->cam->pos)
-			free((*scene)->cam->pos);
 		free((*scene)->cam);
-	}
 	destroy_scene_2(scene);
 }
 

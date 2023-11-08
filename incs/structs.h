@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/08 12:30:21 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:36:13 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_vect
 
 typedef struct s_light
 {
-	t_vect	*coord;
+	t_vect	coord;
 	t_rgb	*color;
 	float	bright;
 }				t_light;
@@ -56,23 +56,23 @@ typedef struct s_sph
 	float			radius;
 	float			spec;
 	float			dist;
-	t_vect			*coord;
+	t_vect			coord;
 	t_rgb			*color;
 	struct s_sph	*next;
 }				t_sph;
 
 typedef struct s_pl
 {
-	t_vect		*coord;
-	t_vect		*n_coord;
+	t_vect		coord;
+	t_vect		n_coord;
 	t_rgb		*color;
 	struct s_pl	*next;
 }				t_pl;
 
 typedef struct s_cyl
 {
-	t_vect			*coord;
-	t_vect			*n_coord;
+	t_vect			coord;
+	t_vect			n_coord;
 	t_rgb			*color;
 	float			diam;
 	float			height;
@@ -87,8 +87,8 @@ typedef struct s_amb
 
 typedef struct s_cam
 {
-	t_vect	*dir;
-	t_vect	*pos;
+	t_vect	dir;
+	t_vect	pos;
 	float	fov;
 }				t_cam;
 

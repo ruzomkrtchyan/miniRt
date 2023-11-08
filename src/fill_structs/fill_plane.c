@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:03 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/30 21:33:40 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:36:03 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ t_pl	*lstadd_pl(char **line)
 
 	tmp = (t_pl *)malloc(sizeof(t_pl));
 	tmp->color = (t_rgb *)malloc(sizeof(t_rgb));
-	tmp->coord = (t_vect *)malloc(sizeof(t_vect));
-	tmp->n_coord = (t_vect *)malloc(sizeof(t_vect));
-	if (!tmp || !tmp->color || !tmp->coord || !tmp->n_coord)
+	if (!tmp || !tmp->color)
 		return (NULL);
 	vect = ft_split(line[1], ',');
 	n_vect = ft_split(line[2], ',');
@@ -37,12 +35,12 @@ t_pl	*lstadd_pl(char **line)
 	tmp->color->r = ft_atoi(colors[0]);
 	tmp->color->g = ft_atoi(colors[1]);
 	tmp->color->b = ft_atoi(colors[2]);
-	tmp->coord->x = ft_atof(vect[0]);
-	tmp->coord->y = ft_atof(vect[1]);
-	tmp->coord->z = ft_atof(vect[2]);
-	tmp->n_coord->x = ft_atof(n_vect[0]);
-	tmp->n_coord->y = ft_atof(n_vect[1]);
-	tmp->n_coord->z = ft_atof(n_vect[2]);
+	tmp->coord.x = ft_atof(vect[0]);
+	tmp->coord.y = ft_atof(vect[1]);
+	tmp->coord.z = ft_atof(vect[2]);
+	tmp->n_coord.x = ft_atof(n_vect[0]);
+	tmp->n_coord.y = ft_atof(n_vect[1]);
+	tmp->n_coord.z = ft_atof(n_vect[2]);
 	tmp->next = NULL;
 	return (free_2d(vect), free_of_n(NULL, n_vect, colors, 3), tmp);
 }
@@ -68,8 +66,6 @@ void	lstclear_pl(t_pl **lst)
 	while ((*lst))
 	{
 		ptr = (*lst)->next;
-		free((*lst)->coord);
-		free((*lst)->n_coord);
 		free((*lst)->color);
 		free (*lst);
 		(*lst) = ptr;
