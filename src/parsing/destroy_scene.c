@@ -6,13 +6,11 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:55:28 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/08 12:33:53 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/08 17:34:02 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-void	destroy_scene_2(t_scene **scene);
 
 void	destroy_scene(t_scene **scene)
 {
@@ -30,11 +28,6 @@ void	destroy_scene(t_scene **scene)
 	}
 	if ((*scene)->cam)
 		free((*scene)->cam);
-	destroy_scene_2(scene);
-}
-
-void	destroy_scene_2(t_scene **scene)
-{
 	if ((*scene)->data)
 		free((*scene)->data);
 	if ((*scene)->mlx)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_mlx.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:26:38 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/08 13:04:38 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/08 17:39:29 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	mlx_keypress(int keypress, t_scene *scene)
 	if (keypress == ESC)
 	{
 		destroy_scene(&scene);
-		exit (1);
+		exit (0);
 	}
 	return (0);
 }
@@ -66,8 +66,9 @@ void	mlx_create(t_scene *scene)
 	scene->data->width = scene->width;
 	scene->data->height = scene->height;
 	scene->mlx->mlx = mlx_init();
-	scene->mlx->mlx_win = mlx_new_window(scene->mlx->mlx, 1080, 720, "MiniRt");
-	scene->data->img = mlx_new_image(scene->mlx->mlx, 1080, 720);
+	scene->mlx->mlx_win = mlx_new_window(scene->mlx->mlx, scene->width, \
+														scene->height, "MiniRt");
+	scene->data->img = mlx_new_image(scene->mlx->mlx, scene->width, scene->height);
 	scene->data->addr = mlx_get_data_addr(scene->data->img, \
 								&scene->data->bits_per_pixel, \
 								&scene->data->line_length, &scene->data->endian);

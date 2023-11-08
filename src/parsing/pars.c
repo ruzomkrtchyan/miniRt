@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:53 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/06 15:49:38 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/08 17:37:58 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ t_scene	*pars(char **arr, t_scene *scene)
 		fill_structs(line, scene);
 		free_2d(line);
 	}
-	scene->height = 720;
-	scene->width = 1080;
+	scene->height = HEIGHT;
+	scene->width = WIDTH;
 	return (scene);
 }
 
