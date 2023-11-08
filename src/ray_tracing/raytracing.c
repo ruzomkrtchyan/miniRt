@@ -6,20 +6,20 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/07 18:51:24 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:26:11 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-float	compute_light(float dot, t_scene *scene, t_vect *ray, t_sph *tmp)
+float	compute_light(float dot, t_scene *scene, t_vect ray, t_sph *tmp)
 {
-	t_vect	*prod;
-	t_vect	*p;
-	t_vect	*norm;
-	t_vect	*light;
-	t_vect	*v;
-	t_vect	*r;
+	t_vect	prod;
+	t_vect	p;
+	t_vect	norm;
+	t_vect	light;
+	t_vect	v;
+	t_vect	r;
 	float	n_dot_l;
 	float	r_dot_v;
 	float	i;
@@ -63,14 +63,14 @@ int	get_color(int red, int green, int blue, float bright)
 	return (r << 16 | g << 8 | b);
 }
 
-float	sphere_intersection(t_cam *cam, t_vect *ray, t_sph *sph)
+float	sphere_intersection(t_cam *cam, t_vect ray, t_sph *sph)
 {
 	float	b;
 	float	c;
 	float	disc;
 	float	x1;
 	float	a;
-	t_vect	*cam_to_sphere;
+	t_vect	cam_to_sphere;
 
 	x1 = 0;
 	cam_to_sphere = substraction_vect(cam->pos, sph->coord);
@@ -78,7 +78,6 @@ float	sphere_intersection(t_cam *cam, t_vect *ray, t_sph *sph)
 	c = dot_product_vect(cam_to_sphere,cam_to_sphere) - (sph->radius * sph->radius);
 	a = dot_product_vect(ray, ray);
 	disc = (b * b) - (4 * a * c);
-	free(cam_to_sphere);
 	if (disc < 0)
 		return (0);
 	x1 = ((-b) - sqrt(disc)) / (2 * a);
@@ -99,7 +98,7 @@ void	ray_tracing(t_scene *scene)
 	int			mlx_x;
 	int			mlx_y;
 	t_vplane	*v_plane;
-	t_vect		*ray;
+	t_vect		ray;
 	t_sph		*tmp;
 	t_sph		*tmp1;
 
@@ -135,7 +134,6 @@ void	ray_tracing(t_scene *scene)
 			else
 				color = get_color(0, 0, 0, 1);
 			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, color);
-			free(ray);
 			x_angle++;
 			mlx_x++;
 			tmp = scene->sph;

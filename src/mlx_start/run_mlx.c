@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:26:38 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/06 15:47:06 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:04:48 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	mlx_keypress(int keypress, t_scene *scene)
 	if (keypress == ESC)
 	{
 		destroy_scene(&scene);
+		system("leaks minirt");
 		exit (1);
 	}
 	return (0);
