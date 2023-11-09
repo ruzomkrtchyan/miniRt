@@ -6,14 +6,14 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/08 12:36:13 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/09 11:17:48 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct	s_data
+typedef struct s_data
 {
 	void	*img;
 	char	*addr;
