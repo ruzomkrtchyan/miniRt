@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/09 11:17:41 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:56:04 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ int			button_press(void);
 int			mlx_keypress(int keypress, t_scene *scene);
 
 void		ray_tracing(t_scene *scene);
-float		sphere_intersection(t_cam *cam, t_vect ray, t_sph *sph);
+float		closest_inter(t_vect pos, t_vect ray, t_sph *sph, t_sph **tmp1);
+float		sphere_intersection(t_vect pos, t_vect ray, t_sph *sph);
 t_vplane	*get_vplane(float height, float width, float fov);
 
 t_vect		new_vect(float x, float y, float z);

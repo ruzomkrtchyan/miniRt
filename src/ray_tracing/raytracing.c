@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/08 19:02:37 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/09 15:38:25 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ float	compute_light(float dot, t_scene *scene, t_vect ray, t_sph *tmp)
 	t_vect	light;
 	t_vect	v;
 	t_vect	r;
+	t_sph	*sph;
 	float	n_dot_l;
 	float	r_dot_v;
 	float	i;
@@ -31,6 +32,9 @@ float	compute_light(float dot, t_scene *scene, t_vect ray, t_sph *tmp)
 	light = substraction_vect(scene->light->coord, p);
 	i = scene->amb->ratio;
 	n_dot_l = dot_product_vect(norm, light);
+	sph = NULL;
+	if (closest_inter(p, light, tmp, &sph) != INFINITY)
+			return (1);
 	if (n_dot_l > 0)
 		i += scene->light->bright * n_dot_l / (length_vect(norm) * length_vect(light));
 	if (tmp->spec > 0)
@@ -63,7 +67,7 @@ int	get_color(int red, int green, int blue, float bright)
 	return (r << 16 | g << 8 | b);
 }
 
-float	sphere_intersection(t_cam *cam, t_vect ray, t_sph *sph)
+float	sphere_intersection(t_vect pos, t_vect ray, t_sph *sph)
 {
 	float	b;
 	float	c;
@@ -73,7 +77,7 @@ float	sphere_intersection(t_cam *cam, t_vect ray, t_sph *sph)
 	t_vect	cam_to_sphere;
 
 	x1 = 0;
-	cam_to_sphere = substraction_vect(cam->pos, sph->coord);
+	cam_to_sphere = substraction_vect(pos, sph->coord);
 	b = 2 * (dot_product_vect(cam_to_sphere, ray));
 	c = dot_product_vect(cam_to_sphere,cam_to_sphere) - (sph->radius * sph->radius);
 	a = dot_product_vect(ray, ray);
@@ -86,26 +90,45 @@ float	sphere_intersection(t_cam *cam, t_vect ray, t_sph *sph)
 	return (0);
 }
 
+float	closest_inter(t_vect pos, t_vect ray, t_sph *sph, t_sph **tmp1)
+{
+	float	min_t;
+	float	dot;
+	t_sph	*tmp;
+	
+	min_t = INFINITY;
+	dot = INFINITY;
+	tmp = sph;
+	while (tmp)
+	{
+		dot = sphere_intersection(pos, ray, tmp);
+		if (dot > 0.001 && dot < min_t)
+		{
+			min_t = dot;
+			*tmp1 = tmp;
+		}
+		tmp = tmp->next;
+	}
+	return (min_t);
+}
+
 void	ray_tracing(t_scene *scene)
 {
 	float		x_angle;
 	float		y_angle;
 	float		x_ray;
 	float		y_ray;
-	float		dot;
 	float		min_t;
 	int			color;
 	int			mlx_x;
 	int			mlx_y;
 	t_vplane	*v_plane;
 	t_vect		ray;
-	t_sph		*tmp;
 	t_sph		*tmp1;
 
 	v_plane = get_vplane(scene->width, scene->height, scene->cam->fov);
 	y_angle = (scene->height / 2);
 	mlx_y = 0;
-	tmp = scene->sph;
 	while (y_angle >= scene->height / 2 * (-1))
 	{
 		mlx_x = 0;
@@ -113,21 +136,12 @@ void	ray_tracing(t_scene *scene)
 		x_angle = ((scene->width / 2) * (-1));
 		while (x_angle <= scene->width / 2)
 		{
+			tmp1 = scene->sph;
 			min_t = INFINITY;
-			dot = INFINITY;
 			x_ray = x_angle * v_plane->x_pixel;
 			ray = new_vect(x_ray, y_ray, -1);
 			norm_vect(ray);
-			while (tmp)
-			{
-				dot = sphere_intersection(scene->cam, ray, tmp);
-				if (dot && dot < min_t)
-				{
-					min_t = dot;
-					tmp1 = tmp;
-				}
-				tmp = tmp->next;
-			}
+			min_t = closest_inter(scene->cam->pos, ray, scene->sph, &tmp1);
 			if (min_t != INFINITY)
 				color = get_color(tmp1->color->r, tmp1->color->g, \
 						tmp1->color->b, compute_light(min_t, scene, ray, tmp1));
@@ -136,7 +150,6 @@ void	ray_tracing(t_scene *scene)
 			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, color);
 			x_angle++;
 			mlx_x++;
-			tmp = scene->sph;
 		}
 		mlx_y++;
 		y_angle--;
