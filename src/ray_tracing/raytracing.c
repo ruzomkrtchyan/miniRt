@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/09 15:38:25 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:53:28 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ float	compute_light(float dot, t_scene *scene, t_vect ray, t_sph *tmp)
 	i = scene->amb->ratio;
 	n_dot_l = dot_product_vect(norm, light);
 	sph = NULL;
-	if (closest_inter(p, light, tmp, &sph) != INFINITY)
-			return (1);
+	if (closest_inter(p, light, scene->sph, &sph) != INFINITY)
+			return (i);
 	if (n_dot_l > 0)
 		i += scene->light->bright * n_dot_l / (length_vect(norm) * length_vect(light));
 	if (tmp->spec > 0)
@@ -102,7 +102,7 @@ float	closest_inter(t_vect pos, t_vect ray, t_sph *sph, t_sph **tmp1)
 	while (tmp)
 	{
 		dot = sphere_intersection(pos, ray, tmp);
-		if (dot > 0.001 && dot < min_t)
+		if (dot && dot < min_t)
 		{
 			min_t = dot;
 			*tmp1 = tmp;

@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/09 15:56:51 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:10:44 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 typedef enum e_figure_type
 {
-	CYLINDER;
-	SPHERE;
-	PLANE;
+	CYLINDER,
+	SPHERE,
+	PLANE,
 }				t_type;
 
 typedef struct s_data
