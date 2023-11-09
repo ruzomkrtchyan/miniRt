@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/09 14:56:04 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/09 21:32:14 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,32 +71,19 @@ int			check_args_cylinder(char **line);
 /**************LST_UTILS_SPHERE*****************/
 /***********************************************/
 
-void		lstback_sp(t_sph **pars, t_sph *new);
-void		lstclear_sp(t_sph **lst);
-int			lstsize_sp(t_sph *lst);
-t_sph		*lstadd_sp(char **line);
-t_sph		*lstlast_sp(t_sph *lst);
-
 t_amb		*fill_amb(char **line);
 t_cam		*fill_cam(char **line);
 t_light		*fill_light(char **line);
 
-void		lstback_pl(t_pl **pars, t_pl *new);
-void		lstclear_pl(t_pl **lst);
-int			lstsize_pl(t_pl *lst);
-t_pl		*lstadd_pl(char **line);
-t_pl		*lstlast_pl(t_pl *lst);
+t_pl		*init_pl(char **line);
+t_cyl		*init_cyl(char **line);
+t_sph		*init_sp(char **line);
 
-void		lstback_cyl(t_cyl **pars, t_cyl *new);
-void		lstclear_cyl(t_cyl **lst);
-int			lstsize_cyl(t_cyl *lst);
-t_cyl		*lstadd_cyl(char **line);
-
-void		lstback_sp(t_sph **pars, t_sph *new);
-void		lstclear_sp(t_sph **lst);
-int			lstsize_sp(t_sph *lst);
-t_sph		*lstadd_sp(char **line);
-t_sph		*lstlast_sp(t_sph *lst);
+int			lstsize_figure(t_figure *lst);
+t_figure	*lstlast_figure(t_figure *lst);
+t_figure	*lstadd_figure(char **line, int type);
+void		lstclear_figure(t_figure **lst);
+void		lstback_figure(t_figure **pars, t_figure *new);
 
 void		mlx_create(t_scene *scene);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);

@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:53 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/08 17:37:58 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/09 22:25:56 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 t_scene	*pars(char **arr, t_scene *scene);
 int		check_ident_args(char **line);
-void	fill_structs(char **line, t_scene *scene);
+void	fill_scene(char **line, t_scene *scene);
 
 void	init_scene(t_scene **scene)
 {
 	(*scene)->amb = NULL;
 	(*scene)->light = NULL;
-	(*scene)->sph = NULL;
-	(*scene)->pl = NULL;
-	(*scene)->cyl = NULL;
+	(*scene)->figure = NULL;
 	(*scene)->cam = NULL;
 	(*scene)->data = NULL;
 	(*scene)->mlx = NULL;
+	(*scene)->height = HEIGHT;
+	(*scene)->width = WIDTH;
 }
 
 t_scene	*pars(char **arr, t_scene *scene)
 {
-	int		i;
-	char	**line;
+	int			i;
+	char		**line;
 
 	line = NULL;
 	i = -1;
@@ -48,11 +48,9 @@ t_scene	*pars(char **arr, t_scene *scene)
 	while (arr[++i])
 	{
 		line = ft_split(arr[i], ' ');
-		fill_structs(line, scene);
+		fill_scene(line, scene);
 		free_2d(line);
 	}
-	scene->height = HEIGHT;
-	scene->width = WIDTH;
 	return (scene);
 }
 
@@ -76,7 +74,7 @@ int	check_ident_args(char **line)
 	return (i);
 }
 
-void	fill_structs(char **line, t_scene *scene)
+void	fill_scene(char **line, t_scene *scene)
 {
 	if (!ft_strcmp(line[0], "A"))
 		scene->amb = fill_amb(line);
@@ -84,10 +82,10 @@ void	fill_structs(char **line, t_scene *scene)
 		scene->cam = fill_cam(line);
 	else if (!ft_strcmp(line[0], "L"))
 		scene->light = fill_light(line);
-	else if (!ft_strcmp(line[0], "pl"))
-		lstback_pl(&scene->pl, lstadd_pl(line));
-	else if (!ft_strcmp(line[0], "sp"))
-		lstback_sp(&scene->sph, lstadd_sp(line));
 	else if (!ft_strcmp(line[0], "cy"))
-		lstback_cyl(&scene->cyl, lstadd_cyl(line));
+		lstback_figure(&scene->figure, lstadd_figure(line, CYLINDER));
+	else if (!ft_strcmp(line[0], "pl"))
+		lstback_figure(&scene->figure, lstadd_figure(line, PLANE));
+	else if (!ft_strcmp(line[0], "sp"))
+		lstback_figure(&scene->figure, lstadd_figure(line, SPHERE));
 }

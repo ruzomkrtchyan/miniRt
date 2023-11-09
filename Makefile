@@ -1,7 +1,7 @@
 NAME	= minirt
 
 SRC_DIR 	= src
-SUBDIRS 	= utils parsing fill_structs mlx_start ray_tracing math
+SUBDIRS 	= utils parsing fill_structs mlx_start math #ray_tracing
 SRCDIRS 	:= $(addprefix $(SRC_DIR)/, $(SUBDIRS))
 SRCS		:= $(notdir $(foreach dir, $(SRCDIRS), $(wildcard $(dir)/*.c))) $(notdir $(SRC_DIR)/main.c)
 

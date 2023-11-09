@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:55:28 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/08 17:34:02 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/09 22:28:13 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,6 @@ void	destroy_scene(t_scene **scene)
 		free((*scene)->data);
 	if ((*scene)->mlx)
 		free((*scene)->mlx);
-	if ((*scene)->pl)
-		lstclear_pl(&(*scene)->pl);
-	if ((*scene)->sph)
-		lstclear_sp(&(*scene)->sph);
-	if ((*scene)->cyl)
-		lstclear_cyl(&(*scene)->cyl);
+	if ((*scene)->figure)
+		lstclear_figure(&(*scene)->figure);
 }

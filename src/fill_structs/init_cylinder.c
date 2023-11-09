@@ -6,20 +6,16 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:10 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/08 17:34:47 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/09 21:29:04 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	lstback_cyl(t_cyl **pars, t_cyl *new);
-void	lstclear_cyl(t_cyl **lst);
-int		lstsize_cyl(t_cyl *lst);
-t_cyl	*lstlast_cyl(t_cyl *lst);
-t_cyl	*lstadd_cyl(char **line);
-t_cyl	*lstadd_cyl_2(t_cyl *tmp, char **vect, char **n_vect, char **colors);
+t_cyl	*init_cyl(char **line);
+t_cyl	*init_cyl_2(t_cyl *tmp, char **vect, char **n_vect, char **colors);
 
-t_cyl	*lstadd_cyl(char **line)
+t_cyl	*init_cyl(char **line)
 {
 	t_cyl	*tmp;
 	char	**colors;
@@ -35,13 +31,13 @@ t_cyl	*lstadd_cyl(char **line)
 	tmp->diam = ft_atof(line[3]);
 	tmp->height = ft_atof(line[4]);
 	colors = ft_split(line[5], ',');
-	tmp = lstadd_cyl_2(tmp, vect, n_vect, colors);
+	tmp = init_cyl_2(tmp, vect, n_vect, colors);
 	free_of_n(NULL, n_vect, colors, 3);
 	free_2d(vect);
 	return (tmp);
 }
 
-t_cyl	*lstadd_cyl_2(t_cyl *tmp, char **vect, char **n_vect, char **colors)
+t_cyl	*init_cyl_2(t_cyl *tmp, char **vect, char **n_vect, char **colors)
 {
 	tmp->color->r = ft_atoi(colors[0]);
 	tmp->color->g = ft_atoi(colors[1]);
@@ -52,46 +48,5 @@ t_cyl	*lstadd_cyl_2(t_cyl *tmp, char **vect, char **n_vect, char **colors)
 	tmp->n_coord.x = ft_atof(n_vect[0]);
 	tmp->n_coord.y = ft_atof(n_vect[1]);
 	tmp->n_coord.z = ft_atof(n_vect[2]);
-	tmp->next = NULL;
 	return (tmp);
-}
-
-void	lstback_cyl(t_cyl **pars, t_cyl *new)
-{
-	t_cyl	*tmp;
-
-	tmp = lstlast_cyl(*pars);
-	if (!tmp)
-		*pars = new;
-	else
-		tmp->next = new;
-}
-
-t_cyl	*lstlast_cyl(t_cyl *lst)
-{
-	t_cyl	*tmp;
-
-	tmp = lst;
-	if (!tmp)
-		return (NULL);
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	return (tmp);
-}
-
-void	lstclear_cyl(t_cyl **lst)
-{
-	t_cyl	*ptr;
-
-	ptr = NULL;
-	if (!lst || !*lst)
-		return ;
-	while ((*lst))
-	{
-		ptr = (*lst)->next;
-		free((*lst)->color);
-		free (*lst);
-		(*lst) = ptr;
-	}
-	ptr = NULL;
 }

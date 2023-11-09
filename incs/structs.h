@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/09 16:10:44 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/09 21:28:25 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_sph
 	float			dist;
 	t_vect			coord;
 	t_rgb			*color;
-	struct s_sph	*next;
 }				t_sph;
 
 typedef struct s_pl
@@ -73,7 +72,6 @@ typedef struct s_pl
 	t_vect		coord;
 	t_vect		n_coord;
 	t_rgb		*color;
-	struct s_pl	*next;
 }				t_pl;
 
 typedef struct s_cyl
@@ -83,7 +81,6 @@ typedef struct s_cyl
 	t_rgb			*color;
 	float			diam;
 	float			height;
-	struct s_cyl	*next;
 }				t_cyl;
 
 typedef struct s_amb
@@ -107,18 +104,25 @@ typedef struct s_vplane
 	float	y_pixel;
 }				t_vplane;
 
+typedef struct s_figure
+{
+	t_sph			*sph;
+	t_pl			*pl;
+	t_cyl			*cyl;
+	t_type			type;
+	struct s_figure	*next;
+}				t_figure;
+
 typedef struct s_scene
 {
-	t_amb	*amb;
-	t_light	*light;
-	t_sph	*sph;
-	t_pl	*pl;
-	t_cyl	*cyl;
-	t_cam	*cam;
-	t_data	*data;
-	t_mlx	*mlx;
-	float	height;
-	float	width;
+	t_amb		*amb;
+	t_light		*light;
+	t_cam		*cam;
+	t_figure	*figure;
+	t_data		*data;
+	t_mlx		*mlx;
+	float		height;
+	float		width;
 }				t_scene;
 
 #endif
