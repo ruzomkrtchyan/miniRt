@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/09 22:37:18 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/10 13:26:57 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,32 +127,30 @@ void	ray_tracing(t_scene *scene)
 	t_sph		*tmp1;
 
 	v_plane = get_vplane(scene->width, scene->height, scene->cam->fov);
-	y_angle = (scene->height / 2);
+	y_angle = (scene->height / 2) + 1;
 	mlx_y = 0;
-	while (y_angle >= scene->height / 2 * (-1))
+	while (--y_angle >= scene->height / 2 * (-1))
 	{
 		mlx_x = 0;
 		y_ray = y_angle * v_plane->y_pixel;
-		x_angle = ((scene->width / 2) * (-1));
-		while (x_angle <= scene->width / 2)
+		x_angle = ((scene->width / 2) * (-1)) - 1;
+		while (++x_angle <= scene->width / 2)
 		{
-			tmp1 = scene->sph;
+			tmp1 = scene->figure;
 			min_t = INFINITY;
 			x_ray = x_angle * v_plane->x_pixel;
 			ray = new_vect(x_ray, y_ray, -1);
 			norm_vect(ray);
-			min_t = closest_inter(scene->cam->pos, ray, scene->sph, &tmp1);
+			min_t = closest_inter(scene->cam->pos, ray, scene->figure, &tmp1);
 			if (min_t != INFINITY)
 				color = get_color(tmp1->color->r, tmp1->color->g, \
 						tmp1->color->b, compute_light(min_t, scene, ray, tmp1));
 			else
 				color = get_color(0, 0, 0, 1);
 			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, color);
-			x_angle++;
 			mlx_x++;
 		}
 		mlx_y++;
-		y_angle--;
 	}
 	free(v_plane);
 }
