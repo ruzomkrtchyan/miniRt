@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/11 11:27:17 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:38:54 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ typedef struct s_figure
 	t_cyl			*cyl;
 	t_type			type;
 	t_rgb			*color;
+	float			spec;
+	t_vect			ray_norm;
 	struct s_figure	*next;
 }				t_figure;
 

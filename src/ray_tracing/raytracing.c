@@ -6,28 +6,26 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/11 12:18:30 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:46:00 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-float	compute_spec(t_scene *scene, float i, float	n_dot_l)
+float	compute_spec(t_scene *scene, float i, float n_dot_l, t_figure *fig)
 {
 	t_vect	v;
 	t_vect	r;
 	float	r_dot_v;
 	
-	if (tmp->spec > 0)
-	{
-		v = num_product_vect(scene->ray, -1);
-		r = num_product_vect(num_product_vect(norm, 2), n_dot_l);
-		r = substraction_vect(r, light);
-		r_dot_v = dot_product_vect(r, v);
-		if (r_dot_v > 0)
-			i += scene->light->bright * pow(r_dot_v/(length_vect(r)*length_vect(v)), tmp->spec);
-	}
-	return (i);
+
+	v = num_product_vect(scene->ray, -1);
+	r = num_product_vect(num_product_vect(fig->ray_norm, 2), n_dot_l);
+	r = substraction_vect(r, light);
+	r_dot_v = dot_product_vect(r, v);
+	if (r_dot_v > 0)
+		i += scene->light->bright * pow(r_dot_v/(length_vect(r)*length_vect(v)), fig->spec);
+	return (0);
 }
 
 t_vect	ray_norm(t_figure *fig, t_vect p)
@@ -35,7 +33,7 @@ t_vect	ray_norm(t_figure *fig, t_vect p)
 	t_vect	norm;
 	
 	if (fig->type = SPHERE)
-		norm = norm_vect(substraction_vect(p, fig->sph->coord));
+		fig->ray_norm = norm_vect(substraction_vect(p, fig->sph->coord));
 	return (norm);
 }
 
@@ -58,7 +56,9 @@ float	compute_light(float dot, t_scene *scene, t_figure *tmp)
 			return (i);
 	if (n_dot_l > 0)
 		i += scene->light->bright * n_dot_l / (length_vect(norm) * length_vect(light));
-	return(compute_spec(scene, i, n_dot_l));
+	if (tmp->spec > 0)
+		i += compute_spec(scene, i, n_dot_l, tmp);
+	return(i);
 }
 
 int	get_color(int red, int green, int blue, float bright)
