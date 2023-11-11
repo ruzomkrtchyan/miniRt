@@ -6,47 +6,59 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/10 13:26:57 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:18:30 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-float	compute_light(float dot, t_scene *scene, t_vect ray, t_sph *tmp)
+float	compute_spec(t_scene *scene, float i, float	n_dot_l)
 {
-	t_vect	prod;
-	t_vect	p;
-	t_vect	norm;
-	t_vect	light;
 	t_vect	v;
 	t_vect	r;
-	t_sph	*sph;
-	float	n_dot_l;
 	float	r_dot_v;
-	float	i;
-
-	prod = num_product_vect(ray, dot);
-	p = sum_vect(scene->cam->pos, prod);
-	norm = substraction_vect(p, tmp->coord);
-	norm_vect(norm);
-	light = substraction_vect(scene->light->coord, p);
-	i = scene->amb->ratio;
-	n_dot_l = dot_product_vect(norm, light);
-	sph = NULL;
-	if (closest_inter(p, light, scene->sph, &sph) != INFINITY)
-			return (i);
-	if (n_dot_l > 0)
-		i += scene->light->bright * n_dot_l / (length_vect(norm) * length_vect(light));
+	
 	if (tmp->spec > 0)
 	{
-		v = num_product_vect(ray, -1);
+		v = num_product_vect(scene->ray, -1);
 		r = num_product_vect(num_product_vect(norm, 2), n_dot_l);
 		r = substraction_vect(r, light);
 		r_dot_v = dot_product_vect(r, v);
 		if (r_dot_v > 0)
 			i += scene->light->bright * pow(r_dot_v/(length_vect(r)*length_vect(v)), tmp->spec);
 	}
-	return(i);
+	return (i);
+}
+
+t_vect	ray_norm(t_figure *fig, t_vect p)
+{
+	t_vect	norm;
+	
+	if (fig->type = SPHERE)
+		norm = norm_vect(substraction_vect(p, fig->sph->coord));
+	return (norm);
+}
+
+float	compute_light(float dot, t_scene *scene, t_figure *tmp)
+{
+	t_vect	p;
+	t_vect	norm;
+	t_vect	light;
+	t_sph	*shadow;
+	float	n_dot_l;
+	float	i;
+
+	i = scene->amb->ratio;
+	p = sum_vect(scene->cam->pos, num_product_vect(scene->ray, dot));
+	norm = ray_norm(tmp, p);
+	light = substraction_vect(scene->light->coord, p);
+	n_dot_l = dot_product_vect(norm, light);
+	shadow = NULL;
+	if (closest_inter(p, light, scene->figure, &shadow) != INFINITY)
+			return (i);
+	if (n_dot_l > 0)
+		i += scene->light->bright * n_dot_l / (length_vect(norm) * length_vect(light));
+	return(compute_spec(scene, i, n_dot_l));
 }
 
 int	get_color(int red, int green, int blue, float bright)
@@ -90,61 +102,52 @@ float	sphere_intersection(t_vect pos, t_vect ray, t_sph *sph)
 	return (0);
 }
 
-float	closest_inter(t_vect pos, t_vect ray, t_sph *sph, t_sph **tmp1)
+float	closest_inter(t_vect pos, t_vect ray, t_figure *figure, t_figure **tmp1)
 {
 	float	min_t;
 	float	dot;
-	t_sph	*tmp;
 	
 	min_t = INFINITY;
 	dot = INFINITY;
-	tmp = sph;
-	while (tmp)
+	while (figure)
 	{
-		dot = sphere_intersection(pos, ray, tmp);
+		if (figure->type == SPHERE)
+			dot = sphere_intersection(pos, ray, figure->sph);
 		if (dot && dot < min_t)
 		{
 			min_t = dot;
-			*tmp1 = tmp;
+			*tmp1 = figure;
 		}
-		tmp = tmp->next;
+		figure = figure->next;
 	}
 	return (min_t);
 }
 
-void	ray_tracing(t_scene *scene)
+void	ray_tracing(t_scene *scene, int mlx_x, int mlx_y)
 {
 	float		x_angle;
 	float		y_angle;
-	float		x_ray;
-	float		y_ray;
 	float		min_t;
 	int			color;
-	int			mlx_x;
-	int			mlx_y;
 	t_vplane	*v_plane;
-	t_vect		ray;
-	t_sph		*tmp1;
+	t_figure	*tmp1;
 
 	v_plane = get_vplane(scene->width, scene->height, scene->cam->fov);
 	y_angle = (scene->height / 2) + 1;
-	mlx_y = 0;
 	while (--y_angle >= scene->height / 2 * (-1))
 	{
 		mlx_x = 0;
-		y_ray = y_angle * v_plane->y_pixel;
 		x_angle = ((scene->width / 2) * (-1)) - 1;
 		while (++x_angle <= scene->width / 2)
 		{
 			tmp1 = scene->figure;
 			min_t = INFINITY;
-			x_ray = x_angle * v_plane->x_pixel;
-			ray = new_vect(x_ray, y_ray, -1);
-			norm_vect(ray);
-			min_t = closest_inter(scene->cam->pos, ray, scene->figure, &tmp1);
+			scene->ray = new_vect(x_angle * v_plane->x_pixel, y_angle * v_plane->y_pixel, -1);
+			norm_vect(scene->ray);
+			min_t = closest_inter(scene->cam->pos, scene->ray, scene->figure, &tmp1);
 			if (min_t != INFINITY)
 				color = get_color(tmp1->color->r, tmp1->color->g, \
-						tmp1->color->b, compute_light(min_t, scene, ray, tmp1));
+						tmp1->color->b, compute_light(min_t, scene, tmp1));
 			else
 				color = get_color(0, 0, 0, 1);
 			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, color);

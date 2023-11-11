@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vect_func_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:12:32 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/09 11:12:56 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:02:14 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ float	dot_product_vect(t_vect v1, t_vect v2)
 	return (res);
 }
 
-void	norm_vect(t_vect vector)
+t_vect	norm_vect(t_vect vector)
 {
 	float	length;
 
@@ -28,4 +28,5 @@ void	norm_vect(t_vect vector)
 	vector.x /= length;
 	vector.y /= length;
 	vector.z /= length;
+	return (vector);
 }

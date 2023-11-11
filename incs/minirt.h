@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/09 21:32:14 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:19:46 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,17 @@ int			close_window(t_scene *scene);
 int			button_press(void);
 int			mlx_keypress(int keypress, t_scene *scene);
 
-void		ray_tracing(t_scene *scene);
-float		closest_inter(t_vect pos, t_vect ray, t_sph *sph, t_sph **tmp1);
+void		ray_tracing(t_scene *scene, int mlx_x, int mlx_y);
+float		closest_inter(t_vect pos, t_vect ray, t_figure *figure, t_figure **tmp1);
 float		sphere_intersection(t_vect pos, t_vect ray, t_sph *sph);
+float		compute_light(float dot, t_scene *scene, t_figure *tmp);
 t_vplane	*get_vplane(float height, float width, float fov);
 
 t_vect		new_vect(float x, float y, float z);
 t_vect		substraction_vect(t_vect v1, t_vect v2);
 float		length_vect(t_vect vec);
 float		dot_product_vect(t_vect v1, t_vect v2);
-void		norm_vect(t_vect vector);
+t_vect		norm_vect(t_vect vector);
 t_vect		num_product_vect(t_vect vec, float num);
 t_vect		sum_vect(t_vect v1, t_vect v2);
 

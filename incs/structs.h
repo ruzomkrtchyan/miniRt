@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/10 13:06:21 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/11 11:27:17 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ typedef struct s_scene
 	t_figure	*figure;
 	t_data		*data;
 	t_mlx		*mlx;
+	t_vect		ray;
 	float		height;
 	float		width;
 }				t_scene;
