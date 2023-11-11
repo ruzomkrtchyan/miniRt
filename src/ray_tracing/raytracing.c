@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/11 17:11:09 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/11 17:39:15 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,20 @@ float	compute_spec(t_scene *scene, t_vect light, float n_dot_l, t_figure *fig)
 	r = substraction_vect(r, light);
 	r_dot_v = dot_product_vect(r, v);
 	if (r_dot_v > 0)
-		i += scene->light->bright * pow(r_dot_v/(length_vect(r)*length_vect(v)), fig->spec);
+		i += scene->light->bright * \
+			pow(r_dot_v / (length_vect(r) * length_vect(v)), fig->spec);
 	return (i);
 }
 
-t_vect	ray_norm(t_figure *fig, t_vect p)
+void	ray_norm(t_figure *fig, t_vect p)
 {
-	t_vect	norm;
-	
 	if (fig->type == SPHERE)
 		fig->ray_norm = norm_vect(substraction_vect(p, fig->sph->coord));
-	return (norm);
 }
 
 float	compute_light(float dot, t_scene *scene, t_figure *tmp)
 {
 	t_vect		p;
-	t_vect		norm;
 	t_vect		light;
 	t_figure	*shadow;
 	float		n_dot_l;
@@ -49,17 +46,18 @@ float	compute_light(float dot, t_scene *scene, t_figure *tmp)
 
 	i = scene->amb->ratio;
 	p = sum_vect(scene->cam->pos, num_product_vect(scene->ray, dot));
-	norm = ray_norm(tmp, p);
+	ray_norm(tmp, p);
 	light = substraction_vect(scene->light->coord, p);
-	n_dot_l = dot_product_vect(norm, light);
+	n_dot_l = dot_product_vect(tmp->ray_norm, light);
 	shadow = NULL;
 	if (closest_inter(p, light, scene->figure, &shadow) != INFINITY)
-			return (i);
+		return (i);
 	if (n_dot_l > 0)
-		i += scene->light->bright * n_dot_l / (length_vect(norm) * length_vect(light));
+		i += scene->light->bright * n_dot_l / \
+			(length_vect(tmp->ray_norm) * length_vect(light));
 	if (tmp->spec > 0)
 		i += compute_spec(scene, light, n_dot_l, tmp);
-	return(i);
+	return (i);
 }
 
 int	get_color(int red, int green, int blue, float bright)
@@ -92,7 +90,8 @@ float	sphere_intersection(t_vect pos, t_vect ray, t_sph *sph)
 	x1 = 0;
 	cam_to_sphere = substraction_vect(pos, sph->coord);
 	b = 2 * (dot_product_vect(cam_to_sphere, ray));
-	c = dot_product_vect(cam_to_sphere,cam_to_sphere) - (sph->radius * sph->radius);
+	c = dot_product_vect(cam_to_sphere, cam_to_sphere) \
+		- (sph->radius * sph->radius);
 	a = dot_product_vect(ray, ray);
 	disc = (b * b) - (4 * a * c);
 	if (disc < 0)
@@ -107,7 +106,7 @@ float	closest_inter(t_vect pos, t_vect ray, t_figure *figure, t_figure **tmp1)
 {
 	float	min_t;
 	float	dot;
-	
+
 	min_t = INFINITY;
 	dot = INFINITY;
 	while (figure)
@@ -124,14 +123,31 @@ float	closest_inter(t_vect pos, t_vect ray, t_figure *figure, t_figure **tmp1)
 	return (min_t);
 }
 
+int	pixel_col(t_scene *scene, t_vplane *v_plane, float x_angle, float y_angle)
+{
+	t_figure	*tmp1;
+	float		min_t;
+	int			color;
+
+	tmp1 = scene->figure;
+	min_t = INFINITY;
+	scene->ray = new_vect(x_angle * v_plane->x_pixel, \
+					y_angle * v_plane->y_pixel, -1);
+	norm_vect(scene->ray);
+	min_t = closest_inter(scene->cam->pos, scene->ray, scene->figure, &tmp1);
+	if (min_t != INFINITY)
+		color = get_color(tmp1->color->r, tmp1->color->g, \
+				tmp1->color->b, compute_light(min_t, scene, tmp1));
+	else
+		color = get_color(0, 0, 0, 1);
+	return (color);
+}
+
 void	ray_tracing(t_scene *scene, int mlx_x, int mlx_y)
 {
 	float		x_angle;
 	float		y_angle;
-	float		min_t;
-	int			color;
 	t_vplane	*v_plane;
-	t_figure	*tmp1;
 
 	v_plane = get_vplane(scene->width, scene->height, scene->cam->fov);
 	y_angle = (scene->height / 2) + 1;
@@ -141,17 +157,8 @@ void	ray_tracing(t_scene *scene, int mlx_x, int mlx_y)
 		x_angle = ((scene->width / 2) * (-1)) - 1;
 		while (++x_angle <= scene->width / 2)
 		{
-			tmp1 = scene->figure;
-			min_t = INFINITY;
-			scene->ray = new_vect(x_angle * v_plane->x_pixel, y_angle * v_plane->y_pixel, -1);
-			norm_vect(scene->ray);
-			min_t = closest_inter(scene->cam->pos, scene->ray, scene->figure, &tmp1);
-			if (min_t != INFINITY)
-				color = get_color(tmp1->color->r, tmp1->color->g, \
-						tmp1->color->b, compute_light(min_t, scene, tmp1));
-			else
-				color = get_color(0, 0, 0, 1);
-			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, color);
+			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, \
+					pixel_col(scene, v_plane, x_angle, y_angle));
 			mlx_x++;
 		}
 		mlx_y++;
