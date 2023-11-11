@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/11 12:41:13 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/11 17:09:14 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		ray_tracing(t_scene *scene, int mlx_x, int mlx_y);
 float		closest_inter(t_vect pos, t_vect ray, t_figure *figure, t_figure **tmp1);
 float		sphere_intersection(t_vect pos, t_vect ray, t_sph *sph);
 float		compute_light(float dot, t_scene *scene, t_figure *tmp);
-float		compute_spec(t_scene *scene, float i, float	n_dot_l, t_figure *fig);
+float		compute_spec(t_scene *scene, t_vect light, float	n_dot_l, t_figure *fig);
 t_vplane	*get_vplane(float height, float width, float fov);
 
 t_vect		new_vect(float x, float y, float z);

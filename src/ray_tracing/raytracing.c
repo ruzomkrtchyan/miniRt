@@ -3,48 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/11 12:46:00 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/11 17:11:09 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-float	compute_spec(t_scene *scene, float i, float n_dot_l, t_figure *fig)
+float	compute_spec(t_scene *scene, t_vect light, float n_dot_l, t_figure *fig)
 {
 	t_vect	v;
 	t_vect	r;
+	float	i;
 	float	r_dot_v;
-	
 
+	i = 0.0;
 	v = num_product_vect(scene->ray, -1);
 	r = num_product_vect(num_product_vect(fig->ray_norm, 2), n_dot_l);
 	r = substraction_vect(r, light);
 	r_dot_v = dot_product_vect(r, v);
 	if (r_dot_v > 0)
 		i += scene->light->bright * pow(r_dot_v/(length_vect(r)*length_vect(v)), fig->spec);
-	return (0);
+	return (i);
 }
 
 t_vect	ray_norm(t_figure *fig, t_vect p)
 {
 	t_vect	norm;
 	
-	if (fig->type = SPHERE)
+	if (fig->type == SPHERE)
 		fig->ray_norm = norm_vect(substraction_vect(p, fig->sph->coord));
 	return (norm);
 }
 
 float	compute_light(float dot, t_scene *scene, t_figure *tmp)
 {
-	t_vect	p;
-	t_vect	norm;
-	t_vect	light;
-	t_sph	*shadow;
-	float	n_dot_l;
-	float	i;
+	t_vect		p;
+	t_vect		norm;
+	t_vect		light;
+	t_figure	*shadow;
+	float		n_dot_l;
+	float		i;
 
 	i = scene->amb->ratio;
 	p = sum_vect(scene->cam->pos, num_product_vect(scene->ray, dot));
@@ -57,7 +58,7 @@ float	compute_light(float dot, t_scene *scene, t_figure *tmp)
 	if (n_dot_l > 0)
 		i += scene->light->bright * n_dot_l / (length_vect(norm) * length_vect(light));
 	if (tmp->spec > 0)
-		i += compute_spec(scene, i, n_dot_l, tmp);
+		i += compute_spec(scene, light, n_dot_l, tmp);
 	return(i);
 }
 
