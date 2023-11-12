@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_cylinder.c                                    :+:      :+:    :+:   */
+/*   init_cylinder.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:10 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/09 21:29:04 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/12 17:03:34 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_cyl	*init_cyl(char **line)
 		return (NULL);
 	vect = ft_split(line[1], ',');
 	n_vect = ft_split(line[2], ',');
-	tmp->diam = ft_atof(line[3]);
+	tmp->radius = ft_atof(line[3]) / 2;
 	tmp->height = ft_atof(line[4]);
 	colors = ft_split(line[5], ',');
 	tmp = init_cyl_2(tmp, vect, n_vect, colors);

@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 17:50:43 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/12 12:47:43 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/12 15:00:18 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ float	plane_inter(t_vect pos, t_vect ray, t_pl *plane)
 	{
 		t = dot_product_vect(plane->n_coord, \
 			substraction_vect(plane->coord, pos)) / dot;
-		if (t > 0)
+		if (t >= 0.001)
 			return (t);
 	}
 	return (0);

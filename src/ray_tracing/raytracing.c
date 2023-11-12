@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/12 12:45:56 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/12 15:15:12 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	pixel_col(t_scene *scene, t_vplane *v_plane, float x_angle, float y_angle)
 	min_t = INFINITY;
 	scene->ray = new_vect(x_angle * v_plane->x_pixel, \
 					y_angle * v_plane->y_pixel, -1);
-	norm_vect(scene->ray);
 	min_t = closest_inter(scene->cam->pos, scene->ray, scene->figure, &tmp1);
 	if (min_t != INFINITY)
 		color = get_color(tmp1->color->r, tmp1->color->g, \
