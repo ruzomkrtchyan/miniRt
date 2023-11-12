@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 17:50:43 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/11 18:26:32 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/12 12:47:43 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,39 @@
 
 float	sphere_intersection(t_vect pos, t_vect ray, t_sph *sph)
 {
-	float	b;
-	float	c;
-	float	disc;
-	float	x1;
-	float	a;
+	t_math	math;
 	t_vect	cam_to_sphere;
 
-	x1 = 0;
+	math.x = 0;
 	cam_to_sphere = substraction_vect(pos, sph->coord);
-	b = 2 * (dot_product_vect(cam_to_sphere, ray));
-	c = dot_product_vect(cam_to_sphere, cam_to_sphere) \
+	math.b = 2 * (dot_product_vect(cam_to_sphere, ray));
+	math.c = dot_product_vect(cam_to_sphere, cam_to_sphere) \
 		- (sph->radius * sph->radius);
-	a = dot_product_vect(ray, ray);
-	disc = (b * b) - (4 * a * c);
-	if (disc < 0)
+	math.a = dot_product_vect(ray, ray);
+	math.disc = (math.b * math.b) - (4 * math.a * math.c);
+	if (math.disc < 0)
 		return (0);
-	x1 = ((-b) - sqrt(disc)) / (2 * a);
-	if (x1 > 0)
-		return (x1);
+	math.x = ((-math.b) - sqrt(math.disc)) / (2 * math.a);
+	if (math.x > 0)
+		return (math.x);
 	return (0);
 }
 
-// float	plane_inter()
-// {
-	
-// }
+float	plane_inter(t_vect pos, t_vect ray, t_pl *plane)
+{
+	float	dot;
+	float	t;
+
+	dot = dot_product_vect(plane->n_coord, ray);
+	if (dot)
+	{
+		t = dot_product_vect(plane->n_coord, \
+			substraction_vect(plane->coord, pos)) / dot;
+		if (t > 0)
+			return (t);
+	}
+	return (0);
+}
 
 float	closest_inter(t_vect pos, t_vect ray, t_figure *figure, t_figure **tmp1)
 {
@@ -52,8 +59,8 @@ float	closest_inter(t_vect pos, t_vect ray, t_figure *figure, t_figure **tmp1)
 	{
 		if (figure->type == SPHERE)
 			dot = sphere_intersection(pos, ray, figure->sph);
-		// else if (figure->type == PLANE)
-		// 	dot = plane_inter();
+		else if (figure->type == PLANE)
+			dot = plane_inter(pos, ray, figure->pl);
 		if (dot && dot < min_t)
 		{
 			min_t = dot;
