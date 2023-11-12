@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/12 11:29:17 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/12 12:50:24 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int			button_press(void);
 int			mlx_keypress(int keypress, t_scene *scene);
 
 void		ray_tracing(t_scene *scene, int mlx_x, int mlx_y);
+void		ray_norm(t_figure *fig, t_vect p);
 float		closest_inter(t_vect pos, t_vect ray, t_figure *figure, t_figure **tmp1);
 float		sphere_intersection(t_vect pos, t_vect ray, t_sph *sph);
 float		plane_inter(t_vect pos, t_vect ray, t_pl *plane);
