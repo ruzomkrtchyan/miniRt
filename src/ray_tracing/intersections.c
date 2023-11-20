@@ -17,7 +17,7 @@ float	sphere_intersection(t_vect pos, t_vect ray, t_sph *sph)
 	t_math	math;
 	t_vect	cam_to_sphere;
 
-	math.x = 0;
+	math.x1 = 0;
 	cam_to_sphere = substraction_vect(pos, sph->coord);
 	math.b = 2 * (dot_product_vect(cam_to_sphere, ray));
 	math.c = dot_product_vect(cam_to_sphere, cam_to_sphere) \
@@ -61,8 +61,8 @@ float	closest_inter(t_vect pos, t_vect ray, t_figure *figure, t_figure **tmp1)
 			dot = sphere_intersection(pos, ray, figure->sph);
 		else if (figure->type == PLANE)
 			dot = plane_inter(pos, ray, figure->pl);
-		else if (figure->type == CYLINDER)
-			dot = cyl_inter(pos, ray, figure->cyl);
+		// else if (figure->type == CYLINDER)
+		// 	dot = cyl_inter(pos, ray, figure->cyl);
 		if (dot && dot < min_t)
 		{
 			min_t = dot;

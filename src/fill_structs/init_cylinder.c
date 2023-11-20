@@ -49,5 +49,11 @@ t_cyl	*init_cyl_2(t_cyl *tmp, char **vect, char **n_vect, char **colors)
 	tmp->n_coord.x = ft_atof(n_vect[0]);
 	tmp->n_coord.y = ft_atof(n_vect[1]);
 	tmp->n_coord.z = ft_atof(n_vect[2]);
+	if (tmp->n_coord.x > 0.0)
+		tmp->n_coord.x *= -1;
+	if (tmp->n_coord.y > 0.0)
+		tmp->n_coord.y *= -1;
+	if (tmp->n_coord.z > 0.0)
+		tmp->n_coord.z *= -1;
 	return (tmp);
 }
