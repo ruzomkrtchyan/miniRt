@@ -37,19 +37,25 @@ t_scene	*pars(char **arr, t_scene *scene)
 	i = -1;
 	while (arr[++i])
 	{
-		line = ft_split(arr[i], ' ');
-		if (check_identifier(line) || check_ident_args(line))
-			exit(1 + free_of_n(NULL, line, arr, 2));
-		free_2d(line);
+		if (arr[i][0] != '#')
+		{
+			line = ft_split(arr[i], ' ');
+			if (check_identifier(line) || check_ident_args(line))
+				exit(1 + free_of_n(NULL, line, arr, 2));
+			free_2d(line);
+		}
 	}
 	scene = (t_scene *)malloc(sizeof(t_scene));
 	init_scene(&scene);
 	i = -1;
 	while (arr[++i])
 	{
-		line = ft_split(arr[i], ' ');
-		fill_scene(line, scene);
-		free_2d(line);
+		if (arr[i][0] != '#')
+		{
+			line = ft_split(arr[i], ' ');
+			fill_scene(line, scene);
+			free_2d(line);
+		}
 	}
 	return (scene);
 }

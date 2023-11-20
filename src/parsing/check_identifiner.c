@@ -51,17 +51,17 @@ int	check_identifier3(char **arr)
 {
 	if (!ft_strcmp(arr[0], "pl"))
 	{
-		if (strlen_2d(arr) != 4)
+		if (strlen_2d(arr) != 5)
 			return (err("Error : Wrong 'pl' identifier arguments\n"));
 	}
 	else if (!ft_strcmp(arr[0], "sp"))
 	{
-		if (strlen_2d(arr) != 4)
+		if (strlen_2d(arr) != 5)
 			return (err("Error : Wrong 'sp' identifier arguments\n"));
 	}
 	else if (!ft_strcmp(arr[0], "cy"))
 	{
-		if (strlen_2d(arr) != 6)
+		if (strlen_2d(arr) != 7)
 			return (err("Error : Wrong 'cy' identifier arguments\n"));
 	}
 	else

@@ -27,7 +27,8 @@ t_pl	*init_pl(char **line)
 		return (NULL);
 	vect = ft_split(line[1], ',');
 	n_vect = ft_split(line[2], ',');
-	colors = ft_split(line[3], ',');
+	tmp->spec = ft_atof(line[3]);
+	colors = ft_split(line[4], ',');
 	tmp->color->r = ft_atoi(colors[0]);
 	tmp->color->g = ft_atoi(colors[1]);
 	tmp->color->b = ft_atoi(colors[2]);

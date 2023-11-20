@@ -33,8 +33,8 @@ int	check_args_plane(char **line)
 		return (err("Error : Wrong coordinates for plane\n"));
 	}
 	free_of_n(NULL, vect, n_vect, 2);
-	colors = ft_split(line[3], ',');
-	if (count_comma(line[3]) != 2 || valid_colors(colors) || \
+	colors = ft_split(line[4], ',');
+	if (count_comma(line[4]) != 2 || valid_colors(colors) || \
 		strlen_2d(colors) != 3 || check_number(NULL, colors, 0))
 	{
 		free_2d(colors);
@@ -50,7 +50,7 @@ int	check_args_sphere(char **line)
 	char	**vect;
 
 	vect = ft_split(line[1], ',');
-	colors = ft_split(line[3], ',');
+	colors = ft_split(line[4], ',');
 	if (count_comma(line[1]) != 2 || valid_float(vect, 3) || \
 											strlen_2d(vect) != 3)
 	{
@@ -62,7 +62,7 @@ int	check_args_sphere(char **line)
 		free_of_n(NULL, vect, colors, 2);
 		return (err("Error : Wrong diameter for sphere\n"));
 	}
-	if (count_comma(line[3]) != 2 || valid_colors(colors) || \
+	if (count_comma(line[4]) != 2 || valid_colors(colors) || \
 			strlen_2d(colors) != 3 || check_number(NULL, colors, 0))
 	{
 		free_of_n(NULL, vect, colors, 2);
@@ -111,9 +111,9 @@ int	check_args_cylinder_2(char **line)
 		return (err("Error : Wrong height for cylinder\n"));
 	}
 	free(height);
-	colors = ft_split(line[5], ',');
+	colors = ft_split(line[6], ',');
 	if (strlen_2d(colors) != 3 || valid_colors(colors) || \
-			count_comma(line[5]) != 2 || check_number(NULL, colors, 0))
+			count_comma(line[6]) != 2 || check_number(NULL, colors, 0))
 	{
 		free_2d(colors);
 		return (err("Error : Wrong colors for cylinder\n"));

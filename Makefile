@@ -1,7 +1,7 @@
 NAME	= minirt
 
 SRC_DIR 	= src
-SUBDIRS 	= utils parsing fill_structs mlx_start math ray_tracing
+SUBDIRS 	= utils parsing fill_structs mlx_start math #ray_tracing
 SRCDIRS 	:= $(addprefix $(SRC_DIR)/, $(SUBDIRS))
 SRCS		:= $(notdir $(foreach dir, $(SRCDIRS), $(wildcard $(dir)/*.c))) $(notdir $(SRC_DIR)/main.c)
 
@@ -26,7 +26,7 @@ GREEN		= "\033[38;2;49;247;196m"
 PURPLE		= "\033[38;2;0;138;240m"
 RESET		= "\033[0m"
 
-all: $(LIBS) $(OBJ_DIR) $(NAME)
+all: mlx $(LIBS) $(OBJ_DIR) $(NAME)
 
 $(OBJ_DIR):
 	@$(MK) $(OBJ_DIR)
@@ -47,8 +47,12 @@ $(NAME): $(OBJ) $(HEADER)
 libft :
 	@make -C $(LIBFT_DIR)
 
+mlx :
+	@cd mlx && make
+
 clean:
 	@rm -f $(OBJ)
+	@make clean -C mlx
 	
 fclean: clean
 	@rm -f $(NAME)
@@ -57,4 +61,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean $(LIBS) re
+.PHONY: all clean fclean $(LIBS) mlx re

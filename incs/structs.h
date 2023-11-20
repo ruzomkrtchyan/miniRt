@@ -79,6 +79,7 @@ typedef struct s_sph
 typedef struct s_pl
 {
 	t_vect		coord;
+	float		spec;
 	t_vect		n_coord;
 	t_rgb		*color;
 }				t_pl;
@@ -88,6 +89,7 @@ typedef struct s_cyl
 	t_vect		coord;
 	t_vect		n_coord;
 	t_rgb		*color;
+	float		spec;
 	float		radius;
 	float		height;
 }			t_cyl;

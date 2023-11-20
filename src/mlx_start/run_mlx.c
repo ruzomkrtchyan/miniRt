@@ -25,7 +25,7 @@ void	mlx_create(t_scene *scene)
 	scene->data->addr = mlx_get_data_addr(scene->data->img, \
 							&scene->data->bits_per_pixel, \
 							&scene->data->line_length, &scene->data->endian);
-	ray_tracing(scene, 0, 0);
+	// ray_tracing(scene, 0, 0);
 	mlx_put_image_to_window(scene->mlx->mlx, scene->mlx->mlx_win, \
 								scene->data->img, 0, 0);
 	mlx_hook(scene->mlx->mlx_win, 2, 0, &mlx_keypress, scene);

@@ -63,7 +63,10 @@ int	valid_coord(char **arr)
 	while (i < 3)
 	{
 		if (ft_atof(arr[i]) < -1.0 || ft_atof(arr[i]) > 1.0)
+		{
+			printf("!!!!!!!!\n");
 			return (1);
+		}
 		i++;
 	}
 	return (0);

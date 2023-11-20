@@ -27,7 +27,6 @@ t_figure	*lstadd_figure(char **line, int type)
 	figure->pl = NULL;
 	figure->next = NULL;
 	figure->type = type;
-	figure->spec = 30.0;
 	figure = lstadd_figure_2(figure, line, type);
 	return (figure);
 }
@@ -37,16 +36,19 @@ t_figure	*lstadd_figure_2(t_figure *figure, char **line, int type)
 	if (type == CYLINDER)
 	{
 		figure->cyl = init_cyl(line);
+		figure->spec = figure->cyl->spec;
 		figure->color = figure->cyl->color;
 	}
 	else if (type == SPHERE)
 	{
 		figure->sph = init_sp(line);
+		figure->spec = figure->sph->spec;
 		figure->color = figure->sph->color;
 	}
 	else if (type == PLANE)
 	{
 		figure->pl = init_pl(line);
+		figure->spec = figure->pl->spec;
 		figure->color = figure->pl->color;
 	}
 	return (figure);

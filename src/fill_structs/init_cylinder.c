@@ -30,7 +30,8 @@ t_cyl	*init_cyl(char **line)
 	n_vect = ft_split(line[2], ',');
 	tmp->radius = ft_atof(line[3]) / 2;
 	tmp->height = ft_atof(line[4]);
-	colors = ft_split(line[5], ',');
+	tmp->spec = ft_atof(line[5]);
+	colors = ft_split(line[6], ',');
 	tmp = init_cyl_2(tmp, vect, n_vect, colors);
 	free_of_n(NULL, n_vect, colors, 3);
 	free_2d(vect);

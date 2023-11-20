@@ -1,6 +1,8 @@
 libft/obj
 libft/libft.a
 obj
+mlx/*.o
+mlx/*.a
 minirt
 .DS_Store
 .vscode

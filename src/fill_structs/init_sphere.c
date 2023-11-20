@@ -26,14 +26,14 @@ t_sph	*init_sp(char **line)
 		return (NULL);
 	vect = ft_split(line[1], ',');
 	tmp->radius = ft_atof(line[2]) / 2;
-	colors = ft_split(line[3], ',');
-	tmp->color->r = ft_atoi(colors[0]);
-	tmp->color->g = ft_atoi(colors[1]);
-	tmp->color->b = ft_atoi(colors[2]);
+	tmp->spec = ft_atof(line[3]);
+	colors = ft_split(line[4], ',');
 	tmp->coord.x = ft_atof(vect[0]);
 	tmp->coord.y = ft_atof(vect[1]);
 	tmp->coord.z = ft_atof(vect[2]);
-	tmp->spec = 40;
+	tmp->color->r = ft_atoi(colors[0]);
+	tmp->color->g = ft_atoi(colors[1]);
+	tmp->color->b = ft_atoi(colors[2]);
 	free_of_n(NULL, colors, vect, 2);
 	return (tmp);
 }
