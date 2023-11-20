@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 17:50:43 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/12 20:03:17 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/20 14:21:09 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ float	sphere_intersection(t_vect pos, t_vect ray, t_sph *sph)
 	math.disc = (math.b * math.b) - (4 * math.a * math.c);
 	if (math.disc < 0)
 		return (0);
-	math.x = ((-math.b) - sqrt(math.disc)) / (2 * math.a);
-	if (math.x > 0)
-		return (math.x);
+	math.x1 = ((-math.b) - sqrt(math.disc)) / (2 * math.a);
+	if (math.x1 > 0)
+		return (math.x1);
 	return (0);
 }
 

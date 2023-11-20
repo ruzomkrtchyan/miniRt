@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/12 17:04:51 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/20 14:20:36 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ typedef struct s_math
 	float	b;
 	float	c;
 	float	disc;
-	float	x;
+	float	x1;
+	float	x2;
 }				t_math;
 
 typedef struct s_vect

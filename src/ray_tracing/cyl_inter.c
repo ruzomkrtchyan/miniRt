@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 20:03:52 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/12 20:18:29 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/20 14:23:38 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,6 @@ float	cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl)
 	math.b = 2 * (dot_product_vect(ray, x) - (dot_product_vect(ray, cyl->n_coord) * dot_product_vect(x, cyl->n_coord)));
 	math.c = dot_product_vect(x, x) - powf(dot_product_vect(x, cyl->n_coord), 2) - powf(cyl->radius, 2);
 	math.disc = math.b * math.b - (4 * math.a * math.c);
+	math.x1 = (-math.b - sqrt(math.disc)) / 2 * math.a;
+	math.x2 = (-math.b + sqrt(math.disc)) / 2 * math.a;
 }
