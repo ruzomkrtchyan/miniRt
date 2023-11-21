@@ -42,8 +42,6 @@ t_pl	*init_pl(char **line)
 		tmp->n_coord.x *= -1;
 	if (tmp->n_coord.y > 0.0)
 		tmp->n_coord.y *= -1;
-	if (tmp->n_coord.z > 0.0)
-		tmp->n_coord.z *= -1;
 	free_of_n(NULL, n_vect, colors, 3);
 	free_2d(vect);
 	return (tmp);

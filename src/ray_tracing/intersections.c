@@ -61,9 +61,9 @@ float	closest_inter(t_vect pos, t_vect ray, t_figure *figure, t_figure **tmp1)
 			dot = sphere_intersection(pos, ray, figure->sph);
 		else if (figure->type == PLANE)
 			dot = plane_inter(pos, ray, figure->pl);
-		// else if (figure->type == CYLINDER)
-		// 	dot = cyl_inter(pos, ray, figure->cyl);
-		if (dot && dot < min_t)
+		else if (figure->type == CYLINDER)
+			dot = cyl_inter(pos, ray, figure->cyl);
+		if (dot > 0.001 && dot < min_t)
 		{
 			min_t = dot;
 			*tmp1 = figure;

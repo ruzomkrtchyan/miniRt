@@ -15,6 +15,7 @@
 float	cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl)
 {
 	t_math	math;
+	float	proj[2];
 	t_vect	p1;
 	t_vect	p2;
 	t_vect	x;
@@ -28,12 +29,17 @@ float	cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl)
 	{
 		math.x1 = (-math.b - sqrt(math.disc)) / (2 * math.a);
 		math.x2 = (-math.b + sqrt(math.disc)) / (2 * math.a);
+		return (math.x1);
 	}
 	else
 		return (0.0);
 	p1 = sum_vect(pos, num_product_vect(ray, math.x1));
 	p2 = sum_vect(pos, num_product_vect(ray, math.x2));
-	
-
-
+	proj[0] = dot_product_vect(substraction_vect(p1, cyl->coord), cyl->n_coord);
+	if (proj[0] > 0 || proj[0] > dot_product_vect(cyl->n_coord, cyl->n_coord))
+		return (math.x1);
+	proj[1] = dot_product_vect(substraction_vect(p2, cyl->coord), cyl->n_coord);
+	if (proj[1] > 0 || proj[1] > dot_product_vect(cyl->n_coord, cyl->n_coord))
+		return (math.x2);
+	return (0.0);
 }
