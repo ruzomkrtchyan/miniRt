@@ -98,6 +98,7 @@ void		ray_norm(t_figure *fig, t_vect p);
 float		closest_inter(t_vect pos, t_vect ray, t_figure *figure, t_figure **tmp1);
 float		sphere_intersection(t_vect pos, t_vect ray, t_sph *sph);
 float		plane_inter(t_vect pos, t_vect ray, t_pl *plane);
+float		vect_proj(t_vect pos, t_vect ray, t_cyl *cyl, t_math *math);
 float		cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl);
 float		compute_light(float dot, t_scene *scene, t_figure *tmp);
 float		compute_spec(t_scene *scene, t_vect light, float	n_dot_l, t_figure *fig);

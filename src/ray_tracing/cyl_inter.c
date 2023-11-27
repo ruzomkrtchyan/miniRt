@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cyl_inter.c                                        :+:      :+:    :+:   */
+/*   cyl_inter->c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -44,29 +44,53 @@
 // 	return (0.0);
 // }
 
-void	vect_proj(t_vect pos, t_vect ray, t_cyl *cyl)
+float	vect_proj(t_vect pos, t_vect ray, t_cyl *cyl, t_math *math)
 {
 	t_vect	ray_p;
 	t_vect	oc_p;
-	t_math	math;
 
 	ray_p = num_product_vect(cyl->n_coord, dot_product_vect(ray, cyl->n_coord));
 	ray_p = substraction_vect(ray, ray_p);
 	oc_p = num_product_vect(cyl->n_coord, \
 			dot_product_vect(substraction_vect(pos, cyl->coord), cyl->n_coord));
 	oc_p = substraction_vect(substraction_vect(pos, cyl->coord), oc_p);
-	math.a = dot_product_vect(ray_p, ray_p);
-	math.b = 2 * dot_product_vect(ray_p, oc_p);
-	math.c = dot_product_vect(oc_p, oc_p) - powf(cyl->radius, 2);
-	math.disc = math.b * math.b - 4 * math.a * math.c;
+	math->a = dot_product_vect(ray_p, ray_p);
+	math->b = 2 * dot_product_vect(ray_p, oc_p);
+	math->c = dot_product_vect(oc_p, oc_p) - powf(cyl->radius, 2);
+	math->disc = math->b * math->b - 4 * math->a * math->c;
+	if (math->disc > 0)
+	{
+		math->x1 = -math->b - sqrt(math->disc)	/ 2 * math->a;
+		math->x2 = -math->b + sqrt(math->disc)	/ 2 * math->a;
+		return (1);
+	}
+	return (0);
+}
+
+float	side_inter(t_vect pos, t_vect ray, t_cyl *cyl)
+{
+	float	t[2];
+	t_math	math;
+
+	if (vect_proj(pos, ray, cyl, &math) == 0)
+		return(0);
+	
+}
+
+float	caps_inter(t_vect pos, t_vect ray, t_cyl *cyl)
+{
+	t_pl	*plane;
+
+	plane->coord = sum_vect(cyl);
+	plane->n_coord = cyl->n_coord;
+	plane_inter(pos, ray, plane);
 }
 
 float	cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl)
 {
-	float	t[2];
-	vect_proj(pos, ray, cyl);
+	float	side_point;
+	float	caps_point;
 
-	t[0] = INFINITY;
-	t[1] = INFINITY;
-	vect_proj(pos, ray, cyl);
+	side_point = side_inter(pos, ray, cyl);
+	caps_point = caps_inter(pos, ray, cyl);
 }
