@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:16:14 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/09 11:12:46 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:01:57 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_vect	new_vect(float x, float y, float z)
 	new.x = x;
 	new.y = y;
 	new.z = z;
+	new.w = 1;
 	return (new);
 }
 
