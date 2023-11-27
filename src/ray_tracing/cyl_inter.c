@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cyl_inter->c                                        :+:      :+:    :+:   */
+/*   cyl_inter.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 20:03:52 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/20 14:23:38 by rmkrtchy         ###   ########.fr       */
+/*   Created: 2023/11/27 15:35:40 by rmkrtchy          #+#    #+#             */
+/*   Updated: 2023/11/27 18:01:53 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // 	t_vect	p1;
 // 	t_vect	p2;
 // 	t_vect	x;
-	
+
 // 	x = substraction_vect(pos, cyl->coord);
 // 	math.a = dot_product_vect(ray, ray) - powf(dot_product_vect(ray, cyl->n_coord), 2);
 // 	math.b = 2 * (dot_product_vect(ray, x) - (dot_product_vect(ray, cyl->n_coord) * dot_product_vect(x, cyl->n_coord)));
@@ -44,6 +44,15 @@
 // 	return (0.0);
 // }
 
+float	calcul_dist(t_cyl *cyl, t_math *math)
+{
+	float	dist;
+
+	dist = dot_product_vect();
+	
+	return (dist);
+}
+
 float	vect_proj(t_vect pos, t_vect ray, t_cyl *cyl, t_math *math)
 {
 	t_vect	ray_p;
@@ -60,8 +69,8 @@ float	vect_proj(t_vect pos, t_vect ray, t_cyl *cyl, t_math *math)
 	math->disc = math->b * math->b - 4 * math->a * math->c;
 	if (math->disc > 0)
 	{
-		math->x1 = -math->b - sqrt(math->disc)	/ 2 * math->a;
-		math->x2 = -math->b + sqrt(math->disc)	/ 2 * math->a;
+		math->x1 = -math->b - sqrt(math->disc) / 2 * math->a;
+		math->x2 = -math->b + sqrt(math->disc) / 2 * math->a;
 		return (1);
 	}
 	return (0);
@@ -69,12 +78,13 @@ float	vect_proj(t_vect pos, t_vect ray, t_cyl *cyl, t_math *math)
 
 float	side_inter(t_vect pos, t_vect ray, t_cyl *cyl)
 {
-	float	t[2];
 	t_math	math;
+	float	dist[2];
 
 	if (vect_proj(pos, ray, cyl, &math) == 0)
-		return(0);
-	
+		return (0);
+	dist[0] = calcul_dist(cyl, &math);
+	dist[1] = calcul_dist(cyl, &math);
 }
 
 float	caps_inter(t_vect pos, t_vect ray, t_cyl *cyl)
