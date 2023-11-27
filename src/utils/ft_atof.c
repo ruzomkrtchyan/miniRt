@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/24 13:30:57 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/10/30 19:31:38 by rmkrtchy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 float	after_dot(char *str)
@@ -30,7 +42,6 @@ float	before_dot(char *str)
 		i++;
 	}
 	return (res);
-	
 }
 
 float	ft_atof(char *str)
@@ -42,8 +53,6 @@ float	ft_atof(char *str)
 	res = 0;
 	i = 0;
 	sign = 1.0;
-	if (!ft_strchr(str, '.'))
-		str = ft_strjoin(str, ".0", -1);
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
@@ -53,6 +62,7 @@ float	ft_atof(char *str)
 	res = before_dot(str);
 	while (str[i] && str[i] != '.')
 		i++;
-	res += after_dot(str + i + 1);
+	if (str[i])
+		res += after_dot(str + i + 1);
 	return (res * sign);
 }

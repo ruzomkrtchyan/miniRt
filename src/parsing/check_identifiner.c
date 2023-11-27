@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_identifiner.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/24 13:07:45 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/10/24 13:29:05 by vhovhann         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 int	check_identifier(char **arr);
 int	check_identifier2(char **arr);
 int	check_identifier3(char **arr);
-
 
 int	check_identifier(char **arr)
 {
@@ -18,7 +29,6 @@ int	check_identifier(char **arr)
 		return (err("Error : Wrong identifier\n"));
 	return (0);
 }
-
 
 int	check_identifier2(char **arr)
 {
@@ -41,17 +51,17 @@ int	check_identifier3(char **arr)
 {
 	if (!ft_strcmp(arr[0], "pl"))
 	{
-		if (strlen_2d(arr) != 4)
+		if (strlen_2d(arr) != 5)
 			return (err("Error : Wrong 'pl' identifier arguments\n"));
 	}
 	else if (!ft_strcmp(arr[0], "sp"))
 	{
-		if (strlen_2d(arr) != 4)
+		if (strlen_2d(arr) != 5)
 			return (err("Error : Wrong 'sp' identifier arguments\n"));
 	}
 	else if (!ft_strcmp(arr[0], "cy"))
 	{
-		if (strlen_2d(arr) != 6)
+		if (strlen_2d(arr) != 7)
 			return (err("Error : Wrong 'cy' identifier arguments\n"));
 	}
 	else

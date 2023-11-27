@@ -1,41 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_file.c                                        :+:      :+:    :+:   */
+/*   destroy_scene.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 13:07:56 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/24 13:08:29 by vhovhann         ###   ########.fr       */
+/*   Created: 2023/10/24 12:55:28 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/11/09 22:28:13 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-char	*read_file(char *str)
+void	destroy_scene(t_scene **scene)
 {
-	char	*tmp;
-	char	*res;
-	int		file;
-
-	file = open(str, O_RDONLY);
-	res = NULL;
-	while (1)
+	if ((*scene)->amb)
 	{
-		tmp = get_next_line(file);
-		if (!tmp)
-			break ;
-		if (!res)
-			res = ft_strdup(tmp);
-		else
-			res = ft_strjoin(res, tmp, 1);
-		free(tmp);
+		if ((*scene)->amb->color)
+			free((*scene)->amb->color);
+		free((*scene)->amb);
 	}
-	if (!res || ft_strchr(res, '\t') != NULL || only_new_line(res))
+	if ((*scene)->light)
 	{
-		write(2, "Error : Incorrect file\n", 22);
-		free(res);
-		exit(1);
+		if ((*scene)->light->color)
+			free((*scene)->light->color);
+		free((*scene)->light);
 	}
-	return (res);
+	if ((*scene)->cam)
+		free((*scene)->cam);
+	if ((*scene)->data)
+		free((*scene)->data);
+	if ((*scene)->mlx)
+		free((*scene)->mlx);
+	if ((*scene)->figure)
+		lstclear_figure(&(*scene)->figure);
 }

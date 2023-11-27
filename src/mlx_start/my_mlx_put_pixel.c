@@ -1,41 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_file.c                                        :+:      :+:    :+:   */
+/*   my_mlx_put_pixel.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 13:07:56 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/24 13:08:29 by vhovhann         ###   ########.fr       */
+/*   Created: 2023/11/09 11:13:24 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/11/09 11:14:20 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-char	*read_file(char *str)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	char	*tmp;
-	char	*res;
-	int		file;
+	char	*dst;
 
-	file = open(str, O_RDONLY);
-	res = NULL;
-	while (1)
+	if (x >= 0 && x < data->width && y >= 0 && y < data->height)
 	{
-		tmp = get_next_line(file);
-		if (!tmp)
-			break ;
-		if (!res)
-			res = ft_strdup(tmp);
-		else
-			res = ft_strjoin(res, tmp, 1);
-		free(tmp);
+		dst = data->addr + (y * data->line_length + x * \
+										(data->bits_per_pixel / 8));
+		*(unsigned int *)dst = color;
 	}
-	if (!res || ft_strchr(res, '\t') != NULL || only_new_line(res))
-	{
-		write(2, "Error : Incorrect file\n", 22);
-		free(res);
-		exit(1);
-	}
-	return (res);
 }

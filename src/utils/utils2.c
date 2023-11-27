@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/24 13:30:37 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/11/04 18:31:02 by vhovhann         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 int	check_matrix_num(char **arr);
@@ -43,15 +55,4 @@ int	check_matrix_num(char **arr)
 		i++;
 	}
 	return (0);
-}
-
-t_scene	*scene_init(t_scene *scene)
-{
-	scene->amb = (t_amb *)malloc(sizeof(t_amb));
-	scene->cam = (t_cam *)malloc(sizeof(t_cam));
-	scene->light = (t_light *)malloc(sizeof(t_light));
-	scene->cyl = NULL;
-	scene->pl = NULL;
-	scene->sph = NULL;
-	return (scene);
 }

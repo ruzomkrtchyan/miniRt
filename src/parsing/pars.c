@@ -1,36 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pars.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/24 13:07:53 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/11/09 22:25:56 by vhovhann         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
-void	pars(char **arr);
+t_scene	*pars(char **arr, t_scene *scene);
 int		check_ident_args(char **line);
-void	fill_structs(char **line, t_scene *scene);
+void	fill_scene(char **line, t_scene *scene);
 
-void pars(char **arr)
+void	init_scene(t_scene **scene)
 {
-	int		i;
-	t_scene	*scene;
-	char	**line;
+	(*scene)->amb = NULL;
+	(*scene)->light = NULL;
+	(*scene)->figure = NULL;
+	(*scene)->cam = NULL;
+	(*scene)->data = NULL;
+	(*scene)->mlx = NULL;
+	(*scene)->height = HEIGHT;
+	(*scene)->width = WIDTH;
+}
+
+t_scene	*pars(char **arr, t_scene *scene)
+{
+	int			i;
+	char		**line;
 
 	line = NULL;
-	scene = NULL;
 	i = -1;
 	while (arr[++i])
 	{
-		line = ft_split(arr[i], ' ');
-		if (check_identifier(line) || check_ident_args(line))
-			exit(1 + free_of_n(NULL, line, arr, 2));
-		free_2d(line);
+		if (arr[i][0] != '#')
+		{
+			line = ft_split(arr[i], ' ');
+			if (check_identifier(line) || check_ident_args(line))
+				exit(1 + free_of_n(NULL, line, arr, 2));
+			free_2d(line);
+		}
 	}
 	scene = (t_scene *)malloc(sizeof(t_scene));
-	// scene = scene_init(scene);
-	if (!scene)
-		exit(1);
+	init_scene(&scene);
 	i = -1;
 	while (arr[++i])
 	{
-		line = ft_split(arr[i], ' ');
-		fill_structs(line, scene);
-		free_2d(line);
+		if (arr[i][0] != '#')
+		{
+			line = ft_split(arr[i], ' ');
+			fill_scene(line, scene);
+			free_2d(line);
+		}
 	}
+	return (scene);
 }
 
 int	check_ident_args(char **line)
@@ -53,7 +80,7 @@ int	check_ident_args(char **line)
 	return (i);
 }
 
-void	fill_structs(char **line, t_scene *scene)
+void	fill_scene(char **line, t_scene *scene)
 {
 	if (!ft_strcmp(line[0], "A"))
 		scene->amb = fill_amb(line);
@@ -61,19 +88,10 @@ void	fill_structs(char **line, t_scene *scene)
 		scene->cam = fill_cam(line);
 	else if (!ft_strcmp(line[0], "L"))
 		scene->light = fill_light(line);
-	else if (!ft_strcmp(line[0], "pl"))
-	{
-		scene->pl = NULL;
-		lstback_pl(&scene->pl, lstadd_pl(line));
-	}
-	else if (!ft_strcmp(line[0], "sp"))
-	{
-		scene->sph = NULL;
-		lstback_sp(&scene->sph, lstadd_sp(line));
-	}
 	else if (!ft_strcmp(line[0], "cy"))
-	{
-		scene->cyl = NULL;
-		lstback_cyl(&scene->cyl, lstadd_cyl(line));
-	}
+		lstback_figure(&scene->figure, lstadd_figure(line, CYLINDER));
+	else if (!ft_strcmp(line[0], "pl"))
+		lstback_figure(&scene->figure, lstadd_figure(line, PLANE));
+	else if (!ft_strcmp(line[0], "sp"))
+		lstback_figure(&scene->figure, lstadd_figure(line, SPHERE));
 }

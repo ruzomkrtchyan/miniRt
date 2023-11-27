@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   vect_func_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 18:55:00 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/07 13:56:50 by rmkrtchy         ###   ########.fr       */
+/*   Created: 2023/11/09 11:12:32 by vhovhann          #+#    #+#             */
+/*   Updated: 2023/11/11 12:02:14 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+float	dot_product_vect(t_vect v1, t_vect v2)
 {
-	char	*res;
-	char	**arr;
-	t_scene	*scene;
+	float	res;
 
-	res = NULL;
-	arr = NULL;
-	scene = NULL;
-	if (argc != 2)
-	{
-		write(2, "Error : Arguments\n", 19);
-		return (1);
-	}
-	check_fname(argv[1]);
-	res = read_file(argv[1]);
-	arr = ft_split(res, '\n');
-	free(res);
-	check_ident_name(arr);
-	scene = pars(arr, scene);
-	free_2d(arr);
-	mlx_create(scene);
-	destroy_scene(&scene);
-	return (0);
+	res = ((v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z));
+	return (res);
+}
+
+t_vect	norm_vect(t_vect vector)
+{
+	float	length;
+
+	length = length_vect(vector);
+	vector.x /= length;
+	vector.y /= length;
+	vector.z /= length;
+	return (vector);
 }

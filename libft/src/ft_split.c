@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 16:58:07 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/08/08 13:01:26 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/10/27 13:17:05 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ static size_t	ft_count(char *str, char j)
 		if (str[i])
 			count++;
 		while (str[i] && str[i] != j)
-		{		
+		{
 			if (str[i] == 34 || str[i] == 39)
 				skipquotes1((char **)&str, (int *)&i);
 			else
 			{
 				if (str[i])
-				i++;
+					i++;
 			}
 		}
 	}
