@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cylinder.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:10 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/12 17:03:34 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:30:57 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@ t_cyl	*init_cyl_2(t_cyl *tmp, char **vect, char **n_vect, char **colors)
 	tmp->coord.x = ft_atof(vect[0]);
 	tmp->coord.y = ft_atof(vect[1]);
 	tmp->coord.z = ft_atof(vect[2]);
+	tmp->coord.w = 1.0;
 	tmp->n_coord.x = ft_atof(n_vect[0]);
 	tmp->n_coord.y = ft_atof(n_vect[1]);
 	tmp->n_coord.z = ft_atof(n_vect[2]);
+	tmp->n_coord.w = 1.0;
 	if (tmp->n_coord.x > 0.0)
 		tmp->n_coord.x *= -1;
 	if (tmp->n_coord.y > 0.0)
