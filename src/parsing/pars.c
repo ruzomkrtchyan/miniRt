@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:53 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/09 22:25:56 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:42:29 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	init_scene(t_scene **scene)
 	(*scene)->cam = NULL;
 	(*scene)->data = NULL;
 	(*scene)->mlx = NULL;
+	(*scene)->x_angle = 0.3;
+	(*scene)->y_angle = 0.3;
+	(*scene)->z_angle = 0.3;
 	(*scene)->height = HEIGHT;
 	(*scene)->width = WIDTH;
 }

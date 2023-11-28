@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/27 18:09:40 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:23:43 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,9 @@ typedef struct s_scene
 	t_data		*data;
 	t_mlx		*mlx;
 	t_vect		ray;
+	float		x_angle;
+	float		y_angle;
+	float		z_angle;
 	float		height;
 	float		width;
 }				t_scene;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:55:00 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/07 13:56:50 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:34:01 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	scene = NULL;
 	if (argc != 2)
 	{
-		write(2, "Error : Arguments\n", 19);
+		write(2, "Error : Arguments Count\n", 19);
 		return (1);
 	}
 	check_fname(argv[1]);

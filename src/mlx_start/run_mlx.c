@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_mlx.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:26:38 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/20 12:34:02 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/28 10:16:12 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	mlx_create(t_scene *scene)
 	ray_tracing(scene, 0, 0);
 	mlx_put_image_to_window(scene->mlx->mlx, scene->mlx->mlx_win, \
 								scene->data->img, 0, 0);
-	mlx_hook(scene->mlx->mlx_win, 2, 0, &mlx_keypress, scene);
+	mlx_hook(scene->mlx->mlx_win, 2, 0, &mlx_keypress, &scene);
 	// mlx_hook(scene->mlx->mlx_win, 4, 0, &button_press, scene);
 	// mlx_hook(scene->mlx->mlx_win, 6, 0, &mouse, scene);
 	mlx_hook(scene->mlx->mlx_win, 17, 0, &close_window, scene);
