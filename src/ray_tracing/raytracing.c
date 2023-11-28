@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/28 16:15:59 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/28 18:07:17 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ray_tracing(t_scene *scene, int mlx_x, int mlx_y)
 		while (++x_angle <= scene->width / 2)
 		{
 			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, \
-					pixel_col(scene, scene->v_plane, x_angle, y_angle));
+					pixel_col(scene, scene->vplane, x_angle, y_angle));
 			mlx_x++;
 		}
 		mlx_y++;

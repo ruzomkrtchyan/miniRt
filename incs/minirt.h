@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/28 12:52:18 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/28 18:56:05 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ t_matrix	matrix_sum(t_matrix m1, t_matrix m2);
 t_matrix	new_zero_matrix(void);
 t_vect		multi_mat_vect(t_matrix m, t_vect v);
 t_matrix	matrix_mult(t_matrix m1, t_matrix m2);
+t_matrix	scale_matrix(int sx, int sy, int sz);
+t_matrix	move_matrix(int dx, int dy, int dz);
 t_matrix	get_rotation_z(int angle);
 t_matrix	get_rotation_y(int angle);
 t_matrix	get_rotation_x(int angle);
