@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 17:50:43 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/20 14:21:09 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/27 18:24:11 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ float	closest_inter(t_vect pos, t_vect ray, t_figure *figure, t_figure **tmp1)
 			dot = sphere_intersection(pos, ray, figure->sph);
 		else if (figure->type == PLANE)
 			dot = plane_inter(pos, ray, figure->pl);
-		else if (figure->type == CYLINDER)
-			dot = cyl_inter(pos, ray, figure->cyl);
+		// else if (figure->type == CYLINDER)
+		// 	dot = cyl_inter(pos, ray, figure->cyl);
 		if (dot > 0.001 && dot < min_t)
 		{
 			min_t = dot;

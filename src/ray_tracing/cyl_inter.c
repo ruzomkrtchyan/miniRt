@@ -6,13 +6,13 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:35:40 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/28 15:18:03 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:15:47 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// float	cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl)
+// float	vect_proj(t_vect pos, t_vect ray, t_cyl *cyl, t_math *math)
 // {
 // 	t_math	math;
 // 	float	proj[2];
@@ -27,21 +27,11 @@
 // 	math.disc = math.b * math.b - (4 * math.a * math.c);
 // 	if (math.disc > 0)
 // 	{
-// 		math.x1 = (-math.b - sqrt(math.disc)) / (2 * math.a);
-// 		math.x2 = (-math.b + sqrt(math.disc)) / (2 * math.a);
-// 		return (math.x1);
+// 		math->x1 = -math->b - sqrt(math->disc)	/ 2 * math->a;
+// 		math->x2 = -math->b + sqrt(math->disc)	/ 2 * math->a;
+// 		return (1);
 // 	}
-// 	else
-// 		return (0.0);
-// 	p1 = sum_vect(pos, num_product_vect(ray, math.x1));
-// 	p2 = sum_vect(pos, num_product_vect(ray, math.x2));
-// 	proj[0] = dot_product_vect(substraction_vect(p1, cyl->coord), cyl->n_coord);
-// 	if (proj[0] > 0 || proj[0] > dot_product_vect(cyl->n_coord, cyl->n_coord))
-// 		return (math.x1);
-// 	proj[1] = dot_product_vect(substraction_vect(p2, cyl->coord), cyl->n_coord);
-// 	if (proj[1] > 0 || proj[1] > dot_product_vect(cyl->n_coord, cyl->n_coord))
-// 		return (math.x2);
-// 	return (0.0);
+// 	return (0);
 // }
 
 float	calcul_dist(t_cyl *cyl, t_math *math, t_vect ray, t_vect pos)

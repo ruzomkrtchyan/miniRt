@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:53 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/28 12:54:50 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:15:36 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	init_scene(t_scene **scene)
 	(*scene)->cam = NULL;
 	(*scene)->data = NULL;
 	(*scene)->mlx = NULL;
+	(*scene)->x_angle = 0.3;
+	(*scene)->y_angle = 0.3;
+	(*scene)->z_angle = 0.3;
 	(*scene)->vplane = NULL;
 	(*scene)->height = HEIGHT;
 	(*scene)->width = WIDTH;

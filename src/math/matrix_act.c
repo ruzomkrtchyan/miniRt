@@ -6,11 +6,16 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:02:58 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/27 17:10:40 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:45:44 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+t_matrix	matrix_sum(t_matrix m1, t_matrix m2);
+t_matrix	new_zero_matrix(void);
+t_vect		multi_mat_vect(t_matrix m, t_vect v);
+t_matrix	matrix_mult(t_matrix m1, t_matrix m2);
 
 t_matrix	new_zero_matrix(void)
 {

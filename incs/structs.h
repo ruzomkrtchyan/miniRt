@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/28 12:45:00 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:15:21 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,9 @@ typedef struct s_scene
 	t_mlx		*mlx;
 	t_vplane	*vplane;
 	t_vect		ray;
+	float		x_angle;
+	float		y_angle;
+	float		z_angle;
 	float		height;
 	float		width;
 }				t_scene;
