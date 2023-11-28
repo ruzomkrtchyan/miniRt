@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy_scene.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:55:28 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/09 22:28:13 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:56:25 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,6 @@ void	destroy_scene(t_scene **scene)
 		free((*scene)->mlx);
 	if ((*scene)->figure)
 		lstclear_figure(&(*scene)->figure);
+	if ((*scene)->v_plane)
+		free(v_plane);
 }

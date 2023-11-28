@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/27 15:35:01 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:56:39 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,7 @@ void	ray_tracing(t_scene *scene, int mlx_x, int mlx_y)
 {
 	float		x_angle;
 	float		y_angle;
-	t_vplane	*v_plane;
 
-	v_plane = get_vplane(scene->width, scene->height, scene->cam->fov);
 	y_angle = (scene->height / 2) + 1;
 	while (--y_angle >= scene->height / 2 * (-1))
 	{
@@ -72,22 +70,9 @@ void	ray_tracing(t_scene *scene, int mlx_x, int mlx_y)
 		while (++x_angle <= scene->width / 2)
 		{
 			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, \
-					pixel_col(scene, v_plane, x_angle, y_angle));
+					pixel_col(scene, scene->v_plane, x_angle, y_angle));
 			mlx_x++;
 		}
 		mlx_y++;
 	}
-	free(v_plane);
-}
-
-t_vplane	*get_vplane(float width, float height, float fov)
-{
-	t_vplane	*v_plane;
-
-	v_plane = malloc(sizeof(t_vplane));
-	v_plane->width = 2 * tan((fov / 2) * (M_PI / 180));
-	v_plane->height = v_plane->width / (width / height);
-	v_plane->x_pixel = v_plane->width / width;
-	v_plane->y_pixel = v_plane->height / height;
-	return (v_plane);
 }

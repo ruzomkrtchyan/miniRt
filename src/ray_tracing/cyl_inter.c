@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:35:40 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/27 18:01:53 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:18:03 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,13 @@
 // 	return (0.0);
 // }
 
-float	calcul_dist(t_cyl *cyl, t_math *math)
+float	calcul_dist(t_cyl *cyl, t_math *math, t_vect ray, t_vect pos)
 {
 	float	dist;
 
-	dist = dot_product_vect();
-	
+	dist = dot_product_vect(cyl->n_coord, \
+			substraction_vect(num_product_vect(math->x1, ray), \
+			substraction_vect(cyl->coord, pos)));
 	return (dist);
 }
 
@@ -83,17 +84,44 @@ float	side_inter(t_vect pos, t_vect ray, t_cyl *cyl)
 
 	if (vect_proj(pos, ray, cyl, &math) == 0)
 		return (0);
-	dist[0] = calcul_dist(cyl, &math);
-	dist[1] = calcul_dist(cyl, &math);
+	dist[0] = calcul_dist(cyl, &math, ray, pos);
+	dist[1] = calcul_dist(cyl, &math, ray, pos);
+	if (dist[0] < 0 || dist[0] > cyl->height || math.x1 < 0.001 \
+		|| dist[1] < 0 || dist[0] > cyl->height || math.x2 < 0.001)
+		return (0);
+	return (math.x1);
 }
 
 float	caps_inter(t_vect pos, t_vect ray, t_cyl *cyl)
 {
 	t_pl	*plane;
+	float	inter[2];
+	t_vect	vect[2];
+	t_vect	center;
 
-	plane->coord = sum_vect(cyl);
+	center = sum_vect(cyl->coord, num_product_vect(cyl->n_coord, cyl->height));
+	plane->coord = center;
 	plane->n_coord = cyl->n_coord;
-	plane_inter(pos, ray, plane);
+	inter[0] = plane_inter(pos, ray, plane);
+	plane->coord = cyl->coord;
+	inter[1] = plane_inter(pos, ray, plane);
+	if (inter[0] < INFINITY || inter[1] < INFINITY)
+	{
+		vect[0] = sum_vect(pos, num_product_vect(ray, inter[0]));
+		vect[1] = sum_vect(pos, num_product_vect(ray, inter[1]));
+		if (dist_vect(v[0], cyl->coord) <= cyl->radius && \
+				dist_vect(v[1], center) <= cyl->radius)
+		{
+			if (inter[0] > inter[1])
+				return (inter[1]);
+			return (inter[0]);
+		}
+		if (dist_vect(v[0], cyl->coord) <= cyl->radius)
+			return (inter[0]);
+		if (dist_vect(v[1], center) <= cyl->radius)
+			return (inter[1]);
+	}
+	return (0);
 }
 
 float	cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl)

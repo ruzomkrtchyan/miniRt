@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:53 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/09 22:25:56 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:54:50 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_scene(t_scene **scene)
 	(*scene)->cam = NULL;
 	(*scene)->data = NULL;
 	(*scene)->mlx = NULL;
+	(*scene)->vplane = NULL;
 	(*scene)->height = HEIGHT;
 	(*scene)->width = WIDTH;
 }
@@ -57,6 +58,7 @@ t_scene	*pars(char **arr, t_scene *scene)
 			free_2d(line);
 		}
 	}
+	scene->vplane = get_vplane(scene->width, scene->height, scene->cam->fov);
 	return (scene);
 }
 
