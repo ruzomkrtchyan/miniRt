@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/28 12:52:18 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/30 21:34:25 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,20 +97,23 @@ void		ray_tracing(t_scene *scene, int mlx_x, int mlx_y);
 void		ray_norm(t_figure *fig, t_vect p);
 float		closest_inter(t_vect pos, t_vect ray, t_figure *figure, t_figure **tmp1);
 float		sphere_intersection(t_vect pos, t_vect ray, t_sph *sph);
-float		plane_inter(t_vect pos, t_vect ray, t_pl *plane);
+float		plane_inter(t_vect pos, t_vect ray, t_vect n_coord, t_vect coord);
 float		vect_proj(t_vect pos, t_vect ray, t_cyl *cyl, t_math *math);
 float		cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl);
+t_vect		cylray_norm(t_math *math, t_vect ray, t_vect pos, t_cyl *cyl);
+float		closest_dist(t_cyl *cyl, t_math *m);
 float		compute_light(float dot, t_scene *scene, t_figure *tmp);
 float		compute_spec(t_scene *scene, t_vect light, float	n_dot_l, t_figure *fig);
 t_vplane	*get_vplane(float height, float width, float fov);
 
 t_vect		new_vect(float x, float y, float z);
-t_vect		substraction_vect(t_vect v1, t_vect v2);
+t_vect		substract_v(t_vect v1, t_vect v2);
 float		length_vect(t_vect vec);
 float		dot_product_vect(t_vect v1, t_vect v2);
 t_vect		norm_vect(t_vect vector);
 t_vect		num_product_vect(t_vect vec, float num);
 t_vect		sum_vect(t_vect v1, t_vect v2);
+float		dist_vect(t_vect v1, t_vect v2);
 
 t_matrix	matrix_sum(t_matrix m1, t_matrix m2);
 t_matrix	new_zero_matrix(void);

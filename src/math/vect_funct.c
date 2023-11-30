@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vect_funct.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:16:14 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/27 17:01:57 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/11/30 21:34:25 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_vect	new_vect(float x, float y, float z)
 	return (new);
 }
 
-t_vect	substraction_vect(t_vect v1, t_vect v2)
+t_vect	substract_v(t_vect v1, t_vect v2)
 {
 	v1.x -= v2.x;
 	v1.y -= v2.y;
