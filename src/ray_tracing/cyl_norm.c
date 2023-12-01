@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 18:04:03 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/30 16:41:04 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:25:26 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_vect	cylray_norm(t_math *math, t_vect ray, t_vect pos, t_cyl *cyl)
 	dist = closest_dist(cyl, math);
 	return (norm_vect(substract_v(substract_v(num_product_vect(ray, math->x1), \
 			num_product_vect(cyl->n_coord, dist)), \
-			substract_v(cyl->coord, pos))));
+			substract_v(cyl->cent, pos))));
 }
 
 float	closest_dist(t_cyl *cyl, t_math *m)

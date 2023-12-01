@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/30 21:34:39 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:50:33 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ray_norm(t_figure *fig, t_vect p)
 		fig->ray_norm = norm_vect(substract_v(p, fig->sph->coord));
 	else if (fig->type == PLANE)
 		fig->ray_norm = fig->pl->n_coord;
+	else if (fig->type == CYLINDER)
+		fig->ray_norm = fig->cyl->ray_norm;
 }
 
 int	get_color(int red, int green, int blue, float bright)

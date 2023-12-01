@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/30 20:21:05 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/01 12:29:25 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct s_pl
 
 typedef struct s_cyl
 {
-	t_vect		coord;
+	t_vect		cent;
 	t_vect		n_coord;
 	t_vect		ray_norm;
 	t_rgb		*color;
