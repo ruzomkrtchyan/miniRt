@@ -6,43 +6,11 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:35:40 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/03 16:16:10 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/03 16:25:16 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-// float	vect_proj(t_vect pos, t_vect ray, t_cyl *cyl, t_math *math)
-// {
-// 	t_vect	x;
-// 	t_vect	p1;
-// 	t_vect	p2;
-// 	float	proj[2];
-
-// 	x = substract_v(pos, sum_vect(cyl->cent, (num_product_vect(cyl->n_coord, -0.5 * cyl->height))));
-// 	// x = substract_v(pos, cyl->n_coord);
-// 	math->a = dot_product_vect(ray, ray) - powf(dot_product_vect(ray, cyl->n_coord), 2);
-// 	math->b = 2 * (dot_product_vect(ray, x) - (dot_product_vect(ray, cyl->n_coord) * dot_product_vect(x, cyl->n_coord)));
-// 	math->c = dot_product_vect(x, x) - powf(dot_product_vect(x, cyl->n_coord), 2) - powf(cyl->radius, 2);
-// 	math->disc = math->b * math->b - (4 * math->a * math->c);
-// 	if (math->disc > 0)
-// 	{
-// 		math->x1 = (-math->b - sqrt(math->disc)) / (2 * math->a);
-// 		math->x2 = (-math->b + sqrt(math->disc)) / (2 * math->a);
-// 	}
-// 	p1 = sum_vect(pos, num_product_vect(ray, math->x1));
-// 	p2 = sum_vect(pos, num_product_vect(ray, math->x2));
-// 	proj[0] = dot_product_vect(substract_v(p1, cyl->cent), cyl->n_coord);
-// 	if (proj[0] > 0 || proj[0] > dot_product_vect(cyl->n_coord, cyl->n_coord))
-// 		return (1);
-// 	proj[1] = dot_product_vect(substract_v(p2, cyl->cent), cyl->n_coord);
-// 	if (proj[1] > 0 || proj[1] > dot_product_vect(cyl->n_coord, cyl->n_coord))
-// 	{
-// 		math->x1 = math->x2;
-// 		return (1);
-// 	}
-// 	return (INFINITY);
-// }
 
 float	calcul_dist(t_cyl *cyl, float t, t_vect ray, t_vect pos)
 {
@@ -87,7 +55,8 @@ float	side_inter(t_vect pos, t_vect ray, t_cyl *cyl)
 	cyl->dist[0] = calcul_dist(cyl, math.x1, ray, pos);
 	cyl->dist[1] = calcul_dist(cyl, math.x2, ray, pos);
 	if (!((cyl->dist[0] >= 0 && cyl->dist[0] <= cyl->height && math.x1 > 0.001) \
-		|| (cyl->dist[1] >= 0 && cyl->dist[1] <= cyl->height && math.x2 > 0.001)))
+		|| (cyl->dist[1] >= 0 && cyl->dist[1] <= cyl->height \
+			&& math.x2 > 0.001)))
 		return (INFINITY);
 	cyl->ray_norm = cylray_norm(&math, ray, pos, cyl);
 	return (math.x1);
