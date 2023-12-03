@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:35:40 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/01 16:15:36 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/03 16:16:10 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 // float	vect_proj(t_vect pos, t_vect ray, t_cyl *cyl, t_math *math)
 // {
 // 	t_vect	x;
+// 	t_vect	p1;
+// 	t_vect	p2;
+// 	float	proj[2];
 
 // 	x = substract_v(pos, sum_vect(cyl->cent, (num_product_vect(cyl->n_coord, -0.5 * cyl->height))));
+// 	// x = substract_v(pos, cyl->n_coord);
 // 	math->a = dot_product_vect(ray, ray) - powf(dot_product_vect(ray, cyl->n_coord), 2);
 // 	math->b = 2 * (dot_product_vect(ray, x) - (dot_product_vect(ray, cyl->n_coord) * dot_product_vect(x, cyl->n_coord)));
 // 	math->c = dot_product_vect(x, x) - powf(dot_product_vect(x, cyl->n_coord), 2) - powf(cyl->radius, 2);
@@ -25,9 +29,19 @@
 // 	{
 // 		math->x1 = (-math->b - sqrt(math->disc)) / (2 * math->a);
 // 		math->x2 = (-math->b + sqrt(math->disc)) / (2 * math->a);
+// 	}
+// 	p1 = sum_vect(pos, num_product_vect(ray, math->x1));
+// 	p2 = sum_vect(pos, num_product_vect(ray, math->x2));
+// 	proj[0] = dot_product_vect(substract_v(p1, cyl->cent), cyl->n_coord);
+// 	if (proj[0] > 0 || proj[0] > dot_product_vect(cyl->n_coord, cyl->n_coord))
+// 		return (1);
+// 	proj[1] = dot_product_vect(substract_v(p2, cyl->cent), cyl->n_coord);
+// 	if (proj[1] > 0 || proj[1] > dot_product_vect(cyl->n_coord, cyl->n_coord))
+// 	{
+// 		math->x1 = math->x2;
 // 		return (1);
 // 	}
-// 	return (0);
+// 	return (INFINITY);
 // }
 
 float	calcul_dist(t_cyl *cyl, float t, t_vect ray, t_vect pos)
@@ -58,23 +72,23 @@ float	vect_proj(t_vect pos, t_vect ray, t_cyl *cyl, t_math *math)
 		math->x1 = (-math->b - sqrt(math->disc)) / (2 * math->a);
 		math->x2 = (-math->b + sqrt(math->disc)) / (2 * math->a);
 		if (math->x1 < 0.001 && math->x2 < 0.001)
-			return (0);
+			return (INFINITY);
 		return (1);
 	}
-	return (0);
+	return (INFINITY);
 }
 
 float	side_inter(t_vect pos, t_vect ray, t_cyl *cyl)
 {
 	t_math	math;
 
-	if (vect_proj(pos, ray, cyl, &math) == 0)
-		return (0);
+	if (vect_proj(pos, ray, cyl, &math) == INFINITY)
+		return (INFINITY);
 	cyl->dist[0] = calcul_dist(cyl, math.x1, ray, pos);
 	cyl->dist[1] = calcul_dist(cyl, math.x2, ray, pos);
-	if (cyl->dist[0] < 0 || cyl->dist[0] > cyl->height || math.x1 <= 0.001 \
-		|| cyl->dist[1] < 0 || cyl->dist[0] > cyl->height || math.x2 <= 0.001)
-		return (0);
+	if (!((cyl->dist[0] >= 0 && cyl->dist[0] <= cyl->height && math.x1 > 0.001) \
+		|| (cyl->dist[1] >= 0 && cyl->dist[1] <= cyl->height && math.x2 > 0.001)))
+		return (INFINITY);
 	cyl->ray_norm = cylray_norm(&math, ray, pos, cyl);
 	return (math.x1);
 }
@@ -88,23 +102,23 @@ float	caps_inter(t_vect pos, t_vect ray, t_cyl *cyl)
 	center = sum_vect(cyl->cent, num_product_vect(cyl->n_coord, cyl->height));
 	inter[0] = plane_inter(pos, ray, cyl->n_coord, center);
 	inter[1] = plane_inter(pos, ray, cyl->n_coord, cyl->cent);
-	if (inter[0] || inter[1])
+	if (inter[0] < INFINITY || inter[1] < INFINITY)
 	{
 		v[0] = sum_vect(pos, num_product_vect(ray, inter[0]));
 		v[1] = sum_vect(pos, num_product_vect(ray, inter[1]));
-		if (dist_vect(v[0], cyl->cent) <= cyl->radius && \
-				dist_vect(v[1], center) <= cyl->radius)
+		if ((inter[0] < INFINITY && dist_vect(v[0], center) <= cyl->radius) && \
+			(inter[1] < INFINITY && dist_vect(v[1], cyl->cent) <= cyl->radius))
 		{
 			if (inter[0] > inter[1])
 				return (inter[1]);
 			return (inter[0]);
 		}
-		if (dist_vect(v[0], cyl->cent) <= cyl->radius)
+		if (inter[0] < INFINITY && dist_vect(v[0], center) <= cyl->radius)
 			return (inter[0]);
-		if (dist_vect(v[1], center) <= cyl->radius)
+		if (inter[1] < INFINITY && dist_vect(v[1], cyl->cent) <= cyl->radius)
 			return (inter[1]);
 	}
-	return (0);
+	return (INFINITY);
 }
 
 float	cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl)
@@ -114,11 +128,11 @@ float	cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl)
 
 	side_point = side_inter(pos, ray, cyl);
 	caps_point = caps_inter(pos, ray, cyl);
-	if (side_point || caps_point)
+	if (side_point != INFINITY || caps_point != INFINITY)
 	{
-		if (side_point < caps_point && side_point > 0.001)
+		if (side_point < caps_point)
 			return (side_point);
-		if (caps_point > 0.001)
+		if (caps_point < INFINITY && caps_point > 0.001)
 		{
 			cyl->ray_norm = cyl->n_coord;
 			if (cyl->n_coord.z <= 0)
@@ -126,5 +140,5 @@ float	cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl)
 			return (caps_point);
 		}
 	}
-	return (0);
+	return (INFINITY);
 }

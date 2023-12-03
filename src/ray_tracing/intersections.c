@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 17:50:43 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/01 15:39:39 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/02 17:13:40 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ float	plane_inter(t_vect pos, t_vect ray, t_vect n_coord, t_vect coord)
 		if (t >= 0.001)
 			return (t);
 	}
-	return (0);
+	return (INFINITY);
 }
 
 float	closest_inter(t_vect pos, t_vect ray, t_figure *figure, t_figure **tmp1)
