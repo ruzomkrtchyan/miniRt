@@ -3,15 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/28 16:15:21 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:41:14 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+# define A 			0
+# define S 			1
+# define D 			2
+# define W 			13
+# define ESC		53
+# define LEFT		123
+# define RIGHT		124
+# define DOWN		125
+# define UP			126
+# define HEIGHT		600
+# define WIDTH		800
+# define NUM_THREAD	4
 
 typedef enum e_figure_type
 {
@@ -24,7 +37,6 @@ typedef struct s_matrix
 {
 	float	m[4][4];
 }				t_matrix;
-
 
 typedef struct s_data
 {
@@ -143,13 +155,27 @@ typedef struct s_scene
 	t_figure	*figure;
 	t_data		*data;
 	t_mlx		*mlx;
-	t_vplane	*vplane;
 	t_vect		ray;
 	float		x_angle;
 	float		y_angle;
 	float		z_angle;
+	int			check;
 	float		height;
 	float		width;
 }				t_scene;
+
+typedef struct s_thread
+{
+	int			height;
+	int			width;
+	int			old_height;
+	int			old_width;
+	int			x_angle;
+	int			y_angle;
+	int			mlx_y;
+	int			mlx_x;
+	t_vplane	*vplane;
+	t_scene		*scene;
+}				t_thread;
 
 #endif

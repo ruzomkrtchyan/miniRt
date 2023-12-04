@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/28 18:07:17 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:38:54 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,27 @@ int	pixel_col(t_scene *scene, t_vplane *v_plane, float x_angle, float y_angle)
 	return (color);
 }
 
-void	ray_tracing(t_scene *scene, int mlx_x, int mlx_y)
+void	*ray_tracing(void *arg)
 {
-	float		x_angle;
-	float		y_angle;
+	t_thread	*thr;
+	t_scene		*scene;
 
-	y_angle = (scene->height / 2) + 1;
-	while (--y_angle >= scene->height / 2 * (-1))
+	thr = arg;
+	scene = thr->scene;
+	thr->y_angle = thr->height / 2 + 1;
+	thr->mlx_y = thr->old_height;
+	while (--(thr->y_angle) >= (thr->height / 2 * (-1)) && \
+													thr->mlx_y <= thr->height)
 	{
-		mlx_x = 0;
-		x_angle = ((scene->width / 2) * (-1)) - 1;
-		while (++x_angle <= scene->width / 2)
+		thr->mlx_x = thr->old_width;
+		thr->x_angle = ((thr->width / 2) * (-1)) - 1;
+		while (++(thr->x_angle) <= thr->width / 2 && thr->mlx_x <= thr->width)
 		{
-			my_mlx_pixel_put(scene->data, mlx_x, mlx_y, \
-					pixel_col(scene, scene->vplane, x_angle, y_angle));
-			mlx_x++;
+			my_mlx_pixel_put(scene->data, thr->mlx_x, thr->mlx_y, \
+				pixel_col(scene, thr->vplane, (thr->x_angle), (thr->y_angle)));
+			(thr->mlx_x)++;
 		}
-		mlx_y++;
+		(thr->mlx_y)++;
 	}
+	pthread_exit(NULL);
 }

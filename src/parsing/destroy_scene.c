@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:55:28 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/28 18:07:04 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/04 16:59:34 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,4 @@ void	destroy_scene(t_scene **scene)
 		free((*scene)->mlx);
 	if ((*scene)->figure)
 		lstclear_figure(&(*scene)->figure);
-	if ((*scene)->vplane)
-		free((*scene)->vplane);
 }

@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/28 18:56:05 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:41:48 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,11 @@
 # include <math.h>
 # include <mlx.h>
 # include <stdint.h>
+# include <pthread.h>
 # include <fcntl.h>
 # include "structs.h"
 # include "libft.h"
 # include "get_next_line_bonus.h"
-
-# define W 		13
-# define A 		0
-# define S 		1
-# define D 		2
-# define UP		126
-# define DOWN	125
-# define LEFT	123
-# define RIGHT	124
-# define ESC	53
-# define HEIGHT	1080
-# define WIDTH	1920
 
 /*************************************/
 /**************UTILS******************/
@@ -91,17 +80,19 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int			mouse(void);
 int			close_window(t_scene *scene);
 int			button_press(void);
-int			mlx_keypress(int keypress, t_scene **scene);
+int			mlx_keypress(int keypress, t_thread *thr);
 
-void		ray_tracing(t_scene *scene, int mlx_x, int mlx_y);
+void		*ray_tracing(void *arg);
 void		ray_norm(t_figure *fig, t_vect p);
-float		closest_inter(t_vect pos, t_vect ray, t_figure *figure, t_figure **tmp1);
+float		closest_inter(t_vect pos, t_vect ray, t_figure *figure, \
+														t_figure **tmp1);
 float		sphere_intersection(t_vect pos, t_vect ray, t_sph *sph);
 float		plane_inter(t_vect pos, t_vect ray, t_pl *plane);
 float		vect_proj(t_vect pos, t_vect ray, t_cyl *cyl, t_math *math);
 float		cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl);
 float		compute_light(float dot, t_scene *scene, t_figure *tmp);
-float		compute_spec(t_scene *scene, t_vect light, float	n_dot_l, t_figure *fig);
+float		compute_spec(t_scene *scene, t_vect light, float n_dot_l, \
+														t_figure *fig);
 t_vplane	*get_vplane(float height, float width, float fov);
 
 t_vect		new_vect(float x, float y, float z);

@@ -6,58 +6,68 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:13:53 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/28 18:12:13 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:40:37 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	mlx_keypress(int keypress, t_scene **scene)
+int	mlx_keypress(int keypress, t_thread *thr)
 {
-	t_figure *tmp = (*scene)->figure;
+	int			i;
+	pthread_t	t1[NUM_THREAD];
+	t_figure	*tmp;
+
+	tmp = thr->scene->figure;
 	if (keypress == W || keypress == UP)
-	{
-		(*scene)->cam->pos.z -= 1;
-		printf("GO TO UP\n");
-	}
+		thr->scene->cam->pos.z -= 1;
 	if (keypress == S || keypress == DOWN)
-	{
-		(*scene)->cam->pos.z += 100;
-		printf("GO TO DOWN\n");
-	}
+		thr->scene->cam->pos.z += 100;
 	if (keypress == A || keypress == LEFT)
 	{
-			while (tmp)
-			{
-				if (tmp->type == SPHERE)
-					tmp->sph->coord.x -= 2;
-				tmp = tmp->next;
-			}
-			printf("GO TO LEFT\n");
+		while (tmp)
+		{
+			if (tmp->type == SPHERE)
+				tmp->sph->coord.x -= 2;
+			tmp = tmp->next;
+		}
 	}
 	if (keypress == D || keypress == RIGHT)
-	{ 
-			while (tmp)
-			{
-				if (tmp->type == SPHERE)
-					tmp->sph->coord.x += 2;
-				tmp = tmp->next;
-			}
-			printf("GO TO RIGHT\n");
+	{
+		while (tmp)
+		{
+			if (tmp->type == SPHERE)
+				tmp->sph->coord.x += 2;
+			tmp = tmp->next;
+		}
 	}
-	(*scene)->data->img = mlx_new_image((*scene)->mlx->mlx, WIDTH, HEIGHT);
-	(*scene)->data->addr = mlx_get_data_addr((*scene)->data->img, \
-			&(*scene)->data->bits_per_pixel, \
-			&(*scene)->data->line_length, &(*scene)->data->endian);
-	ray_tracing(*scene, 0, 0);
-	mlx_put_image_to_window((*scene)->mlx->mlx, (*scene)->mlx->mlx_win, \
-								(*scene)->data->img, 0, 0);
 	if (keypress == ESC)
 	{
-		mlx_destroy_window((*scene)->mlx->mlx, (*scene)->mlx->mlx_win);
-		destroy_scene(scene);
+		mlx_destroy_window(thr->scene->mlx->mlx, thr->scene->mlx->mlx_win);
+		destroy_scene(&thr->scene);
+		free(thr->vplane);
 		exit (0);
 	}
+	thr->scene->data->img = mlx_new_image(thr->scene->mlx->mlx, WIDTH, HEIGHT);
+	thr->scene->data->addr = mlx_get_data_addr(thr->scene->data->img, \
+			&thr->scene->data->bits_per_pixel, \
+			&thr->scene->data->line_length, &thr->scene->data->endian);
+	i = -1;
+	while (++i < NUM_THREAD)
+	{
+		if (pthread_create(&t1[i], NULL, ray_tracing, &thr[i]))
+		{
+			mlx_destroy_window(thr->scene->mlx->mlx, thr->scene->mlx->mlx_win);
+			destroy_scene(&thr->scene);
+			free(thr->vplane);
+			exit(1);
+		}
+	}
+	i = -1;
+	while (++i < NUM_THREAD)
+		pthread_join(t1[i], NULL);
+	mlx_put_image_to_window(thr->scene->mlx->mlx, thr->scene->mlx->mlx_win, \
+								thr->scene->data->img, 0, 0);
 	return (0);
 }
 
