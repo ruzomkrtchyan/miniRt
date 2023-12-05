@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/05 17:39:08 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:02:36 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # define RIGHT		124
 # define DOWN		125
 # define UP			126
-# define HEIGHT		1080
-# define WIDTH		1920
+# define HEIGHT		600
+# define WIDTH		800
 # define NUM_THREAD	4
 
 typedef enum e_figure_type
@@ -106,12 +106,14 @@ typedef struct s_pl
 
 typedef struct s_cyl
 {
-	t_vect		coord;
+	t_vect		cent;
 	t_vect		n_coord;
+	t_vect		ray_norm;
 	t_rgb		*color;
 	float		spec;
 	float		radius;
 	float		height;
+	float		dist[2];
 }			t_cyl;
 
 typedef struct s_amb

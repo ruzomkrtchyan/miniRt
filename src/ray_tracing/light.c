@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 12:45:20 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/11/12 12:48:01 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/05 12:08:56 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ float	compute_spec(t_scene *scene, t_vect light, float n_dot_l, t_figure *fig)
 	i = 0.0;
 	v = num_product_vect(scene->ray, -1);
 	r = num_product_vect(num_product_vect(fig->ray_norm, 2), n_dot_l);
-	r = substraction_vect(r, light);
+	r = substract_v(r, light);
 	r_dot_v = dot_product_vect(r, v);
 	if (r_dot_v > 0)
 		i += scene->light->bright * \
@@ -41,7 +41,7 @@ float	compute_light(float dot, t_scene *scene, t_figure *tmp)
 	i = scene->amb->ratio;
 	p = sum_vect(scene->cam->pos, num_product_vect(scene->ray, dot));
 	ray_norm(tmp, p);
-	light = substraction_vect(scene->light->coord, p);
+	light = substract_v(scene->light->coord, p);
 	n_dot_l = dot_product_vect(tmp->ray_norm, light);
 	shadow = NULL;
 	if (closest_inter(p, light, scene->figure, &shadow) != INFINITY)
