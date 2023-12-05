@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 12:45:20 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/03 16:45:11 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/05 12:08:56 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ float	compute_light(float dot, t_scene *scene, t_figure *tmp)
 	t_figure	*shadow;
 	float		n_dot_l;
 	float		i;
-	
 
 	i = scene->amb->ratio;
 	p = sum_vect(scene->cam->pos, num_product_vect(scene->ray, dot));
