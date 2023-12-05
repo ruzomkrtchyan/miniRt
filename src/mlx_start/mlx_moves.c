@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:13:53 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/04 17:40:37 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:42:07 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	mlx_keypress(int keypress, t_thread *thr)
 
 	tmp = thr->scene->figure;
 	if (keypress == W || keypress == UP)
-		thr->scene->cam->pos.z -= 1;
+		thr->scene->cam->pos.z -= 10;
 	if (keypress == S || keypress == DOWN)
-		thr->scene->cam->pos.z += 100;
+		thr->scene->cam->pos.z += 50;
 	if (keypress == A || keypress == LEFT)
 	{
 		while (tmp)
