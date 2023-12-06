@@ -6,16 +6,14 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:26:38 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/04 17:40:15 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/06 19:04:21 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	mlx_create(t_scene *scene)
+static void	fill_thread_struct(t_thread	thr[NUM_THREAD], t_scene *scene)
 {
-	t_thread	thr[NUM_THREAD];
-	pthread_t	t1[NUM_THREAD];
 	int			i;
 
 	i = NUM_THREAD - 1;
@@ -30,6 +28,34 @@ void	mlx_create(t_scene *scene)
 		thr[i].scene = scene;
 		i--;
 	}
+}
+
+void	start_threads(t_thread thr[NUM_THREAD])
+{
+	pthread_t	t1[NUM_THREAD];
+	int			i;
+
+	i = -1;
+	while (++i < NUM_THREAD)
+	{
+		if (pthread_create(&t1[i], NULL, ray_tracing, &thr[i]))
+		{
+			mlx_destroy_window(thr->scene->mlx->mlx, thr->scene->mlx->mlx_win);
+			destroy_scene(&thr->scene);
+			free(thr->vplane);
+			exit(1);
+		}
+	}
+	i = -1;
+	while (++i < NUM_THREAD)
+		pthread_join(t1[i], NULL);
+}
+
+void	mlx_create(t_scene *scene)
+{
+	t_thread	thr[NUM_THREAD];
+
+	fill_thread_struct(thr, scene);
 	scene->mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	scene->data = (t_data *)malloc(sizeof(t_data));
 	scene->mlx->mlx = mlx_init();
@@ -39,16 +65,10 @@ void	mlx_create(t_scene *scene)
 	scene->data->addr = mlx_get_data_addr(scene->data->img, \
 							&scene->data->bits_per_pixel, \
 							&scene->data->line_length, &scene->data->endian);
-	i = -1;
-	while (++i < NUM_THREAD)
-		if (pthread_create(&t1[i], NULL, ray_tracing, &thr[i]))
-			exit(1);
-	i = -1;
-	while (++i < NUM_THREAD)
-		pthread_join(t1[i], NULL);
+	start_threads(thr);
 	mlx_put_image_to_window(scene->mlx->mlx, scene->mlx->mlx_win, \
 								scene->data->img, 0, 0);
 	mlx_hook(scene->mlx->mlx_win, 2, 0, &mlx_keypress, &thr);
-	mlx_hook(scene->mlx->mlx_win, 17, 0, &close_window, scene);
+	mlx_hook(scene->mlx->mlx_win, 17, 0, (t_hook_helper)close_window, &thr);
 	mlx_loop(scene->mlx->mlx);
 }

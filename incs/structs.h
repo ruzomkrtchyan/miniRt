@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/05 18:02:36 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/06 19:06:50 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define HEIGHT		600
 # define WIDTH		800
 # define NUM_THREAD	4
+
+typedef int	(*t_hook_helper)(int *);
 
 typedef enum e_figure_type
 {

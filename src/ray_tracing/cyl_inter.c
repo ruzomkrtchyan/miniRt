@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:35:40 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/05 18:08:00 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/06 18:19:51 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ float	caps_inter(t_vect pos, t_vect ray, t_cyl *cyl)
 	return (INFINITY);
 }
 
-float	 cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl)
+float	cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl)
 {
 	float	side_point;
 	float	caps_point;

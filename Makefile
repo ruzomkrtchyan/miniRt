@@ -1,7 +1,7 @@
 NAME	= miniRt
 
 SRC_DIR 	= src
-SUBDIRS 	= utils parsing fill_structs mlx_start math ray_tracing
+SUBDIRS 	= utils parsing fill_structs mlx_start math ray_tracing moves
 SRCDIRS 	:= $(addprefix $(SRC_DIR)/, $(SUBDIRS))
 SRCS		:= $(notdir $(foreach dir, $(SRCDIRS), $(wildcard $(dir)/*.c))) $(notdir $(SRC_DIR)/main.c)
 
@@ -25,6 +25,9 @@ TEXT		= "\033[6;1m"
 GREEN		= "\033[38;2;49;247;196m"
 PURPLE		= "\033[38;2;0;138;240m"
 RESET		= "\033[0m"
+
+# test :
+# 	@echo $(SRCDIRS);
 
 all: mlx $(LIBS) $(OBJ_DIR) $(NAME)
 

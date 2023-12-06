@@ -1,8 +1,5 @@
-libft/obj
-libft/libft.a
-obj
-mlx/*.o
-mlx/*.a
+*.o
+*.a
 minirt
 .DS_Store
 .vscode

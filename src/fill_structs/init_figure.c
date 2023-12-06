@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_figure.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 20:30:31 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/11 19:27:10 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/06 18:20:06 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	lstclear_figure(t_figure **lst)
 
 void	free_figure(t_figure **lst)
 {
-	
 	if ((*lst)->type == CYLINDER)
 	{
 		free((*lst)->cyl->color);

@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/05 18:00:24 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/06 19:06:38 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int			valid_float(char **str, int len);
 int			valid_colors(char **colors);
 char		*read_file(char *str);
 void		destroy_scene(t_scene **scene);
+void		destroy_exit(t_thread *thr);
 
 t_scene		*pars(char **arr, t_scene *scene);
 void		check_fname(char *str);
@@ -78,9 +79,10 @@ void		mlx_create(t_scene *scene);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 int			mouse(void);
-int			close_window(t_scene *scene);
+void		close_window(t_thread *thr);
 int			button_press(void);
-int			mlx_keypress(int keypress, t_thread *thr);
+int			mlx_keypress(int keypress, t_thread thr[NUM_THREAD]);
+void		start_threads(t_thread thr[NUM_THREAD]);
 
 void		*ray_tracing(void *arg);
 void		ray_norm(t_figure *fig, t_vect p);
@@ -112,6 +114,11 @@ t_vect		multi_mat_vect(t_matrix m, t_vect v);
 t_matrix	matrix_mult(t_matrix m1, t_matrix m2);
 t_matrix	scale_matrix(int sx, int sy, int sz);
 t_matrix	move_matrix(int dx, int dy, int dz);
+
+void		move_right(t_figure **figure);
+void		move_left(t_figure **figure);
+void		move_down(t_figure **figure);
+void		move_up(t_figure **figure);
 t_matrix	get_rotation_z(int angle);
 t_matrix	get_rotation_y(int angle);
 t_matrix	get_rotation_x(int angle);
