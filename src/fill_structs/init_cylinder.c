@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:10 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/01 12:31:25 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/06 19:14:08 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ t_cyl	*init_cyl_2(t_cyl *tmp, char **vect, char **n_vect, char **colors)
 	tmp->n_coord.x = ft_atof(n_vect[0]);
 	tmp->n_coord.y = ft_atof(n_vect[1]);
 	tmp->n_coord.z = ft_atof(n_vect[2]);
+	tmp->n_coord = norm_vect(tmp->n_coord);
 	tmp->n_coord.w = 1.0;
-	if (tmp->n_coord.x > 0.0)
-		tmp->n_coord.x *= -1;
-	if (tmp->n_coord.y > 0.0)
-		tmp->n_coord.y *= -1;
 	return (tmp);
 }
