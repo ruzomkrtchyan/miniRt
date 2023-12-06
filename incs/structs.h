@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/06 19:06:50 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/06 21:24:24 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,10 @@ typedef struct s_vect
 
 typedef struct s_light
 {
-	t_vect	coord;
-	t_rgb	*color;
-	float	bright;
+	t_vect			coord;
+	t_rgb			*color;
+	float			bright;
+	struct s_light	*next;
 }				t_light;
 
 typedef struct s_sph

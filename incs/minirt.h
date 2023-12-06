@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/06 19:06:38 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/06 21:26:35 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,16 @@ int			check_args_cylinder(char **line);
 
 t_amb		*fill_amb(char **line);
 t_cam		*fill_cam(char **line);
-t_light		*fill_light(char **line);
 
 t_pl		*init_pl(char **line);
 t_cyl		*init_cyl(char **line);
 t_sph		*init_sp(char **line);
+
+t_light		*lstadd_light(char **line);
+t_light		*lstlast_light(t_light *lst);
+int			lstsize_light(t_light *lst);
+void		lstclear_light(t_light **lst);
+void		lstback_light(t_light **pars, t_light *new);
 
 int			lstsize_figure(t_figure *lst);
 t_figure	*lstlast_figure(t_figure *lst);

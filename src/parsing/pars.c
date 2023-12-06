@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:53 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/04 16:59:46 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/06 21:32:16 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	fill_scene(char **line, t_scene *scene)
 	else if (!ft_strcmp(line[0], "C"))
 		scene->cam = fill_cam(line);
 	else if (!ft_strcmp(line[0], "L"))
-		scene->light = fill_light(line);
+		lstback_light(&scene->light, lstadd_light(line));
 	else if (!ft_strcmp(line[0], "cy"))
 		lstback_figure(&scene->figure, lstadd_figure(line, CYLINDER));
 	else if (!ft_strcmp(line[0], "pl"))

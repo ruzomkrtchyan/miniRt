@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:43 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/24 13:07:44 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/06 21:20:45 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,22 @@ void	check_ident_name(char **arr)
 	int	a;
 	int	c;
 	int	i;
-	int	l;
 
 	i = 0;
 	a = 0;
 	c = 0;
-	l = 0;
 	while (arr[i])
 	{
 		if (arr[i][0] == 'A')
 			a++;
 		else if (arr[i][0] == 'C')
 			c++;
-		else if (arr[i][0] == 'L')
-			l++;
 		else if (arr[i][0] == ' ')
 			exit(err("Error : Invalid file\n") + free_2d(arr));
 		i++;
 	}
 	if (a == 0 || c == 0)
 		exit(err("Error : Ambient or Camera is not defined\n") + free_2d(arr));
-	if (a != 1 || c != 1 || l != 1)
+	if (a != 1 || c != 1)
 		exit(err("Error : Wrong quantity of Identifiers\n") + free_2d(arr));
 }
