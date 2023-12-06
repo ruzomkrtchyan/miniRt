@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:35:40 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/06 18:19:51 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/06 21:37:28 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,13 @@ float	vect_proj(t_vect pos, t_vect ray, t_cyl *cyl, t_math *math)
 	math->b = 2 * dot_product_vect(ray_p, oc_p);
 	math->c = dot_product_vect(oc_p, oc_p) - powf(cyl->radius, 2);
 	math->disc = math->b * math->b - (4 * math->a * math->c);
-	if (math->disc > 0)
-	{
-		math->x1 = (-math->b - sqrt(math->disc)) / (2 * math->a);
-		math->x2 = (-math->b + sqrt(math->disc)) / (2 * math->a);
-		if (math->x1 < 0.001 && math->x2 < 0.001)
-			return (INFINITY);
-		return (1);
-	}
-	return (INFINITY);
+	if (math->disc < 0)
+		return (INFINITY);
+	math->x1 = (-math->b - sqrt(math->disc)) / (2 * math->a);
+	math->x2 = (-math->b + sqrt(math->disc)) / (2 * math->a);
+	if (math->x1 < 0.001 && math->x2 < 0.001)
+		return (INFINITY);
+	return (1);
 }
 
 float	side_inter(t_vect pos, t_vect ray, t_cyl *cyl)
