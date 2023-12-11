@@ -6,15 +6,15 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:53 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/06 21:32:16 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:19:16 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_scene	*pars(char **arr, t_scene *scene);
-int		check_ident_args(char **line);
-void	fill_scene(char **line, t_scene *scene);
+t_scene			*pars(char **arr, t_scene *scene);
+int				check_ident_args(char **line);
+void			fill_scene(char **line, t_scene *scene);
 
 void	init_scene(t_scene **scene)
 {
@@ -24,11 +24,27 @@ void	init_scene(t_scene **scene)
 	(*scene)->cam = NULL;
 	(*scene)->data = NULL;
 	(*scene)->mlx = NULL;
-	(*scene)->x_angle = 0.3;
-	(*scene)->y_angle = 0.3;
-	(*scene)->z_angle = 0.3;
+	(*scene)->x_angle = 10;
+	(*scene)->y_angle = 10;
 	(*scene)->height = HEIGHT;
 	(*scene)->width = WIDTH;
+}
+
+static void	pars_2(char **arr, t_scene *scene)
+{
+	int		i;
+	char	**line;
+
+	i = -1;
+	while (arr[++i])
+	{
+		if (arr[i][0] != '#')
+		{
+			line = ft_split(arr[i], ' ');
+			fill_scene(line, scene);
+			free_2d(line);
+		}
+	}
 }
 
 t_scene	*pars(char **arr, t_scene *scene)
@@ -50,16 +66,7 @@ t_scene	*pars(char **arr, t_scene *scene)
 	}
 	scene = (t_scene *)malloc(sizeof(t_scene));
 	init_scene(&scene);
-	i = -1;
-	while (arr[++i])
-	{
-		if (arr[i][0] != '#')
-		{
-			line = ft_split(arr[i], ' ');
-			fill_scene(line, scene);
-			free_2d(line);
-		}
-	}
+	pars_2(arr, scene);
 	return (scene);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:13:53 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/06 21:38:26 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:20:07 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,11 @@
 
 int	mlx_keypress(int keypress, t_thread thr[NUM_THREAD])
 {
-	// if (keypress == W)
-	// 	thr->scene->cam->pos.z -= 10;
-	// else if (keypress == S)
-	// 	thr->scene->cam->pos.z += 50;
-	if (keypress == UP)
-		move_up(&thr->scene->figure);
-	else if (keypress == DOWN)
-		move_down(&thr->scene->figure);
-	else if (keypress == LEFT)
-		move_left(&thr->scene->figure);
-	else if (keypress == RIGHT)
-		move_right(&thr->scene->figure);
+	if (keypress == A || keypress == S || keypress == D || keypress == W)
+		_rotate_(keypress, thr->scene);
+	else if (keypress == LEFT || keypress == RIGHT || keypress == DECREASE || \
+														keypress == INCREASE)
+		_move_(keypress, thr->scene);
 	else if (keypress == ESC)
 		destroy_exit(thr);
 	mlx_destroy_image(thr->scene->mlx->mlx, thr->scene->data->img);
@@ -39,19 +32,7 @@ int	mlx_keypress(int keypress, t_thread thr[NUM_THREAD])
 	return (0);
 }
 
-int	button_press(void)
-{
-	printf("MOUSE HERE\n");
-	return (1);
-}
-
 void	close_window(t_thread *thr)
 {
 	destroy_exit(thr);
-}
-
-int	mouse(void)
-{
-	printf("OK\n");
-	return (1);
 }

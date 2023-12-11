@@ -6,20 +6,20 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:44:39 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/28 12:56:54 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:32:59 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_matrix	get_rotation_z(int angle);
-t_matrix	get_rotation_y(int angle);
-t_matrix	get_rotation_x(int angle);
+t_matrix	get_rotation_z(float angle);
+t_matrix	get_rotation_y(float angle);
+t_matrix	get_rotation_x(float angle);
 
-t_matrix	get_rotation_x(int angle)
+t_matrix	get_rotation_x(float angle)
 {
 	t_matrix	out_m;
-	int			rad;
+	float		rad;
 
 	rad = M_PI / 180 * angle;
 	out_m = new_zero_matrix();
@@ -31,10 +31,10 @@ t_matrix	get_rotation_x(int angle)
 	return (out_m);
 }
 
-t_matrix	get_rotation_y(int angle)
+t_matrix	get_rotation_y(float angle)
 {
 	t_matrix	out_m;
-	int			rad;
+	float		rad;
 
 	rad = M_PI / 180 * angle;
 	out_m = new_zero_matrix();
@@ -47,10 +47,10 @@ t_matrix	get_rotation_y(int angle)
 	return (out_m);
 }
 
-t_matrix	get_rotation_z(int angle)
+t_matrix	get_rotation_z(float angle)
 {
 	t_matrix	out_m;
-	int			rad;
+	float		rad;
 
 	rad = M_PI / 180 * angle;
 	out_m = new_zero_matrix();

@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/06 21:26:35 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:07:56 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,12 +120,22 @@ t_matrix	matrix_mult(t_matrix m1, t_matrix m2);
 t_matrix	scale_matrix(int sx, int sy, int sz);
 t_matrix	move_matrix(int dx, int dy, int dz);
 
-void		move_right(t_figure **figure);
-void		move_left(t_figure **figure);
-void		move_down(t_figure **figure);
-void		move_up(t_figure **figure);
-t_matrix	get_rotation_z(int angle);
-t_matrix	get_rotation_y(int angle);
-t_matrix	get_rotation_x(int angle);
+void		move_right(t_figure *figure);
+void		move_left(t_figure *figure);
+t_matrix	get_rotation_z(float angle);
+t_matrix	get_rotation_y(float angle);
+t_matrix	get_rotation_x(float angle);
+
+void		_move_(int keypress, t_scene *scene);
+void		_rotate_(int keypress, t_scene *scene);
+
+void		rotate_scene_up(t_scene *scene);
+void		rotate_scene_left(t_scene *scene);
+void		rotate_scene_right(t_scene *scene);
+void		rotate_scene_down(t_scene *scene);
+
+void		rotate_sphere(t_sph *sph, t_matrix matrix);
+void		rotate_light(t_light *light, t_matrix matrix);
+void		rotate_plane(t_pl *plane, t_matrix matrix);
 
 #endif

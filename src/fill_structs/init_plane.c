@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init_plane.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:03 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/28 12:47:27 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:15:48 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 t_pl	*init_pl(char **line);
+void	init_pl_2(char **n_vect, t_pl *tmp);
 
 t_pl	*init_pl(char **line)
 {
@@ -36,6 +37,14 @@ t_pl	*init_pl(char **line)
 	tmp->coord.y = ft_atof(vect[1]);
 	tmp->coord.z = ft_atof(vect[2]);
 	tmp->coord.w = 1.0;
+	init_pl_2(n_vect, tmp);
+	free_of_n(NULL, n_vect, colors, 3);
+	free_2d(vect);
+	return (tmp);
+}
+
+void	init_pl_2(char **n_vect, t_pl *tmp)
+{
 	tmp->n_coord.x = ft_atof(n_vect[0]);
 	tmp->n_coord.y = ft_atof(n_vect[1]);
 	tmp->n_coord.z = ft_atof(n_vect[2]);
@@ -44,7 +53,4 @@ t_pl	*init_pl(char **line)
 		tmp->n_coord.x *= -1;
 	if (tmp->n_coord.y > 0.0)
 		tmp->n_coord.y *= -1;
-	free_of_n(NULL, n_vect, colors, 3);
-	free_2d(vect);
-	return (tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/06 21:24:24 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:05:54 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define ESC		53
 # define LEFT		123
 # define RIGHT		124
-# define DOWN		125
-# define UP			126
+# define DECREASE	125
+# define INCREASE	126
 # define HEIGHT		600
 # define WIDTH		800
 # define NUM_THREAD	4
@@ -163,7 +163,6 @@ typedef struct s_scene
 	t_vect		ray;
 	float		x_angle;
 	float		y_angle;
-	float		z_angle;
 	int			check;
 	float		height;
 	float		width;
