@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/11 18:07:56 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:39:25 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,6 @@ void		rotate_scene_down(t_scene *scene);
 void		rotate_sphere(t_sph *sph, t_matrix matrix);
 void		rotate_light(t_light *light, t_matrix matrix);
 void		rotate_plane(t_pl *plane, t_matrix matrix);
+void		rotate_cylinder(t_cyl *cylinder, t_matrix matrix);
 
 #endif
