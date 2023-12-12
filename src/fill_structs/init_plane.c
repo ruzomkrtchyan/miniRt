@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:03 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/11 18:15:48 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/12 15:24:43 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	init_pl_2(char **n_vect, t_pl *tmp)
 	tmp->n_coord.x = ft_atof(n_vect[0]);
 	tmp->n_coord.y = ft_atof(n_vect[1]);
 	tmp->n_coord.z = ft_atof(n_vect[2]);
+	tmp->n_coord = norm_vect(tmp->n_coord);
 	tmp->n_coord.w = 1.0;
 	if (tmp->n_coord.x > 0.0)
 		tmp->n_coord.x *= -1;
