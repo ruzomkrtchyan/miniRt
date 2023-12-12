@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:58:42 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/11 18:16:07 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/12 19:51:30 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	_move_(int keypress, t_scene *scene)
 	else if (keypress == DECREASE)
 		scene->cam->pos.z += 5;
 	else if (keypress == LEFT)
-		move_left(scene->figure);
+		move_left(scene);
 	else if (keypress == RIGHT)
-		move_right(scene->figure);
+		move_right(scene);
 }

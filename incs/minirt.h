@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/11 18:39:25 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/12 19:51:10 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,8 @@ t_matrix	matrix_mult(t_matrix m1, t_matrix m2);
 t_matrix	scale_matrix(int sx, int sy, int sz);
 t_matrix	move_matrix(int dx, int dy, int dz);
 
-void		move_right(t_figure *figure);
-void		move_left(t_figure *figure);
+void		move_right(t_scene *scene);
+void		move_left(t_scene *scene);;
 t_matrix	get_rotation_z(float angle);
 t_matrix	get_rotation_y(float angle);
 t_matrix	get_rotation_x(float angle);
