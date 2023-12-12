@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:30:37 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/04 18:31:02 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/11 19:08:03 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	check_matrix_num(char **arr)
 			j++;
 		while (arr[i][j])
 		{
-			if (arr[i][j] < '0' || arr[i][j] > '9')
+			if (arr[i][j] != '.' && (arr[i][j] < '0' || arr[i][j] > '9'))
 				return (1);
 			j++;
 		}
