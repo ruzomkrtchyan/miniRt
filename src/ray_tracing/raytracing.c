@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/06 21:37:34 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/14 15:43:26 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,17 @@ void	ray_norm(t_figure *fig, t_vect p)
 		fig->ray_norm = fig->cyl->ray_norm;
 }
 
-int	get_color(int red, int green, int blue, float bright)
+int	get_color(t_figure *fig, float min_t, t_scene *scene)
 {
 	int	r;
 	int	g;
 	int	b;
+	float	bright;
 
-	r = red * bright;
-	g = green * bright;
-	b = blue * bright;
+	bright = compute_light(min_t, scene, fig);
+	r = fig->color->r * bright;
+	g = fig->color->g * bright;
+	b = fig->color->b  * bright;
 	if (r > 255)
 		r = 255;
 	if (g > 255)
@@ -52,10 +54,9 @@ int	pixel_col(t_scene *scene, t_vplane *v_plane, float x_angle, float y_angle)
 					y_angle * v_plane->y_pixel, -1);
 	min_t = closest_inter(scene->cam->pos, scene->ray, scene->figure, &tmp1);
 	if (min_t != INFINITY)
-		color = get_color(tmp1->color->r, tmp1->color->g, \
-				tmp1->color->b, compute_light(min_t, scene, tmp1));
+		color = get_color(tmp1, min_t, scene);
 	else
-		color = get_color(0, 0, 0, 1);
+		color = 0;
 	return (color);
 }
 
