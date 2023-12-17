@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:10 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/06 19:14:08 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/15 14:48:36 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ t_cyl	*init_cyl(char **line)
 	char	**n_vect;
 
 	tmp = (t_cyl *)malloc(sizeof(t_cyl));
-	tmp->color = (t_rgb *)malloc(sizeof(t_rgb));
-	if (!tmp || !tmp->color)
+	if (!tmp)
 		return (NULL);
 	vect = ft_split(line[1], ',');
 	n_vect = ft_split(line[2], ',');
@@ -40,9 +39,9 @@ t_cyl	*init_cyl(char **line)
 
 t_cyl	*init_cyl_2(t_cyl *tmp, char **vect, char **n_vect, char **colors)
 {
-	tmp->color->r = ft_atoi(colors[0]);
-	tmp->color->g = ft_atoi(colors[1]);
-	tmp->color->b = ft_atoi(colors[2]);
+	tmp->color.r = ft_atoi(colors[0]);
+	tmp->color.g = ft_atoi(colors[1]);
+	tmp->color.b = ft_atoi(colors[2]);
 	tmp->cent.x = ft_atof(vect[0]);
 	tmp->cent.y = ft_atof(vect[1]);
 	tmp->cent.z = ft_atof(vect[2]);

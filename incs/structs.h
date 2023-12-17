@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/11 18:05:54 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/17 15:14:38 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,9 @@ typedef struct s_vect
 typedef struct s_light
 {
 	t_vect			coord;
-	t_rgb			*color;
+	t_rgb			color;
 	float			bright;
+	float			n_dot_l;
 	struct s_light	*next;
 }				t_light;
 
@@ -96,7 +97,7 @@ typedef struct s_sph
 	float			spec;
 	float			dist;
 	t_vect			coord;
-	t_rgb			*color;
+	t_rgb			color;
 }				t_sph;
 
 typedef struct s_pl
@@ -104,7 +105,7 @@ typedef struct s_pl
 	t_vect		coord;
 	float		spec;
 	t_vect		n_coord;
-	t_rgb		*color;
+	t_rgb		color;
 }				t_pl;
 
 typedef struct s_cyl
@@ -112,7 +113,7 @@ typedef struct s_cyl
 	t_vect		cent;
 	t_vect		n_coord;
 	t_vect		ray_norm;
-	t_rgb		*color;
+	t_rgb		color;
 	float		spec;
 	float		radius;
 	float		height;
@@ -122,7 +123,7 @@ typedef struct s_cyl
 typedef struct s_amb
 {
 	float	ratio;
-	t_rgb	*color;
+	t_rgb	color;
 }				t_amb;
 
 typedef struct s_cam
@@ -146,7 +147,7 @@ typedef struct s_figure
 	t_pl			*pl;
 	t_cyl			*cyl;
 	t_type			type;
-	t_rgb			*color;
+	t_rgb			color;
 	float			spec;
 	t_vect			ray_norm;
 	struct s_figure	*next;

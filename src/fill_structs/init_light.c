@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_light.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:09 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/06 21:32:37 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/15 14:50:07 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ t_light	*lstadd_light(char **line)
 	char	**vect;
 
 	tmp = (t_light *)malloc(sizeof(t_light));
-	tmp->color = (t_rgb *)malloc(sizeof(t_rgb));
-	if (!tmp || !tmp->color)
+	if (!tmp)
 		return (NULL);
 	vect = ft_split(line[1], ',');
 	tmp->bright = ft_atof(line[2]);
 	colors = ft_split(line[3], ',');
-	tmp->color->r = ft_atoi(colors[0]);
-	tmp->color->g = ft_atoi(colors[1]);
-	tmp->color->b = ft_atoi(colors[2]);
+	tmp->color.r = ft_atoi(colors[0]);
+	tmp->color.g = ft_atoi(colors[1]);
+	tmp->color.b = ft_atoi(colors[2]);
 	tmp->coord.x = ft_atof(vect[0]);
 	tmp->coord.y = ft_atof(vect[1]);
 	tmp->coord.z = ft_atof(vect[2]);

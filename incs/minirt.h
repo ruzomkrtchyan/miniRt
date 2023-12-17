@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/12 19:51:10 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/17 16:46:10 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,14 @@ float		vect_proj(t_vect pos, t_vect ray, t_cyl *cyl, t_math *math);
 float		cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl);
 t_vect		cylray_norm(t_math *math, t_vect ray, t_vect pos, t_cyl *cyl);
 float		closest_dist(t_cyl *cyl, t_math *m);
-float		compute_light(float dot, t_scene *scene, t_figure *tmp);
-float		compute_spec(t_scene *scene, t_vect light, float n_dot_l, \
-														t_figure *fig);
+t_rgb		n_prod_col(t_rgb c, float n);
+t_rgb		add_col(t_rgb c1, t_rgb c2);
+t_rgb		prod_col(t_rgb c1, t_rgb c2, float ratio);
+t_rgb		compute_light(t_rgb fig_col, t_light *light, float n_dot_l);
+t_rgb		compute_spec(t_scene *scene, t_vect light, t_figure *fig, \
+				t_light *lights);
+int			compute_shadow(float dot, t_scene *sc, t_figure *tmp, \
+				t_light *lights);
 t_vplane	*get_vplane(float height, float width, float fov);
 
 t_vect		new_vect(float x, float y, float z);
@@ -135,7 +140,7 @@ void		rotate_scene_right(t_scene *scene);
 void		rotate_scene_down(t_scene *scene);
 
 void		rotate_sphere(t_sph *sph, t_matrix matrix);
-void		rotate_light(t_light *light, t_matrix matrix);
+void		rotate_light(t_light **light, t_matrix matrix);
 void		rotate_plane(t_pl *plane, t_matrix matrix);
 void		rotate_cylinder(t_cyl *cylinder, t_matrix matrix);
 

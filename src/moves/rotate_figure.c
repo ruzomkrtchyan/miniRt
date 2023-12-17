@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_figure.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:49:20 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/11 18:40:43 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/17 14:53:51 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	rotate_sphere(t_sph *sph, t_matrix matrix);
 void	rotate_plane(t_pl *plane, t_matrix matrix);
-void	rotate_light(t_light *light, t_matrix matrix);
+void	rotate_light(t_light **light, t_matrix matrix);
 void	rotate_cylinder(t_cyl *cylinder, t_matrix matrix);
 
 void	rotate_sphere(t_sph *sph, t_matrix matrix)
@@ -35,7 +35,14 @@ void	rotate_cylinder(t_cyl *cylinder, t_matrix matrix)
 	cylinder->n_coord = multi_mat_vect(matrix, cylinder->n_coord);
 }
 
-void	rotate_light(t_light *light, t_matrix matrix)
+void	rotate_light(t_light **light, t_matrix matrix)
 {
-	light->coord = multi_mat_vect(matrix, light->coord);
+	t_light	*tmp;
+
+	tmp = (*light);
+	while (tmp)
+	{
+		tmp->coord = multi_mat_vect(matrix, tmp->coord);
+		tmp = tmp->next;
+	}
 }

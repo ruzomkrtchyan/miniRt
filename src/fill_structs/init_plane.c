@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_plane.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:03 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/12 19:48:50 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/17 14:37:59 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@ t_pl	*init_pl(char **line)
 	char	**n_vect;
 
 	tmp = (t_pl *)malloc(sizeof(t_pl));
-	tmp->color = (t_rgb *)malloc(sizeof(t_rgb));
-	if (!tmp || !tmp->color)
+	if (!tmp)
 		return (NULL);
 	vect = ft_split(line[1], ',');
 	n_vect = ft_split(line[2], ',');
 	tmp->spec = ft_atof(line[3]);
 	colors = ft_split(line[4], ',');
-	tmp->color->r = ft_atoi(colors[0]);
-	tmp->color->g = ft_atoi(colors[1]);
-	tmp->color->b = ft_atoi(colors[2]);
+	tmp->color.r = ft_atoi(colors[0]);
+	tmp->color.g = ft_atoi(colors[1]);
+	tmp->color.b = ft_atoi(colors[2]);
 	tmp->coord.x = ft_atof(vect[0]);
 	tmp->coord.y = ft_atof(vect[1]);
 	tmp->coord.z = ft_atof(vect[2]);

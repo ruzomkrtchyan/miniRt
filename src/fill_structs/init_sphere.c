@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:00 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/27 15:30:50 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/15 14:51:20 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ t_sph	*init_sp(char **line)
 	char	**vect;
 
 	tmp = (t_sph *)malloc(sizeof(t_sph));
-	tmp->color = (t_rgb *)malloc(sizeof(t_rgb));
-	if (!tmp || !tmp->color)
+	if (!tmp)
 		return (NULL);
 	vect = ft_split(line[1], ',');
 	tmp->radius = ft_atof(line[2]) / 2;
@@ -32,9 +31,9 @@ t_sph	*init_sp(char **line)
 	tmp->coord.y = ft_atof(vect[1]);
 	tmp->coord.z = ft_atof(vect[2]);
 	tmp->coord.w = 1.0;
-	tmp->color->r = ft_atoi(colors[0]);
-	tmp->color->g = ft_atoi(colors[1]);
-	tmp->color->b = ft_atoi(colors[2]);
+	tmp->color.r = ft_atoi(colors[0]);
+	tmp->color.g = ft_atoi(colors[1]);
+	tmp->color.b = ft_atoi(colors[2]);
 	free_of_n(NULL, colors, vect, 2);
 	return (tmp);
 }

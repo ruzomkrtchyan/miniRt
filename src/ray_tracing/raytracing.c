@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/14 15:43:26 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/17 16:51:34 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,33 @@ void	ray_norm(t_figure *fig, t_vect p)
 		fig->ray_norm = fig->cyl->ray_norm;
 }
 
-int	get_color(t_figure *fig, float min_t, t_scene *scene)
+int	get_color(t_figure *fig, float min_t, t_scene *scene, t_rgb amb)
 {
-	int	r;
-	int	g;
-	int	b;
-	float	bright;
+	t_light	*lights;
+	t_rgb	col;
+	t_vect	light;
+	t_vect	p;
 
-	bright = compute_light(min_t, scene, fig);
-	r = fig->color->r * bright;
-	g = fig->color->g * bright;
-	b = fig->color->b  * bright;
-	if (r > 255)
-		r = 255;
-	if (g > 255)
-		g = 255;
-	if (b > 255)
-		b = 255;
-	return (r << 16 | g << 8 | b);
+	lights = scene->light;
+	col.r = 0;
+	col.g = 0;
+	col.b = 0;
+	while (lights)
+	{
+		col = add_col(col, amb);
+		if (compute_shadow(min_t, scene, fig, lights) != 0)
+		{
+			p = sum_vect(scene->cam->pos, num_product_vect(scene->ray, min_t));
+			ray_norm(fig, p);
+			light = norm_vect(substract_v(lights->coord, p));
+			lights->n_dot_l = dot_product_vect(fig->ray_norm, light);
+			if (lights->n_dot_l > 0)
+				col = add_col(add_col(col, compute_light(fig->color, lights, \
+				lights->n_dot_l)), compute_spec(scene, light, fig, lights));
+		}
+		lights = lights->next;
+	}
+	return (col.r << 16 | col.g << 8 | col.b);
 }
 
 int	pixel_col(t_scene *scene, t_vplane *v_plane, float x_angle, float y_angle)
@@ -47,14 +56,16 @@ int	pixel_col(t_scene *scene, t_vplane *v_plane, float x_angle, float y_angle)
 	t_figure	*tmp1;
 	float		min_t;
 	int			color;
+	t_rgb		amb;
 
 	tmp1 = scene->figure;
 	min_t = INFINITY;
 	scene->ray = new_vect(x_angle * v_plane->x_pixel, \
 					y_angle * v_plane->y_pixel, -1);
 	min_t = closest_inter(scene->cam->pos, scene->ray, scene->figure, &tmp1);
+	amb = prod_col(tmp1->color, scene->amb->color, scene->amb->ratio);
 	if (min_t != INFINITY)
-		color = get_color(tmp1, min_t, scene);
+		color = get_color(tmp1, min_t, scene, amb);
 	else
 		color = 0;
 	return (color);

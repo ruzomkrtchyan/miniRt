@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:09:16 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/11 18:45:13 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/17 14:46:20 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	rotate_scene_up(t_scene *scene)
 			rotate_cylinder(figure->cyl, matrix);
 		figure = figure->next;
 	}
-	rotate_light(scene->light, matrix);
+	rotate_light(&scene->light, matrix);
 }
 
 void	rotate_scene_down(t_scene *scene)
@@ -54,7 +54,7 @@ void	rotate_scene_down(t_scene *scene)
 			rotate_cylinder(figure->cyl, matrix);
 		figure = figure->next;
 	}
-	rotate_light(scene->light, matrix);
+	rotate_light(&scene->light, matrix);
 }
 
 void	rotate_scene_left(t_scene *scene)
@@ -74,7 +74,7 @@ void	rotate_scene_left(t_scene *scene)
 			rotate_cylinder(figure->cyl, matrix);
 		figure = figure->next;
 	}
-	rotate_light(scene->light, matrix);
+	rotate_light(&scene->light, matrix);
 }
 
 void	rotate_scene_right(t_scene *scene)
@@ -94,5 +94,5 @@ void	rotate_scene_right(t_scene *scene)
 			rotate_cylinder(figure->cyl, matrix);
 		figure = figure->next;
 	}
-	rotate_light(scene->light, matrix);
+	rotate_light(&scene->light, matrix);
 }
