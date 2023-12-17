@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:53 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/11 18:19:16 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/17 18:01:05 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	check_ident_args(char **line)
 		i = check_args_sphere(line);
 	else if (!ft_strcmp(line[0], "cy"))
 		i = check_args_cylinder(line);
+	else if (!ft_strcmp(line[0], "co"))
+		i = check_args_cone(line);
 	return (i);
 }
 
@@ -104,4 +106,6 @@ void	fill_scene(char **line, t_scene *scene)
 		lstback_figure(&scene->figure, lstadd_figure(line, PLANE));
 	else if (!ft_strcmp(line[0], "sp"))
 		lstback_figure(&scene->figure, lstadd_figure(line, SPHERE));
+	else if (!ft_strcmp(line[0], "co"))
+		lstback_figure(&scene->figure, lstadd_figure(line, CONE));
 }

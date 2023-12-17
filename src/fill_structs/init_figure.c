@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_figure.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 20:30:31 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/15 14:49:32 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/17 17:52:47 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	free_figure(t_figure **lst)
 		free((*lst)->sph);
 	else if ((*lst)->type == PLANE)
 		free((*lst)->pl);
+	else if ((*lst)->type == CONE)
+		free((*lst)->cone);
 	free (*lst);
 }
 

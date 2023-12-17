@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/17 15:14:38 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/17 17:45:29 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef enum e_figure_type
 	CYLINDER,
 	SPHERE,
 	PLANE,
+	CONE
 }				t_type;
 
 typedef struct s_matrix
@@ -120,6 +121,17 @@ typedef struct s_cyl
 	float		dist[2];
 }			t_cyl;
 
+typedef struct s_cone
+{
+	t_vect		coord;
+	t_vect		axis;
+	t_rgb		color;
+	float		height;
+	float		spec;
+	float		radius;
+	float		degree;
+}			t_cone;
+
 typedef struct s_amb
 {
 	float	ratio;
@@ -145,6 +157,7 @@ typedef struct s_figure
 {
 	t_sph			*sph;
 	t_pl			*pl;
+	t_cone			*cone;
 	t_cyl			*cyl;
 	t_type			type;
 	t_rgb			color;

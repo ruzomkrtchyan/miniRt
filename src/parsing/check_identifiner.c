@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:45 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/10/24 13:29:05 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/17 17:50:06 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ int	check_identifier3(char **arr)
 	{
 		if (strlen_2d(arr) != 7)
 			return (err("Error : Wrong 'cy' identifier arguments\n"));
+	}
+	else if (!ft_strcmp(arr[0], "co"))
+	{
+		if (strlen_2d(arr) != 8)
+			return (err("Error : Wrong 'co' identifier arguments\n"));
 	}
 	else
 		return (2);
