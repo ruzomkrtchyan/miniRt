@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/17 16:46:10 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/17 17:56:27 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int			check_ident_args(char **arr);
 int			check_args_amb(char **line);
 int			check_args_cam(char **line);
 int			check_args_light(char **line);
+int			check_args_cone(char **line);
 int			check_args_plane(char **line);
 int			check_args_sphere(char **line);
 int			check_args_cylinder(char **line);
@@ -67,6 +68,7 @@ t_cam		*fill_cam(char **line);
 t_pl		*init_pl(char **line);
 t_cyl		*init_cyl(char **line);
 t_sph		*init_sp(char **line);
+t_cone		*init_cone(char **line);
 
 t_light		*lstadd_light(char **line);
 t_light		*lstlast_light(t_light *lst);
@@ -83,7 +85,6 @@ void		lstback_figure(t_figure **pars, t_figure *new);
 void		mlx_create(t_scene *scene);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
-int			mouse(void);
 void		close_window(t_thread *thr);
 int			button_press(void);
 int			mlx_keypress(int keypress, t_thread thr[NUM_THREAD]);

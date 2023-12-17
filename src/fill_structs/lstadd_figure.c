@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 17:13:32 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/11/11 17:17:00 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/17 17:53:20 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_figure	*lstadd_figure(char **line, int type)
 	figure->cyl = NULL;
 	figure->sph = NULL;
 	figure->pl = NULL;
+	figure->cone = NULL;
 	figure->next = NULL;
 	figure->type = type;
 	figure = lstadd_figure_2(figure, line, type);
@@ -50,6 +51,12 @@ t_figure	*lstadd_figure_2(t_figure *figure, char **line, int type)
 		figure->pl = init_pl(line);
 		figure->spec = figure->pl->spec;
 		figure->color = figure->pl->color;
+	}
+	else if (type == CONE)
+	{
+		figure->cone = init_cone(line);
+		figure->spec = figure->cone->spec;
+		figure->color = figure->cone->color;
 	}
 	return (figure);
 }
