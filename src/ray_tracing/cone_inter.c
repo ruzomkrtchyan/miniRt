@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 18:49:32 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/18 14:06:53 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/18 16:02:43 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,13 @@ float	cone_inter(t_vect pos, t_vect ray, t_cone *cone)
 		return (0);
 	h1 = dot_product_vect(ray, cone->axis) * math.x1 + dot_product_vect(oc, cone->axis);
 	h2 = dot_product_vect(ray, cone->axis) * math.x2 + dot_product_vect(oc, cone->axis);
+	if (h1 > 0.001 && h1 <= cone->height && math.x1 > 0.001 && h2 > 0.001 && h2 <= cone->height && math.x1 > 0.001)
+	{
+		if (math.x1 < math.x2)
+			return (math.x1);
+		else
+			return (math.x2);
+	}
 	if (h1 > 0.001 && h1 <= cone->height && math.x1 > 0.001)
 	{
 		// printf ("yey\n");
