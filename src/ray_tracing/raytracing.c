@@ -6,13 +6,13 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/17 16:51:34 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/18 12:47:15 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	ray_norm(t_figure *fig, t_vect p)
+void	ray_norm(t_figure *fig, t_vect p, float t, t_scene *scene)
 {
 	if (fig->type == SPHERE)
 		fig->ray_norm = norm_vect(substract_v(p, fig->sph->coord));
@@ -20,6 +20,8 @@ void	ray_norm(t_figure *fig, t_vect p)
 		fig->ray_norm = fig->pl->n_coord;
 	else if (fig->type == CYLINDER)
 		fig->ray_norm = fig->cyl->ray_norm;
+	else if (fig->type == CONE)
+		fig->ray_norm = norm_cone(fig->cone, p, t, scene);
 }
 
 int	get_color(t_figure *fig, float min_t, t_scene *scene, t_rgb amb)
@@ -39,7 +41,7 @@ int	get_color(t_figure *fig, float min_t, t_scene *scene, t_rgb amb)
 		if (compute_shadow(min_t, scene, fig, lights) != 0)
 		{
 			p = sum_vect(scene->cam->pos, num_product_vect(scene->ray, min_t));
-			ray_norm(fig, p);
+			ray_norm(fig, p, min_t, scene);
 			light = norm_vect(substract_v(lights->coord, p));
 			lights->n_dot_l = dot_product_vect(fig->ray_norm, light);
 			if (lights->n_dot_l > 0)

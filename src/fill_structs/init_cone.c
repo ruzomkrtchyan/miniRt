@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cone.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 17:54:02 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/17 17:55:37 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/17 19:00:57 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_cone	*init_cone(char **line)
 	axis = ft_split(line[2], ',');
 	tmp->radius = ft_atof(line[3]) / 2;
 	tmp->height = ft_atof(line[4]);
-	tmp->degree = ft_atof(line[5]);
+	tmp->degree = ft_atof(line[5]) / 2;
 	tmp->spec = ft_atof(line[6]);
 	colors = ft_split(line[7], ',');
 	tmp = init_cone_2(tmp, vect, axis, colors);

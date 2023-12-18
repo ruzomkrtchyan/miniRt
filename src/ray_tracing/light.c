@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 12:45:20 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/17 16:33:20 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/18 12:52:20 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	compute_shadow(float dot, t_scene *scene, t_figure *tmp, t_light *lights)
 	t_figure	*shadow;
 
 	p = sum_vect(scene->cam->pos, num_product_vect(scene->ray, dot));
-	ray_norm(tmp, p);
+	ray_norm(tmp, p, dot, scene);
 	light = substract_v(lights->coord, p);
 	shadow = NULL;
 	if (closest_inter(p, light, scene->figure, &shadow) != INFINITY)

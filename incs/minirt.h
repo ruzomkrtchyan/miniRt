@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/17 17:56:27 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/18 12:47:50 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,13 @@ int			mlx_keypress(int keypress, t_thread thr[NUM_THREAD]);
 void		start_threads(t_thread thr[NUM_THREAD]);
 
 void		*ray_tracing(void *arg);
-void		ray_norm(t_figure *fig, t_vect p);
+void		ray_norm(t_figure *fig, t_vect p, float t, t_scene *scene);
 float		closest_inter(t_vect pos, t_vect ray, t_figure *figure, \
 														t_figure **tmp1);
 float		sphere_intersection(t_vect pos, t_vect ray, t_sph *sph);
 float		plane_inter(t_vect pos, t_vect ray, t_vect n_coord, t_vect coord);
+float		cone_inter(t_vect pos, t_vect ray, t_cone *cone);
+t_vect		norm_cone(t_cone *cone, t_vect p, float t, t_scene *scene);
 float		vect_proj(t_vect pos, t_vect ray, t_cyl *cyl, t_math *math);
 float		cyl_inter(t_vect pos, t_vect ray, t_cyl *cyl);
 t_vect		cylray_norm(t_math *math, t_vect ray, t_vect pos, t_cyl *cyl);
