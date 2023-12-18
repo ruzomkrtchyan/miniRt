@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 17:09:16 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/17 14:46:20 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/18 15:46:43 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	rotate_scene_up(t_scene *scene)
 			rotate_plane(figure->pl, matrix);
 		else if (figure->type == CYLINDER)
 			rotate_cylinder(figure->cyl, matrix);
+		else if (figure->type == CONE)
+			rotate_cone(figure->cone, matrix);
 		figure = figure->next;
 	}
 	rotate_light(&scene->light, matrix);
@@ -52,6 +54,8 @@ void	rotate_scene_down(t_scene *scene)
 			rotate_plane(figure->pl, matrix);
 		else if (figure->type == CYLINDER)
 			rotate_cylinder(figure->cyl, matrix);
+		else if (figure->type == CONE)
+			rotate_cone(figure->cone, matrix);
 		figure = figure->next;
 	}
 	rotate_light(&scene->light, matrix);
@@ -72,6 +76,8 @@ void	rotate_scene_left(t_scene *scene)
 			rotate_plane(figure->pl, matrix);
 		else if (figure->type == CYLINDER)
 			rotate_cylinder(figure->cyl, matrix);
+		else if (figure->type == CONE)
+			rotate_cone(figure->cone, matrix);
 		figure = figure->next;
 	}
 	rotate_light(&scene->light, matrix);
@@ -92,6 +98,8 @@ void	rotate_scene_right(t_scene *scene)
 			rotate_plane(figure->pl, matrix);
 		else if (figure->type == CYLINDER)
 			rotate_cylinder(figure->cyl, matrix);
+		else if (figure->type == CONE)
+			rotate_cone(figure->cone, matrix);
 		figure = figure->next;
 	}
 	rotate_light(&scene->light, matrix);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/18 12:47:50 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/18 15:48:11 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,9 @@ void		rotate_scene_right(t_scene *scene);
 void		rotate_scene_down(t_scene *scene);
 
 void		rotate_sphere(t_sph *sph, t_matrix matrix);
-void		rotate_light(t_light **light, t_matrix matrix);
 void		rotate_plane(t_pl *plane, t_matrix matrix);
+void		rotate_cone(t_cone *cone, t_matrix matrix);
+void		rotate_light(t_light **light, t_matrix matrix);
 void		rotate_cylinder(t_cyl *cylinder, t_matrix matrix);
 
 #endif

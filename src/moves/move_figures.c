@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_figures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:38:41 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/17 14:48:12 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/18 15:55:40 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	move_left(t_scene *scene)
 			tmp->cyl->cent.x += 2;
 		else if (tmp->type == PLANE)
 			tmp->pl->coord.x += 2;
+		else if (tmp->type == CONE)
+			tmp->cone->coord.x += 2;
 		tmp = tmp->next;
 	}
 	while (l_tmp)
@@ -54,6 +56,8 @@ void	move_right(t_scene *scene)
 			tmp->cyl->cent.x -= 2;
 		else if (tmp->type == PLANE)
 			tmp->pl->coord.x -= 2;
+		else if (tmp->type == CONE)
+			tmp->cone->coord.x -= 2;
 		tmp = tmp->next;
 	}
 	while (l_tmp)
