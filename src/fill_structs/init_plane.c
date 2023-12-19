@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_plane.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:03 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/19 13:04:14 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:30:29 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ t_pl	*init_pl(char **line)
 	tmp->coord.y = ft_atof(vect[1]);
 	tmp->coord.z = ft_atof(vect[2]);
 	tmp->coord.w = 1.0;
+	tmp->chess = 0;
+	if (line[5] && line[5][0] == '1')
+		tmp->chess = 1;
 	init_pl_2(n_vect, tmp);
 	free_of_n(NULL, n_vect, colors, 3);
 	free_2d(vect);

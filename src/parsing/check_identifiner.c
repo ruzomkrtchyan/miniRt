@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:45 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/17 17:50:06 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:32:46 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,22 @@ int	check_identifier3(char **arr)
 {
 	if (!ft_strcmp(arr[0], "pl"))
 	{
-		if (strlen_2d(arr) != 5)
+		if (strlen_2d(arr) < 5 || strlen_2d(arr) > 6)
 			return (err("Error : Wrong 'pl' identifier arguments\n"));
 	}
 	else if (!ft_strcmp(arr[0], "sp"))
 	{
-		if (strlen_2d(arr) != 5)
+		if (strlen_2d(arr) < 5 || strlen_2d(arr) > 6)
 			return (err("Error : Wrong 'sp' identifier arguments\n"));
 	}
 	else if (!ft_strcmp(arr[0], "cy"))
 	{
-		if (strlen_2d(arr) != 7)
+		if (strlen_2d(arr) < 7 || strlen_2d(arr) > 8)
 			return (err("Error : Wrong 'cy' identifier arguments\n"));
 	}
 	else if (!ft_strcmp(arr[0], "co"))
 	{
-		if (strlen_2d(arr) != 8)
+		if (strlen_2d(arr) < 8 || strlen_2d(arr) > 9)
 			return (err("Error : Wrong 'co' identifier arguments\n"));
 	}
 	else

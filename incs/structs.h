@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/17 20:27:00 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:12:51 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,19 +94,21 @@ typedef struct s_light
 
 typedef struct s_sph
 {
-	float			radius;
-	float			spec;
-	float			dist;
-	t_vect			coord;
-	t_rgb			color;
+	t_vect		coord;
+	t_rgb		color;
+	float		radius;
+	float		spec;
+	float		dist;
+	int			chess;
 }				t_sph;
 
 typedef struct s_pl
 {
 	t_vect		coord;
-	float		spec;
 	t_vect		n_coord;
 	t_rgb		color;
+	float		spec;
+	int			chess;
 }				t_pl;
 
 typedef struct s_cyl
@@ -118,6 +120,7 @@ typedef struct s_cyl
 	float		spec;
 	float		radius;
 	float		height;
+	int			chess;
 	float		dist[2];
 }			t_cyl;
 
@@ -130,6 +133,7 @@ typedef struct s_cone
 	float		spec;
 	float		radius;
 	float		degree;
+	int			chess;
 	t_vect		ray_norm;
 }			t_cone;
 
@@ -162,8 +166,8 @@ typedef struct s_figure
 	t_cyl			*cyl;
 	t_type			type;
 	t_rgb			color;
-	float			spec;
 	t_vect			ray_norm;
+	float			spec;
 	struct s_figure	*next;
 }				t_figure;
 

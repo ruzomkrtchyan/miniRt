@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:00 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/15 14:51:20 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:29:56 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ t_sph	*init_sp(char **line)
 	tmp->color.r = ft_atoi(colors[0]);
 	tmp->color.g = ft_atoi(colors[1]);
 	tmp->color.b = ft_atoi(colors[2]);
+	tmp->chess = 0;
+	if (line[5] && line[5][0] == '1')
+		tmp->chess = 1;
 	free_of_n(NULL, colors, vect, 2);
 	return (tmp);
 }

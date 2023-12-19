@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:08:10 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/17 17:53:47 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:30:24 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ t_cyl	*init_cyl(char **line)
 	tmp->height = ft_atof(line[4]);
 	tmp->spec = ft_atof(line[5]);
 	colors = ft_split(line[6], ',');
+	tmp->chess = 0;
+	if (line[7] && line[7][0] == '1')
+		tmp->chess = 1;
 	tmp = init_cyl_2(tmp, vect, n_vect, colors);
 	free_of_n(NULL, n_vect, colors, 3);
 	free_2d(vect);
