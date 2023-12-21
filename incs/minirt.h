@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:51:35 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/19 14:15:07 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:39:37 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ float		closest_dist(t_cyl *cyl, t_math *m);
 t_rgb		n_prod_col(t_rgb c, float n);
 t_rgb		add_col(t_rgb c1, t_rgb c2);
 t_rgb		prod_col(t_rgb c1, t_rgb c2, float ratio);
-int		checkerboard(t_scene *scene, float t);
+void		checkerboard(t_scene *scene, float t, t_figure *fig);
 t_rgb		compute_light(t_rgb fig_col, t_light *light, float n_dot_l);
 t_rgb		compute_spec(t_scene *scene, t_vect light, t_figure *fig, \
 				t_light *lights);

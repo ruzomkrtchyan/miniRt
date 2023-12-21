@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:53:31 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/19 14:16:10 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/21 13:24:02 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,12 @@ int	pixel_col(t_scene *scene, t_vplane *v_plane, float x_angle, float y_angle)
 	min_t = closest_inter(scene->cam->pos, scene->ray, scene->figure, &tmp1);
 	amb = prod_col(tmp1->color, scene->amb->color, scene->amb->ratio);
 	if (min_t != INFINITY)
-		color = checkerboard(scene, min_t);
+	{
+		if ((tmp1->type == SPHERE && tmp1->sph->chess == 1) \
+			|| (tmp1->type == PLANE && tmp1->pl->chess == 1))
+			checkerboard(scene, min_t, tmp1);
+		color = get_color(tmp1, min_t, scene, amb);
+	}
 	else
 		color = 0;
 	return (color);

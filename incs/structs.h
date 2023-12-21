@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:28:29 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/19 15:12:51 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/21 13:15:10 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,5 +200,19 @@ typedef struct s_thread
 	t_vplane	*vplane;
 	t_scene		*scene;
 }				t_thread;
+
+typedef struct s_pattern
+{
+	float	height;
+	float	width;
+	t_rgb	col1;
+	t_rgb	col2;
+}			t_pattern;
+
+typedef struct s_uv
+{
+	float	u;
+	float	v;
+}			t_uv;
 
 #endif
