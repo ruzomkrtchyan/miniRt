@@ -6,7 +6,7 @@
 /*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:51 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/11 19:06:24 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/21 16:18:28 by vhovhann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	check_args_cam(char **line)
 			check_number(NULL, n_vect, 0) || strlen_2d(vect) != 3 || \
 				strlen_2d(n_vect) != 3)
 	{
-		printf("%d\n", check_number(NULL, vect, 0));
 		free_of_n(NULL, vect, n_vect, 2);
 		return (err("Error : Wrong coordinates for camera\n"));
 	}
