@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_mlx.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:26:38 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/06 19:04:21 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:51:52 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ static void	fill_thread_struct(t_thread	thr[NUM_THREAD], t_scene *scene)
 		thr[i].width = WIDTH / (NUM_THREAD - i);
 		thr[i].old_height = HEIGHT - (HEIGHT / (NUM_THREAD - i));
 		thr[i].old_width = WIDTH - (WIDTH / (NUM_THREAD - i));
-		thr[i].vplane = get_vplane(thr[i].width, thr[i].height, \
+		if (scene->cam)
+			thr[i].vplane = get_vplane(thr[i].width, thr[i].height, \
 														scene->cam->fov);
+		else
+			thr[i].vplane = NULL;
 		thr[i].scene = scene;
 		i--;
 	}
@@ -65,7 +68,8 @@ void	mlx_create(t_scene *scene)
 	scene->data->addr = mlx_get_data_addr(scene->data->img, \
 							&scene->data->bits_per_pixel, \
 							&scene->data->line_length, &scene->data->endian);
-	start_threads(thr);
+	if (scene->amb && scene->cam)
+		start_threads(thr);
 	mlx_put_image_to_window(scene->mlx->mlx, scene->mlx->mlx_win, \
 								scene->data->img, 0, 0);
 	mlx_hook(scene->mlx->mlx_win, 2, 0, &mlx_keypress, &thr);

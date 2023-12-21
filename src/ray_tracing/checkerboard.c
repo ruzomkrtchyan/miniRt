@@ -6,7 +6,7 @@
 /*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 13:20:48 by rmkrtchy          #+#    #+#             */
-/*   Updated: 2023/12/21 13:33:08 by rmkrtchy         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:09:30 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ t_pattern	uv_checkers(float height, float width)
 	patt.height = height;
 	patt.width = width;
 	patt.col1.b = 255;
-	patt.col1.g = 255;
-	patt.col1.r = 255;
-	patt.col2.b = 0;
+	patt.col1.g = 0;
+	patt.col1.r = 20;
+	patt.col2.b = 100;
 	patt.col2.g = 0;
-	patt.col2.r = 0;
+	patt.col2.r = 255;
 	return (patt);
 }
 
@@ -37,33 +37,6 @@ t_rgb	uv_pattern_at(t_pattern patt, float u, float v)
 	if (fmodf(u2 + v2, 2) == 0)
 		return (patt.col1);
 	return (patt.col2);
-}
-
-t_uv	get_uv(t_vect p, t_figure *fig)
-{
-	t_uv	uv;
-
-	if (fig->pl->n_coord.x != 0.0001)
-	{
-		uv.u = p.z;
-		uv.v = p.y;
-	}
-	else if (fig->pl->n_coord.y != 0.0001)
-	{
-		uv.u = p.x;
-		uv.v = p.z;
-	}
-	else if (fig->pl->n_coord.z != 0.0001)
-	{
-		uv.u = p.x;
-		uv.v = p.y;
-	}
-	else
-	{
-		uv.u = 0.0;
-		uv.v = 0.0;
-	}
-	return (uv);
 }
 
 void	checkerboard(t_scene *scene, float t, t_figure *fig)
@@ -82,11 +55,6 @@ void	checkerboard(t_scene *scene, float t, t_figure *fig)
 		raw_u = theta / (2 * M_PI);
 		uv.u = 1 - (raw_u + 0.5);
 		uv.v = (1 - phi) / M_PI;
-		fig->color = (uv_pattern_at (uv_checkers(300, 150), uv.u, uv.v));
-	}
-	if (fig->type == PLANE)
-	{
-		uv = get_uv(p, fig);
-		fig->color = (uv_pattern_at (uv_checkers(100, 100), uv.u, uv.v));
+		fig->color = (uv_pattern_at (uv_checkers(200, 400), uv.u, uv.v));
 	}
 }

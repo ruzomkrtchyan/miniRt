@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhovhann <vhovhann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rmkrtchy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:07:43 by vhovhann          #+#    #+#             */
-/*   Updated: 2023/12/06 21:20:45 by vhovhann         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:51:37 by rmkrtchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	check_ident_name(char **arr)
 			exit(err("Error : Invalid file\n") + free_2d(arr));
 		i++;
 	}
-	if (a == 0 || c == 0)
-		exit(err("Error : Ambient or Camera is not defined\n") + free_2d(arr));
-	if (a != 1 || c != 1)
+	if (a > 1 || c > 1)
 		exit(err("Error : Wrong quantity of Identifiers\n") + free_2d(arr));
 }
