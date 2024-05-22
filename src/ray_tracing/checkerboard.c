@@ -47,7 +47,8 @@ void	checkerboard(t_scene *scene, float t, t_figure *fig)
 	float	raw_u;
 	t_uv	uv;
 
-	p = norm_vect(sum_vect(scene->cam->pos, num_product_vect(scene->ray, t)));
+	p = sum_vect(scene->cam->pos, num_product_vect(scene->ray, t));
+	p = norm_vect(substract_v(p, fig->sph->coord));
 	if (fig->type == SPHERE)
 	{
 		theta = atan2f(p.x, p.z);
@@ -55,6 +56,6 @@ void	checkerboard(t_scene *scene, float t, t_figure *fig)
 		raw_u = theta / (2 * M_PI);
 		uv.u = 1 - (raw_u + 0.5);
 		uv.v = (1 - phi) / M_PI;
-		fig->color = (uv_pattern_at (uv_checkers(200, 400), uv.u, uv.v));
+		fig->color = (uv_pattern_at (uv_checkers(15, 15), uv.u, uv.v));
 	}
 }
